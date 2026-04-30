@@ -102,9 +102,16 @@
     position: relative;
     display: grid;
     grid-template-columns: 1.05fr 1fr;
-    gap: 48px;
+    grid-template-areas:
+      "text   collage"
+      "ctas   collage";
+    column-gap: 48px;
+    row-gap: 28px;
     align-items: center;
   }
+  .hero-text { grid-area: text; align-self: end; }
+  .hero-collage { grid-area: collage; align-self: center; }
+  .hero-ctas { grid-area: ctas; align-self: start; }
   .hero-tag {
     font-family: "Caveat", cursive;
     color: var(--teal-deep);
@@ -874,7 +881,16 @@
     .btn-contact-header svg { width: 13px; height: 13px; }
     .logo img { width: 48px; }
     .logo .brand-name { font-size: 14px; }
-    .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "text"
+        "collage"
+        "ctas";
+      row-gap: 32px;
+    }
+    .hero-text, .hero-collage, .hero-ctas { align-self: stretch; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
     h1.hero-title { font-size: 36px; }
     .strengths-grid { grid-template-columns: 1fr; }
     .products-grid { grid-template-columns: repeat(2, 1fr); }
@@ -946,17 +962,6 @@
         歯科技工のプロフェッショナルとして、<br />
         先生の想いに寄り添い、最高の技工物をお届けします。
       </p>
-      <div class="hero-ctas">
-        <a class="btn btn-primary" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
-          <svg class="btn-mail-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-          LINEで問い合わせ
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-        <a class="btn btn-blue" href="products.html">
-          製品について見る
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
     </div>
 
     <div class="hero-collage reveal">
@@ -970,6 +975,18 @@
       <img src="assets/24.png" alt="" class="sparkle s1" />
       <img src="assets/60.png" alt="" class="sparkle s2" />
       <span class="label l-top">高品質を、<br/>確かな技術で。</span>
+    </div>
+
+    <div class="hero-ctas reveal">
+      <a class="btn btn-primary" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg class="btn-mail-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせ
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="btn btn-blue" href="products.html">
+        製品について見る
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
