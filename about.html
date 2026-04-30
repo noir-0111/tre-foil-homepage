@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>会社概要 | SMILE LABO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Caveat:wght@400;500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blue: #4a90e2;
+    --blue-deep: #2f7adf;
+    --blue-soft: #e8f0fc;
+    --blue-bg: #f3f7fd;
+    --teal: #6ec9b8;
+    --teal-deep: #4fb8a3;
+    --teal-soft: #e6f5f1;
+    --ink: #2d3a4a;
+    --ink-2: #5a6878;
+    --ink-3: #8a96a4;
+    --line: #e7edf3;
+    --paper: #ffffff;
+    --bg: #f7fbfd;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(231,237,243,0.6);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { width: 56px; height: auto; }
+  .logo .brand-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  nav.primary { display: flex; align-items: center; gap: 36px; }
+  nav.primary a {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    position: relative; padding: 8px 0;
+    transition: color .2s;
+  }
+  nav.primary a.active { color: var(--blue-deep); }
+  nav.primary a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px; background: var(--blue-deep); border-radius: 2px;
+  }
+  nav.primary a:hover { color: var(--blue-deep); }
+  .btn-contact-header {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #06C755; color: #fff;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 4px 14px rgba(6,199,85,0.35);
+    transition: transform .15s, box-shadow .2s;
+  }
+  .btn-contact-header:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
+  .btn-contact-header svg { width: 16px; height: 16px; }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    padding: 18px 0 0;
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .breadcrumb a { color: var(--ink-3); transition: color .2s; }
+  .breadcrumb a:hover { color: var(--blue-deep); }
+  .breadcrumb .sep { margin: 0 10px; color: var(--ink-3); }
+  .breadcrumb .current { color: var(--ink-2); }
+
+  /* COMMON */
+  .eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: var(--teal-deep);
+    font-size: 11.5px;
+    display: block;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  .eyebrow.left { text-align: left; }
+  .eyebrow.blue { color: var(--blue-deep); }
+  h2.section-title {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 50px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  h2.section-title.spaced { letter-spacing: 0.18em; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 16px 34px; border-radius: 999px;
+    font-size: 14px; font-weight: 500;
+    transition: transform .15s, box-shadow .2s;
+    border: none; cursor: pointer;
+    font-family: inherit;
+  }
+  .btn svg.arrow { width: 14px; height: 14px; }
+
+  /* HERO */
+  .page-hero {
+    position: relative;
+    padding: 28px 0 96px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 56px;
+    align-items: center;
+    position: relative;
+    margin-top: 30px;
+  }
+  .hero-text h1 {
+    font-size: 38px;
+    line-height: 1.55;
+    font-weight: 700;
+    margin: 0 0 28px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .hero-text p {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 2.1;
+    margin: 0;
+  }
+  .hero-photo {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    aspect-ratio: 4/2.7;
+    box-shadow: 0 18px 44px rgba(45,58,74,0.10);
+  }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* hero deco */
+  .page-hero .deco { position: absolute; pointer-events: none; }
+  .page-hero .deco.blob-tl {
+    width: 120px;
+    top: 50px; left: 0%;
+    opacity: 0.95;
+    animation: aboutFloatA 7s ease-in-out infinite;
+  }
+  .page-hero .deco.dot-blue {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue);
+    top: 60px; left: 35%;
+    opacity: 0.7;
+    animation: aboutPulse 4.5s ease-in-out infinite;
+    animation-delay: -1s;
+  }
+  .page-hero .deco.ring-tl {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+    top: 30px; left: 44%;
+    opacity: 0.4;
+    animation: aboutDrift 5s ease-in-out infinite;
+    animation-delay: -2s;
+  }
+  .page-hero .deco.tooth-line {
+    width: 110px;
+    bottom: 80px; left: 1%;
+    opacity: 0.55;
+    animation: aboutFloatC 6.5s ease-in-out infinite;
+    animation-delay: -1.5s;
+  }
+  .page-hero .deco.dot-grid-br {
+    width: 90px;
+    bottom: 60px; right: 2%;
+    opacity: 0.85;
+    animation: aboutFloatB 6s ease-in-out infinite;
+  }
+  /* curve - SVG flowing line */
+  .page-hero .curve {
+    position: absolute;
+    left: 8%; top: 150px;
+    width: 60%; height: 280px;
+    pointer-events: none;
+    opacity: 0.5;
+    animation: aboutCurveDraw 4s ease-in-out infinite;
+  }
+  .page-hero .curve path {
+    stroke-dasharray: 800;
+    stroke-dashoffset: 0;
+    animation: curveDash 6s linear infinite;
+  }
+
+  /* hero photo gentle floating */
+  .hero-photo {
+    animation: aboutPhotoFloat 6s ease-in-out infinite;
+  }
+  .hero-photo img { transition: transform .6s ease; }
+  .hero-photo:hover { animation-play-state: paused; }
+  .hero-photo:hover img { transform: scale(1.04); }
+
+  @keyframes aboutFloatA {
+    0%, 100% { transform: translate(0,0)        rotate(0deg); }
+    25%      { transform: translate(14px,-18px) rotate(8deg); }
+    50%      { transform: translate(22px,-28px) rotate(14deg); }
+    75%      { transform: translate(10px,-12px) rotate(4deg); }
+  }
+  @keyframes aboutFloatB {
+    0%, 100% { transform: translate(0,0)         rotate(0deg); }
+    50%      { transform: translate(-18px,-22px) rotate(-10deg); }
+  }
+  @keyframes aboutFloatC {
+    0%, 100% { transform: translate(0,0)        rotate(0deg); }
+    33%      { transform: translate(16px,-12px) rotate(8deg); }
+    66%      { transform: translate(-8px,-22px) rotate(-6deg); }
+  }
+  @keyframes aboutPulse {
+    0%, 100% { transform: scale(1)   translate(0,0); }
+    50%      { transform: scale(1.5) translate(4px,-6px); }
+  }
+  @keyframes aboutDrift {
+    0%, 100% { transform: translate(0,0)   scale(1); }
+    50%      { transform: translate(-10px,-14px) scale(1.3); }
+  }
+  @keyframes aboutPhotoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+  }
+  @keyframes curveDash {
+    0%   { stroke-dashoffset: 800; }
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes aboutCurveDraw {
+    0%, 100% { opacity: 0.35; }
+    50%      { opacity: 0.65; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-hero .deco,
+    .page-hero .curve,
+    .page-hero .curve path,
+    .hero-photo { animation: none; }
+  }
+
+  /* MESSAGE */
+  .message {
+    padding: 90px 0 90px;
+    background: linear-gradient(180deg, #fff 0%, #f8fbff 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .message::before {
+    content: ""; position: absolute;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,201,184,0.10), transparent 70%);
+    top: -40px; right: 4%;
+    pointer-events: none;
+  }
+  .message::after {
+    content: ""; position: absolute;
+    width: 80px; height: 80px;
+    background-image: radial-gradient(rgba(74,144,226,0.25) 1.5px, transparent 2px);
+    background-size: 10px 10px;
+    bottom: 8%; left: 5%;
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  .message-card {
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 18px 48px rgba(45,58,74,0.08);
+    padding: 50px 56px;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 50px;
+    align-items: center;
+    position: relative;
+  }
+  .message-photo {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/4.6;
+    background: linear-gradient(180deg, #f5f9fc, #eef4fb);
+    box-shadow: 0 12px 30px rgba(45,58,74,0.10);
+    animation: msgPhotoFloat 5s ease-in-out infinite;
+    transform-origin: center bottom;
+    cursor: pointer;
+    transition: box-shadow .3s ease;
+  }
+  .message-photo::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.45) 50%, transparent 70%);
+    transform: translateX(-110%);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .message-photo:hover {
+    animation: msgPhotoBow 1.4s ease-in-out;
+    box-shadow: 0 22px 50px rgba(45,58,74,0.20);
+  }
+  .message-photo:hover::before {
+    animation: msgShimmer 1.4s ease-in-out;
+  }
+  .message-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    transition: transform .6s ease;
+  }
+  .message-photo:hover img { transform: scale(1.05); }
+
+  /* sparkle decorations around the photo */
+  .message-card { position: relative; }
+  .message-card .msg-sparkle {
+    position: absolute;
+    width: 22px; height: 22px;
+    color: var(--teal-deep);
+    pointer-events: none;
+    opacity: 0;
+  }
+  .message-card .msg-sparkle svg { width: 100%; height: 100%; }
+  .message-card .msg-sparkle.sp1 { top: 8%;  left: -6px; color: var(--teal-deep); animation: msgTwinkle 3.2s ease-in-out infinite; animation-delay: 0s; }
+  .message-card .msg-sparkle.sp2 { top: 38%; left: 38%;  color: var(--blue); width: 16px; height: 16px; animation: msgTwinkle 2.6s ease-in-out infinite; animation-delay: 1s; }
+  .message-card .msg-sparkle.sp3 { bottom: 18%; left: 36%; color: var(--teal); width: 18px; height: 18px; animation: msgTwinkle 2.8s ease-in-out infinite; animation-delay: 1.8s; }
+  .message-card .msg-sparkle.sp4 { top: 14%; right: 38%; color: var(--blue-deep); width: 14px; height: 14px; animation: msgTwinkle 3s ease-in-out infinite; animation-delay: 0.6s; }
+
+  @keyframes msgPhotoFloat {
+    0%, 100% { transform: translateY(0)    rotate(0deg); }
+    25%      { transform: translateY(-6px) rotate(1deg); }
+    50%      { transform: translateY(-10px) rotate(0deg); }
+    75%      { transform: translateY(-4px) rotate(-1deg); }
+  }
+  @keyframes msgPhotoBow {
+    0%   { transform: translateY(0)    rotate(0deg); }
+    20%  { transform: translateY(-10px) rotate(-5deg); }
+    40%  { transform: translateY(-2px)  rotate(4deg); }
+    60%  { transform: translateY(-8px)  rotate(-3deg); }
+    80%  { transform: translateY(-2px)  rotate(2deg); }
+    100% { transform: translateY(0)     rotate(0deg); }
+  }
+  @keyframes msgShimmer {
+    0%   { transform: translateX(-110%); }
+    100% { transform: translateX(110%); }
+  }
+  @keyframes msgTwinkle {
+    0%, 100% { opacity: 0;   transform: scale(0.4) rotate(0deg); }
+    50%      { opacity: 0.95; transform: scale(1.15) rotate(180deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .message-photo, .message-card .msg-sparkle { animation: none; }
+  }
+  .message-body .eyebrow { text-align: left; color: var(--teal-deep); margin-bottom: 18px; }
+  .message-body h2 {
+    font-size: 30px; font-weight: 700;
+    margin: 0 0 32px; color: var(--ink);
+    letter-spacing: 0.04em; line-height: 1.4;
+  }
+  .message-body p {
+    font-size: 14px; color: var(--ink);
+    line-height: 2.15; margin: 0 0 16px;
+  }
+  .message-body p:last-of-type { margin-bottom: 30px; }
+  .message-sign { text-align: right; margin-top: 18px; }
+  .message-sign .role {
+    font-size: 13.5px; color: var(--ink);
+    margin-bottom: 6px; letter-spacing: 0.08em;
+  }
+  .message-sign .role .name { margin-left: 14px; font-weight: 500; }
+  .message-sign .signature {
+    font-family: "Caveat", cursive;
+    font-size: 30px; color: var(--ink);
+    line-height: 1.1; letter-spacing: 0.02em;
+  }
+
+  /* PHILOSOPHY */
+  .philosophy {
+    padding: 90px 0 110px;
+    background: var(--blue-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .philosophy::before {
+    content: ""; position: absolute; inset: 0;
+    background:
+      radial-gradient(20% 30% at 0% 0%, rgba(110,201,184,0.10), transparent 60%),
+      radial-gradient(20% 30% at 100% 100%, rgba(74,144,226,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  /* wave-shaped section boundaries */
+  .philosophy .wave {
+    position: absolute;
+    left: 0; right: 0;
+    height: 60px;
+    pointer-events: none;
+    z-index: 3;
+    background-repeat: repeat-x;
+    background-size: 1440px 60px;
+  }
+  .philosophy .wave-top {
+    top: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0 0 L1440 0 L1440 28 Q1080 60 720 28 Q360 60 0 28 Z' fill='%23ffffff'/></svg>");
+    animation: philoWaveFlow 12s linear infinite;
+  }
+  .philosophy .wave-bottom {
+    bottom: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'><path d='M0 60 L1440 60 L1440 32 Q1080 0 720 32 Q360 0 0 32 Z' fill='%23ffffff'/></svg>");
+    animation: philoWaveFlow 14s linear infinite;
+  }
+  @keyframes philoWaveFlow {
+    0%   { background-position-x: 0; }
+    100% { background-position-x: 1440px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .philosophy .wave { animation: none; }
+  }
+  .philo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    position: relative;
+  }
+  .philo-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 26px;
+    box-shadow: 0 4px 20px rgba(45,58,74,0.04);
+    transition: transform .25s, box-shadow .25s;
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .philo-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(45,58,74,0.08); }
+  .philo-card .ic { width: 52px; flex-shrink: 0; }
+  .philo-card .ic img { width: 100%; }
+  .philo-card .ic svg { width: 100%; }
+  .philo-card .body { flex: 1; min-width: 0; padding-top: 4px; }
+  .philo-card h3 {
+    font-size: 14px; margin: 0 0 8px;
+    font-weight: 700; color: var(--ink);
+  }
+  .philo-card p {
+    font-size: 12px; color: var(--ink-2);
+    line-height: 1.85; margin: 0;
+  }
+
+  /* COMPANY INFO */
+  .company {
+    padding: 100px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .company-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .company-content .eyebrow { margin-bottom: 12px; }
+  .company-content h2 {
+    font-size: 26px; font-weight: 700;
+    margin: 0 0 26px; color: var(--ink);
+    letter-spacing: 0.16em;
+  }
+  .info-table { width: 100%; border-collapse: collapse; }
+  .info-table tr { border-top: 1px solid var(--line); }
+  .info-table tr:last-child { border-bottom: 1px solid var(--line); }
+  .info-table th, .info-table td {
+    padding: 14px 4px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+  .info-table th {
+    width: 32%;
+    color: var(--blue-deep);
+    font-weight: 500;
+  }
+  .info-table td { color: var(--ink); font-weight: 400; }
+  .company-photo-col { position: relative; }
+  .company-photo {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 4/3.4;
+    box-shadow: 0 16px 40px rgba(45,58,74,0.10);
+    background: linear-gradient(180deg, #cfdbe8, #aabfd6);
+  }
+  .company-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .company-photo iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .company-photo .placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 8px;
+    color: rgba(255,255,255,0.85);
+    background: linear-gradient(135deg, #b8cee0 0%, #8fa9c2 60%, #6f8ba6 100%);
+  }
+  .company-photo .placeholder .lbl {
+    font-family: "Montserrat", sans-serif;
+    font-size: 11px; letter-spacing: 0.3em; opacity: 0.85;
+  }
+  .company-photo .placeholder .ttl {
+    font-size: 18px; font-weight: 600; letter-spacing: 0.12em;
+  }
+  .access-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 22px;
+    margin-top: 20px;
+    box-shadow: 0 8px 24px rgba(45,58,74,0.08);
+    display: flex; gap: 14px; align-items: center;
+  }
+  .access-card .pin {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--teal-soft);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .access-card .pin svg { width: 18px; color: var(--teal-deep); }
+  .access-card .a-label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--teal-deep);
+    margin-bottom: 4px;
+  }
+  .access-card .a-text {
+    font-size: 12px; color: var(--ink); line-height: 1.8;
+  }
+
+  /* deco for company */
+  .company .deco { position: absolute; pointer-events: none; }
+  .company .deco.dot-grid {
+    width: 100px; bottom: 18%; right: 1%; opacity: 0.75;
+    animation: compDrift 5.5s ease-in-out infinite;
+  }
+  .company .deco.cloud {
+    width: 100px; bottom: 26%; right: -12px; opacity: 0.7;
+    animation: compFloat 7s ease-in-out infinite; animation-delay: -1s;
+  }
+  .company .deco.ellipse {
+    width: 110px; top: 52%; left: 0%;
+    opacity: 0.5; transform: rotate(8deg);
+    animation: compEllipse 6.5s ease-in-out infinite;
+  }
+  @keyframes compFloat {
+    0%, 100% { transform: translate(0,0)        rotate(0deg); }
+    50%      { transform: translate(-14px,-18px) rotate(-8deg); }
+  }
+  @keyframes compDrift {
+    0%, 100% { transform: translate(0,0); }
+    50%      { transform: translate(8px,-14px); }
+  }
+  @keyframes compEllipse {
+    0%, 100% { transform: translate(0,0)   rotate(8deg); }
+    50%      { transform: translate(-12px,-12px) rotate(-4deg); }
+  }
+
+  /* LOGO STORY */
+  .logo-story {
+    padding: 90px 0 100px;
+    background: var(--blue-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-story::before {
+    content: ""; position: absolute;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    top: -60px; left: -80px;
+    pointer-events: none;
+    animation: lsCircleA 9s ease-in-out infinite;
+  }
+  .logo-story::after {
+    content: ""; position: absolute;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(110,201,184,0.10);
+    bottom: -40px; right: -30px;
+    pointer-events: none;
+    animation: lsCircleB 8s ease-in-out infinite;
+  }
+  @keyframes lsCircleA {
+    0%, 100% { transform: translate(0,0)   scale(1); }
+    50%      { transform: translate(20px,18px) scale(1.08); }
+  }
+  @keyframes lsCircleB {
+    0%, 100% { transform: translate(0,0)   scale(1); }
+    50%      { transform: translate(-22px,-18px) scale(1.12); }
+  }
+  .ls-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+  }
+  .ls-mark {
+    background: #fff;
+    border-radius: 22px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(45,58,74,0.08);
+  }
+  .ls-mark .label {
+    font-family: "Montserrat", sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.3em;
+    color: var(--teal-deep);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .ls-mark .label-jp {
+    font-size: 13px;
+    color: var(--ink-2);
+    margin-bottom: 24px;
+    letter-spacing: 0.06em;
+  }
+  .ls-mark .mark-img {
+    max-width: 200px;
+    margin: 0 auto;
+    animation: lsMarkBob 4.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+  @keyframes lsMarkBob {
+    0%, 100% { transform: translateY(0)   rotate(-2deg); }
+    50%      { transform: translateY(-8px) rotate(2deg); }
+  }
+  .ls-content h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 22px;
+    line-height: 1.55;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+  }
+  .ls-content p {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 2.1;
+    margin: 0 0 28px;
+  }
+  .ls-meanings { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .ls-meaning {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff;
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    box-shadow: 0 4px 12px rgba(45,58,74,0.05);
+  }
+  .ls-meaning .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+  .ls-meaning:nth-of-type(2) .dot { background: var(--teal-deep); }
+  .ls-meaning:nth-of-type(3) .dot { background: #f4a460; }
+  .ls-meanings .x { color: var(--ink-3); margin: 0 4px; font-weight: 400; font-size: 11px; }
+
+  /* HISTORY */
+  .history {
+    padding: 100px 0 100px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .history .deco { position: absolute; pointer-events: none; }
+  .history .deco.blob-tl { width: 140px; top: 70px; left: 2%;
+    animation: histFloat 7.5s ease-in-out infinite; }
+  .history .deco.sparkle-tl { width: 70px; top: 60px; left: 18%; opacity: 0.8;
+    animation: histTwinkle 3s ease-in-out infinite; animation-delay: -0.5s; }
+  .history .deco.dot-grid-br { width: 90px; bottom: 80px; right: 4%; opacity: 0.85;
+    animation: histDrift 5.5s ease-in-out infinite; }
+  @keyframes histFloat {
+    0%, 100% { transform: translate(0,0) rotate(0deg); }
+    25%      { transform: translate(14px,-18px) rotate(8deg); }
+    50%      { transform: translate(22px,-26px) rotate(14deg); }
+    75%      { transform: translate(10px,-12px) rotate(4deg); }
+  }
+  .history .deco.cloud-tr   { width: 110px; top: 50px;  right: 6%;   opacity: 0.75;
+    animation: histCloud 7s ease-in-out infinite; }
+  .history .deco.dots-mr    { width: 85px;  top: 200px; right: 16%;  opacity: 0.7;
+    animation: histDrift 6s ease-in-out infinite; animation-delay: -1.5s; }
+  .history .deco.sparkle-bl { width: 75px;  bottom: 70px; left: 7%;  opacity: 0.85;
+    animation: histTwinkle 3.2s ease-in-out infinite; animation-delay: -1s; }
+  .history .deco.sparkle-br { width: 60px;  bottom: 110px; right: 26%; opacity: 0.8;
+    animation: histTwinkle 2.8s ease-in-out infinite; }
+  @keyframes histCloud {
+    0%, 100% { transform: translate(0,0) rotate(0deg); }
+    50%      { transform: translate(-12px,-14px) rotate(-6deg); }
+  }
+  @keyframes histDrift {
+    0%, 100% { transform: translate(0,0); }
+    50%      { transform: translate(8px,-12px); }
+  }
+  @keyframes histTwinkle {
+    0%, 100% { transform: scale(0.85) rotate(0deg);   opacity: 0.55; }
+    50%      { transform: scale(1.2)  rotate(20deg);  opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .history .deco,
+    .company .deco,
+    .logo-story::before,
+    .logo-story::after,
+    .ls-mark .mark-img { animation: none; }
+  }
+  .timeline-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    position: relative;
+  }
+  .timeline-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px 16px 22px;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(45,58,74,0.05);
+    border: 1px solid var(--line);
+    position: relative;
+    transition: transform .25s;
+  }
+  .timeline-card:hover { transform: translateY(-3px); }
+  .timeline-card .year {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: var(--blue-deep);
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .timeline-card .ic {
+    width: 48px; height: 48px;
+    margin: 0 auto 12px;
+    color: var(--blue-deep);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .timeline-card .ic svg { width: 100%; height: 100%; }
+  .timeline-card p {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.75;
+    margin: 0;
+  }
+  .timeline-card::after {
+    content: "";
+    position: absolute;
+    top: 50%; right: -10px;
+    width: 14px; height: 1px;
+    background: repeating-linear-gradient(90deg, var(--blue) 0 4px, transparent 4px 8px);
+    z-index: 1;
+  }
+  .timeline-card:last-child::after { display: none; }
+
+  /* STATS */
+  .stats {
+    padding: 80px 0 100px;
+    background: var(--bg);
+  }
+  .stats h2 { margin-bottom: 50px; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .stat-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 12px 24px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(45,58,74,0.05);
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center;
+    transition: transform .25s;
+  }
+  .stat-card:hover { transform: translateY(-3px); }
+  .stat-card .label {
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+    font-size: 10.5px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .stat-card .label.teal { background: var(--teal-soft); color: var(--teal-deep); }
+  .stat-card .ic {
+    width: 50px; height: 50px;
+    margin-bottom: 8px;
+    color: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stat-card .ic svg { width: 100%; height: 100%; }
+  .stat-card .ic img { width: 100%; height: 100%; object-fit: contain; }
+  .stat-card .num {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    color: var(--blue-deep);
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+  .stat-card .num .unit {
+    font-size: 12px;
+    color: var(--ink-2);
+    font-weight: 500;
+    margin-left: 2px;
+  }
+
+  /* CTA */
+  .cta-banner {
+    padding: 60px 0 100px;
+    background: var(--bg);
+  }
+  .cta-banner .box {
+    background: linear-gradient(120deg, #4a90e2 0%, #6ec9b8 100%);
+    border-radius: 28px;
+    padding: 38px 50px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+    color: #fff;
+    box-shadow: 0 16px 40px rgba(74,144,226,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner .box::before {
+    content: ""; position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    right: -80px; top: -120px;
+  }
+  .cta-banner .icon-bubble {
+    width: 72px; height: 72px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+  }
+  .cta-banner .icon-bubble svg { width: 32px; color: #fff; }
+  .cta-banner .icon-bubble img { width: 52px; height: auto; }
+  .cta-banner .copy { position: relative; z-index: 1; }
+  .cta-banner h3 {
+    font-size: 18px;
+    margin: 0 0 4px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .cta-banner .sub {
+    font-size: 12px;
+    opacity: 0.92;
+    margin: 0;
+  }
+  .cta-banner .btn-white {
+    background: #fff;
+    color: var(--blue-deep);
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    position: relative; z-index: 1;
+    transition: transform .15s;
+  }
+  .cta-banner .btn-white:hover { transform: translateY(-2px); }
+  .cta-banner .btn-white svg { width: 14px; height: 14px; }
+
+  /* FOOTER */
+  footer {
+    background: #2d3a4a;
+    color: #c0cad7;
+    padding: 60px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  footer .brand-block p {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #8a96a4;
+  }
+  footer h5 {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    letter-spacing: 0.05em;
+  }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { font-size: 12.5px; color: #c0cad7; transition: color .2s; }
+  footer ul a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #8a96a4;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    nav.primary { display: none; }
+    .hero-grid, .company-grid, .ls-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero-text h1 { font-size: 26px; }
+    .message-card { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
+    .message-photo { aspect-ratio: 4/3.6; }
+    .message-body h2 { font-size: 22px; }
+    .philo-grid { grid-template-columns: 1fr; }
+    .timeline-row { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .timeline-card::after { display: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .cta-banner .box { grid-template-columns: 1fr; text-align: center; padding: 32px 24px; }
+    .cta-banner .icon-bubble { margin: 0 auto; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    h2.section-title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" data-screen-label="Header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      <span class="brand-name">歯科技工所 tre-foil</span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">ホーム</a>
+      <a href="about.html" class="active">会社概要</a>
+      <a href="products.html">製品紹介</a>
+      <a href="index.html#flow">ご注文の流れ</a>
+      <a href="#">採用情報</a>
+    </nav>
+    <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+      LINEで問い合わせ
+    </a>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="wrap breadcrumb">
+  <a href="index.html">ホーム</a><span class="sep">›</span><span class="current">会社概要</span>
+</div>
+
+<!-- HERO -->
+<section class="page-hero" data-screen-label="About Hero">
+  <img src="assets2/27.png" alt="" class="deco blob-tl" />
+  <div class="deco ring-tl"></div>
+  <div class="deco dot-blue"></div>
+  <img src="assets2/33.png" alt="" class="deco tooth-line" />
+  <img src="assets2/30.png" alt="" class="deco dot-grid-br" />
+
+  <svg class="curve" viewBox="0 0 600 280" fill="none" preserveAspectRatio="none">
+    <path d="M0 180 C 120 60, 280 60, 380 140 S 580 220, 600 120" stroke="#6ec9b8" stroke-width="1.2" fill="none" stroke-dasharray="0" />
+  </svg>
+
+  <div class="wrap hero-grid">
+    <div class="hero-text reveal">
+      <span class="eyebrow left">ABOUT US</span>
+      <h1>信頼される技工所で<br/>あり続けるために。</h1>
+      <p>
+        私たちは、歯科医療の一端を担うパートナーとして、<br/>
+        常に技術の向上と品質の追求に取り組んでいます。<br/>
+        先生と患者さまの笑顔のために、<br/>
+        心を込めて技工物をお届けします。
+      </p>
+    </div>
+    <div class="hero-photo reveal">
+      <img src="assets2/07.png" alt="技工所内観" />
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGE -->
+<section class="message" data-screen-label="Message">
+  <div class="wrap">
+    <div class="message-card reveal">
+      <span class="msg-sparkle sp1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
+      <span class="msg-sparkle sp2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
+      <span class="msg-sparkle sp3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
+      <span class="msg-sparkle sp4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
+      <div class="message-photo">
+        <img src="人物写真/大園%20鎮正.jpg" alt="代表取締役 大園 鎮正" />
+      </div>
+      <div class="message-body">
+        <span class="eyebrow">MESSAGE</span>
+        <h2>代表メッセージ</h2>
+        <p>歯科医療は、チーム医療です。</p>
+        <p>
+          私たち技工士は、目に見えないところで<br/>
+          治療を支える存在ですが、その責任と誇りを<br/>
+          胸に、日々技術を磨いています。
+        </p>
+        <p>
+          これからも、先生方の良きパートナーとして、<br/>
+          最高の技工物をお届けし続けます。
+        </p>
+        <div class="message-sign">
+          <div class="role">代表取締役<span class="name">大園 鎮正</span></div>
+          <div class="signature">Shizumasa Ozono</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" data-screen-label="Philosophy">
+  <div class="wave wave-top"></div>
+  <div class="wrap">
+    <span class="eyebrow">PHILOSOPHY</span>
+    <h2 class="section-title spaced">私たちの想い</h2>
+    <div class="philo-grid">
+      <div class="philo-card reveal">
+        <div class="ic"><img src="assets2/icon-tooth.png" alt="" /></div>
+        <div class="body">
+          <h3>患者さまの笑顔のために</h3>
+          <p>一つひとつの技工物に心を込めて、<br/>快適で美しい口元を支えます。</p>
+        </div>
+      </div>
+      <div class="philo-card reveal">
+        <div class="ic"><img src="assets2/icon-hands.png" alt="" /></div>
+        <div class="body">
+          <h3>信頼されるパートナーとして</h3>
+          <p>丁寧なコミュニケーションを大切にし、<br/>先生方の信頼に応えます。</p>
+        </div>
+      </div>
+      <div class="philo-card reveal">
+        <div class="ic">
+          <svg viewBox="0 0 60 60" fill="none">
+            <path d="M14 48 L14 38 L20 38 L20 48z" stroke="#4a90e2" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            <path d="M26 48 L26 28 L32 28 L32 48z" stroke="#4a90e2" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            <path d="M38 48 L38 18 L44 18 L44 48z" stroke="#4a90e2" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            <path d="M14 32 L24 22 L34 28 L46 12" stroke="#6ec9b8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M42 12 L46 12 L46 16" stroke="#6ec9b8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>技術の研鑽と進化</h3>
+          <p>最新の技術と設備を取り入れ、<br/>常に高い品質を追求します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wave wave-bottom"></div>
+</section>
+
+<!-- COMPANY INFO -->
+<section class="company" data-screen-label="Company Info">
+  <img src="assets2/30.png" alt="" class="deco dot-grid" />
+  <img src="assets2/32.png" alt="" class="deco cloud" />
+  <img src="assets2/31.png" alt="" class="deco ellipse" />
+
+  <div class="wrap company-grid">
+    <div class="company-content reveal">
+      <span class="eyebrow left blue">COMPANY INFO</span>
+      <h2>会 社 概 要</h2>
+      <table class="info-table">
+        <tr><th>会社名</th><td>株式会社tre-foil</td></tr>
+        <tr><th>所在地</th><td>〒816-0911<br/>福岡県大野城市大城3丁目10-35</td></tr>
+        <tr><th>設立</th><td>2010年4月1日</td></tr>
+        <tr><th>代表者</th><td>大園 鎮正</td></tr>
+        <tr><th>資本金</th><td>1,000万円</td></tr>
+        <tr><th>従業員数</th><td>28名</td></tr>
+        <tr><th>事業内容</th><td>歯科技工物の製作・販売</td></tr>
+        <tr><th>取引銀行</th><td>三井住友銀行 渋谷支店<br/>みずほ銀行 青山支店</td></tr>
+      </table>
+    </div>
+    <div class="company-photo-col reveal">
+      <div class="company-photo">
+        <iframe
+          src="https://maps.google.com/maps?q=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E5%A4%A7%E9%87%8E%E5%9F%8E%E5%B8%82%E5%A4%A7%E5%9F%8E3%E4%B8%81%E7%9B%AE10-35&hl=ja&z=17&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="株式会社tre-foil 所在地マップ"></iframe>
+      </div>
+      <div class="access-card">
+        <div class="pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/>
+            <circle cx="12" cy="10" r="2.5"/>
+          </svg>
+        </div>
+        <div>
+          <div class="a-label">ACCESS</div>
+          <div class="a-text">
+            太宰府インターより車で2分<br/>
+            白木原駅より車で8分
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STORY -->
+<section class="logo-story" data-screen-label="Logo Story">
+  <div class="wrap">
+    <div class="ls-grid">
+      <div class="ls-mark reveal">
+        <div class="label">LOGO STORY</div>
+        <div class="label-jp">ロゴに込めた想い</div>
+        <img class="mark-img" src="素材2/tre-foilロゴ.png" alt="tre-foil ロゴマーク" />
+      </div>
+      <div class="ls-content reveal">
+        <h2>歯とハート、人のつながりを<br/>モチーフにしたロゴマーク</h2>
+        <p>
+          歯の形をベースに、ハートと人のつながりを<br/>
+          モチーフにしたロゴマーク。<br/>
+          「寄り添う心」と「確かな技術」で、<br/>
+          患者さまと先生を笑顔でつなぐ存在で<br/>
+          ありたいという想いを込めています。
+        </p>
+        <div class="ls-meanings">
+          <span class="ls-meaning"><span class="dot"></span>歯・技術</span>
+          <span class="x">×</span>
+          <span class="ls-meaning"><span class="dot"></span>想いやり</span>
+          <span class="x">×</span>
+          <span class="ls-meaning"><span class="dot"></span>つながり</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY -->
+<section class="history" data-screen-label="History">
+  <img src="assets2/27.png" alt="" class="deco blob-tl" />
+  <img src="assets2/36.png" alt="" class="deco sparkle-tl" />
+  <img src="assets2/30.png" alt="" class="deco dot-grid-br" />
+  <img src="素材/16.png" alt="" class="deco cloud-tr" />
+  <img src="素材/13.png" alt="" class="deco dots-mr" />
+  <img src="素材/21.png" alt="" class="deco sparkle-bl" />
+  <img src="素材/24.png" alt="" class="deco sparkle-br" />
+
+  <div class="wrap">
+    <span class="eyebrow blue">HISTORY</span>
+    <h2 class="section-title spaced">沿  革</h2>
+    <div class="timeline-row">
+      <div class="timeline-card reveal">
+        <span class="year">2010</span>
+        <div class="ic">
+          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="14" y="18" width="32" height="32" rx="2"/>
+            <path d="M22 26h4M30 26h4M38 26h4M22 34h4M30 34h4M38 34h4M22 42h4M30 42h4M38 42h4"/>
+            <path d="M14 18 L30 8 L46 18"/>
+          </svg>
+        </div>
+        <p>東京都渋谷区にて<br/>スマイルラボ株式会社を設立</p>
+      </div>
+      <div class="timeline-card reveal">
+        <span class="year">2012</span>
+        <div class="ic">
+          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M30 14C24 14 19 19 19 25c0 5 3 9 5 13 2 3 3 6 3 8 0 1 1 2 2 2h2c1 0 2-1 2-2 0-2 1-5 3-8 2-4 5-8 5-13 0-6-5-11-11-11z" fill="none"/>
+            <circle cx="26" cy="24" r="1.4" fill="currentColor"/>
+            <path d="M24 36 L36 36" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p>CAD/CAMシステムを導入し<br/>デジタル技工を開始</p>
+      </div>
+      <div class="timeline-card reveal">
+        <span class="year">2016</span>
+        <div class="ic">
+          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="22" cy="22" r="5"/>
+            <circle cx="38" cy="22" r="5"/>
+            <path d="M14 44 c0 -5 4 -9 8 -9 c4 0 8 4 8 9"/>
+            <path d="M30 44 c0 -5 4 -9 8 -9 c4 0 8 4 8 9"/>
+          </svg>
+        </div>
+        <p>技工所を拡張し<br/>新ラボへ移転</p>
+      </div>
+      <div class="timeline-card reveal">
+        <span class="year">2020</span>
+        <div class="ic">
+          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="30" cy="26" r="10"/>
+            <path d="M30 22 l1.5 3 l3 0.4 l-2.2 2 l0.6 3 l-2.9 -1.5 l-2.9 1.5 l0.6 -3 l-2.2 -2 l3 -0.4z" fill="currentColor" opacity="0.4"/>
+            <path d="M22 36 L18 50 L24 46 L26 50 Z" fill="none"/>
+            <path d="M38 36 L42 50 L36 46 L34 50 Z" fill="none"/>
+          </svg>
+        </div>
+        <p>品質管理体制の強化と<br/>ISO取得</p>
+      </div>
+      <div class="timeline-card reveal">
+        <span class="year">2024</span>
+        <div class="ic">
+          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 18 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z" fill="currentColor" opacity="0.6" stroke="none"/>
+            <path d="M40 30 l1.5 4 l4 1.5 l-4 1.5 l-1.5 4 l-1.5 -4 l-4 -1.5 l4 -1.5 z" fill="currentColor" opacity="0.6" stroke="none"/>
+            <path d="M30 14 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1 z" fill="currentColor" opacity="0.4" stroke="none"/>
+            <path d="M28 44 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1 z" fill="currentColor" opacity="0.4" stroke="none"/>
+          </svg>
+        </div>
+        <p>最新設備の導入で<br/>さらなる品質向上へ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" data-screen-label="Stats">
+  <div class="wrap">
+    <span class="eyebrow">OUR STRENGTH</span>
+    <h2 class="section-title">数字で見るtre-foil</h2>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="label">取引歯科医院数</span>
+        <div class="ic"><img src="素材5/01.png" alt="" /></div>
+        <div class="num">500<span class="unit">院以上</span></div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="label teal">年間製作数</span>
+        <div class="ic"><img src="素材5/02.png" alt="" /></div>
+        <div class="num">50,000<span class="unit">件以上</span></div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="label">リピート率</span>
+        <div class="ic"><img src="素材5/03.png" alt="" /></div>
+        <div class="num">95<span class="unit">%以上</span></div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="label teal">技工士数</span>
+        <div class="ic"><img src="素材5/04.png" alt="" /></div>
+        <div class="num">20<span class="unit">名以上</span></div>
+      </div>
+      <div class="stat-card reveal">
+        <span class="label">平均納期</span>
+        <div class="ic"><img src="素材5/05.png" alt="" /></div>
+        <div class="num">3.2<span class="unit">日</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="contact" data-screen-label="CTA">
+  <div class="wrap">
+    <div class="box reveal">
+      <div class="icon-bubble">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      </div>
+      <div class="copy">
+        <h3>技工に関するご相談・ご依頼はお気軽にどうぞ</h3>
+        <p class="sub">先生の理想をカタチにするお手伝いをいたします。</p>
+      </div>
+      <a class="btn-white" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#06C755"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせはこちら
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="Footer">
+  <div class="wrap footer-grid">
+    <div class="brand-block">
+      <a href="index.html" class="logo">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" style="filter: brightness(0) invert(1); width: 96px;" />
+      </a>
+      <p>歯科技工のプロフェッショナルとして、<br/>先生と患者さまの笑顔のために。</p>
+    </div>
+    <div>
+      <h5>サービス</h5>
+      <ul>
+        <li><a href="products.html">オールセラミック</a></li>
+        <li><a href="products.html">インプラント</a></li>
+        <li><a href="products.html">義歯</a></li>
+        <li><a href="products.html">矯正装置</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>会社情報</h5>
+      <ul>
+        <li><a href="about.html">私たちについて</a></li>
+        <li><a href="index.html#flow">ご注文の流れ</a></li>
+        <li><a href="#">採用情報</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>お問い合わせ</h5>
+      <ul>
+        <li>〒816-0911<br/>福岡県大野城市大城3丁目10-35</li>
+        <li>受付：平日 9:00 – 18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 SMILE LABO. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>製品紹介 | SMILE LABO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blue: #4a90e2;
+    --blue-deep: #2f7adf;
+    --blue-soft: #e8f0fc;
+    --blue-bg: #f3f7fd;
+    --teal: #6ec9b8;
+    --teal-deep: #4fb8a3;
+    --teal-soft: #e6f5f1;
+    --ink: #2d3a4a;
+    --ink-2: #5a6878;
+    --ink-3: #8a96a4;
+    --line: #e7edf3;
+    --paper: #ffffff;
+    --bg: #f7fbfd;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(231,237,243,0.6);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { width: 56px; height: auto; }
+  .logo .brand-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  nav.primary { display: flex; align-items: center; gap: 36px; }
+  nav.primary a {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    position: relative; padding: 8px 0;
+    transition: color .2s;
+  }
+  nav.primary a.active { color: var(--blue-deep); }
+  nav.primary a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px; background: var(--blue-deep); border-radius: 2px;
+  }
+  nav.primary a:hover { color: var(--blue-deep); }
+  .btn-contact-header {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #06C755; color: #fff;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 4px 14px rgba(6,199,85,0.35);
+    transition: transform .15s, box-shadow .2s;
+  }
+  .btn-contact-header:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
+  .btn-contact-header svg { width: 16px; height: 16px; }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    padding: 18px 0 0;
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .breadcrumb a { color: var(--ink-3); transition: color .2s; }
+  .breadcrumb a:hover { color: var(--blue-deep); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .current { color: var(--ink-2); }
+
+  /* PAGE INTRO */
+  .page-intro {
+    position: relative;
+    padding: 30px 0 56px;
+    overflow: hidden;
+  }
+  .page-intro .eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: var(--teal-deep);
+    font-size: 11.5px;
+    margin: 24px 0 14px;
+    display: block;
+  }
+  .page-intro h1 {
+    font-size: 38px;
+    margin: 0 0 22px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+  .page-intro p {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 2;
+    margin: 0;
+    max-width: 540px;
+  }
+  /* deco */
+  .page-intro .deco { position: absolute; pointer-events: none; }
+  .page-intro .deco.tooth-line {
+    width: 110px;
+    top: 70px; right: 24%;
+    opacity: 0.45;
+    animation: flowToothSpin 14s linear infinite;
+    animation-delay: -7s;
+  }
+  .page-intro .deco.cloud-blue {
+    width: 78px;
+    top: 80px; right: 12%;
+    opacity: 0.55;
+    animation: flowCloudBlue 16s linear infinite;
+    animation-delay: -4s;
+  }
+  .page-intro .deco.dots-tr {
+    width: 110px;
+    top: 30px; right: 4%;
+    opacity: 0.85;
+    animation: flowDotsWave 13s linear infinite;
+    animation-delay: -2s;
+  }
+  .page-intro .deco.cloud-blob {
+    width: 130px;
+    top: 200px; right: 0%;
+    opacity: 0.85;
+    animation: flowBlobBig 18s linear infinite;
+    animation-delay: -10s;
+  }
+  .page-intro .deco.dot-blue {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--blue-deep);
+    top: 100px; right: 38%;
+    opacity: 0.5;
+    animation: flowDotBounce 10s linear infinite;
+    animation-delay: -5s;
+  }
+  @keyframes flowToothSpin {
+    0%   { transform: translateX(-95vw)  rotate(0deg)   scale(0.8); opacity: 0; }
+    10%  { opacity: 0.45; }
+    90%  { opacity: 0.45; }
+    100% { transform: translateX(95vw)   rotate(720deg) scale(1.1); opacity: 0; }
+  }
+  @keyframes flowCloudBlue {
+    0%   { transform: translate(-95vw, 0)   rotate(0deg);  opacity: 0; }
+    10%  { opacity: 0.55; }
+    25%  { transform: translate(-45vw, -15px) rotate(8deg); }
+    50%  { transform: translate(0, 5px)      rotate(-6deg); }
+    75%  { transform: translate(45vw, -18px) rotate(8deg); }
+    90%  { opacity: 0.55; }
+    100% { transform: translate(95vw, 0)     rotate(0deg);  opacity: 0; }
+  }
+  @keyframes flowDotsWave {
+    0%   { transform: translate(-95vw, 0); opacity: 0; }
+    10%  { opacity: 0.85; }
+    20%  { transform: translate(-55vw, -28px); }
+    40%  { transform: translate(-15vw, 18px); }
+    60%  { transform: translate(15vw, -28px); }
+    80%  { transform: translate(55vw, 18px); }
+    90%  { opacity: 0.85; }
+    100% { transform: translate(95vw, 0); opacity: 0; }
+  }
+  @keyframes flowBlobBig {
+    0%   { transform: translate(-95vw, 0)  scale(0.7);  opacity: 0; }
+    10%  { opacity: 0.85; }
+    50%  { transform: translate(0, -12px)  scale(1.15); }
+    90%  { opacity: 0.85; }
+    100% { transform: translate(95vw, 0)   scale(0.7);  opacity: 0; }
+  }
+  @keyframes flowDotBounce {
+    0%   { transform: translate(-95vw, 0); opacity: 0; }
+    10%  { opacity: 0.7; }
+    20%  { transform: translate(-55vw, -45px); }
+    35%  { transform: translate(-25vw, 0); }
+    50%  { transform: translate(0, -45px); }
+    65%  { transform: translate(25vw, 0); }
+    80%  { transform: translate(55vw, -45px); }
+    90%  { opacity: 0.7; }
+    100% { transform: translate(95vw, 0); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-intro .deco { animation: none; }
+  }
+
+  /* SECTION TITLE WITH ICON */
+  .cat-head {
+    display: flex; align-items: center; gap: 14px;
+    margin: 0 0 22px;
+    padding-left: 4px;
+    flex-wrap: wrap;
+  }
+  .cat-head .ic-bubble {
+    width: 38px; height: 38px;
+    flex-shrink: 0;
+  }
+  .cat-head .ic-bubble svg { width: 100%; height: 100%; }
+  .cat-head h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.08em;
+    margin: 0;
+  }
+  .cat-head .desc {
+    font-size: 12px;
+    color: var(--ink-3);
+    margin: 0 0 0 14px;
+  }
+
+  /* CATEGORY */
+  .category {
+    padding: 24px 0 60px;
+    position: relative;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .p-card {
+    background: #fff;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 18px rgba(45,58,74,0.04);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .p-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(45,58,74,0.08); }
+  .p-card .img {
+    aspect-ratio: 16/10;
+    background: linear-gradient(180deg, #f5f9fc, #ebf2f9);
+    overflow: hidden;
+  }
+  .p-card .img img { width: 100%; height: 100%; object-fit: cover; }
+  .p-card .body {
+    padding: 18px 22px 22px;
+  }
+  .p-card h3 {
+    font-size: 16px;
+    margin: 0 0 8px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+  }
+  .p-card p {
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  /* TABLE SECTION */
+  .table-section {
+    padding: 60px 0 70px;
+    position: relative;
+  }
+  .table-section .cat-head h2 { font-size: 20px; }
+  .product-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+  }
+  .product-table thead th {
+    background: var(--blue-bg);
+    padding: 14px 22px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
+  .product-table thead th:first-child { width: 22%; color: var(--blue-deep); }
+  .product-table tbody td {
+    padding: 16px 22px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    color: var(--ink-2);
+    line-height: 1.85;
+  }
+  .product-table tbody tr:last-child td { border-bottom: none; }
+  .product-table tbody td:first-child { color: var(--blue-deep); font-weight: 500; }
+
+  /* SERVICES */
+  .services {
+    padding: 50px 0 70px;
+    position: relative;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .svc-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px 16px 22px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(45,58,74,0.05);
+    border: 1px solid var(--line);
+    transition: transform .25s;
+  }
+  .svc-card:hover { transform: translateY(-3px); }
+  .svc-card .ic {
+    width: 64px; height: 64px;
+    margin: 0 auto 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .svc-card .ic img { width: 100%; height: 100%; object-fit: contain; }
+  .svc-card .pill {
+    background: var(--blue-soft);
+    color: var(--blue-deep);
+    font-size: 11.5px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin: 6px 0 12px;
+    font-weight: 500;
+    display: inline-block;
+    letter-spacing: 0.04em;
+  }
+  .svc-card .pill.teal { background: var(--teal-soft); color: var(--teal-deep); }
+  .svc-card p {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* CTA */
+  .cta-banner {
+    padding: 50px 0 100px;
+    background: var(--bg);
+    margin-top: 30px;
+  }
+  .cta-banner .box {
+    background: linear-gradient(120deg, #4a90e2 0%, #6ec9b8 100%);
+    border-radius: 28px;
+    padding: 38px 50px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 28px;
+    align-items: center;
+    color: #fff;
+    box-shadow: 0 16px 40px rgba(74,144,226,0.25);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner .box::before {
+    content: ""; position: absolute;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    right: -80px; top: -120px;
+  }
+  .cta-banner .icon-bubble {
+    width: 72px; height: 72px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+  }
+  .cta-banner .icon-bubble svg { width: 32px; color: #fff; }
+  .cta-banner .icon-bubble img { width: 52px; height: auto; }
+  .cta-banner .copy { position: relative; z-index: 1; }
+  .cta-banner h3 {
+    font-size: 18px;
+    margin: 0 0 4px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .cta-banner .sub {
+    font-size: 12px;
+    opacity: 0.92;
+    margin: 0;
+  }
+  .cta-banner .btn-white {
+    background: #fff;
+    color: var(--blue-deep);
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    position: relative; z-index: 1;
+    transition: transform .15s;
+  }
+  .cta-banner .btn-white:hover { transform: translateY(-2px); }
+  .cta-banner .btn-white svg { width: 14px; height: 14px; }
+
+  /* FOOTER */
+  footer {
+    background: #2d3a4a;
+    color: #c0cad7;
+    padding: 60px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  footer .brand-block p {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #8a96a4;
+  }
+  footer h5 {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    letter-spacing: 0.05em;
+  }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { font-size: 12.5px; color: #c0cad7; transition: color .2s; }
+  footer ul a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #8a96a4;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    nav.primary { display: none; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .page-intro h1 { font-size: 28px; }
+    .product-table thead { display: none; }
+    .product-table tbody td:first-child { font-weight: 600; padding-bottom: 4px; border-bottom: none; }
+    .cta-banner .box { grid-template-columns: 1fr; text-align: center; padding: 32px 24px; }
+    .cta-banner .icon-bubble { margin: 0 auto; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .cat-head .desc { margin-left: 0; flex-basis: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" data-screen-label="Header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      <span class="brand-name">歯科技工所 tre-foil</span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">ホーム</a>
+      <a href="about.html">会社概要</a>
+      <a href="products.html" class="active">製品紹介</a>
+      <a href="index.html#flow">ご注文の流れ</a>
+      <a href="#">採用情報</a>
+    </nav>
+    <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+      LINEで問い合わせ
+    </a>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="wrap breadcrumb">
+  <a href="index.html">ホーム</a><span class="sep">›</span><span class="current">製品紹介</span>
+</div>
+
+<!-- PAGE INTRO -->
+<section class="page-intro" data-screen-label="Intro">
+  <img src="assets3/31.png" alt="" class="deco tooth-line" />
+  <img src="assets3/28.png" alt="" class="deco cloud-blue" />
+  <img src="assets3/32.png" alt="" class="deco dots-tr" />
+  <img src="assets3/30.png" alt="" class="deco cloud-blob" />
+  <div class="deco dot-blue"></div>
+
+  <div class="wrap">
+    <span class="eyebrow">PRODUCTS</span>
+    <h1>製 品 紹 介</h1>
+    <p>
+      確かな技術と高品質な素材で、<br/>
+      患者さま一人ひとりに最適な技工物をお届けします。
+    </p>
+  </div>
+</section>
+
+<!-- 保険適用製品 -->
+<section class="category" data-screen-label="Insured Products">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div class="ic-bubble">
+        <svg viewBox="0 0 60 60" fill="none">
+          <path d="M30 12C22 12 16 18 16 26c0 6 3 11 6 16 2 4 3 8 3 12 0 1.5 0.6 2 1.5 2h7c0.9 0 1.5-0.5 1.5-2 0-4 1-8 3-12 3-5 6-10 6-16 0-8-6-14-14-14z" stroke="#4a90e2" stroke-width="2.4" fill="#fff"/>
+          <circle cx="26" cy="26" r="1.4" fill="#6ec9b8"/>
+          <path d="M22 22 Q24 24 26 22" stroke="#6ec9b8" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2>保険適用製品</h2>
+      <span class="desc">保険診療に対応した高品質な技工物を、確かな品質でご提供します。</span>
+    </div>
+    <div class="product-grid">
+      <article class="p-card reveal">
+        <div class="img"><img src="assets3/10.png" alt="金属床義歯" /></div>
+        <div class="body">
+          <h3>金属床義歯</h3>
+          <p>強度と適合性に優れ、違和感の少ない<br/>快適な装着感を実現します。</p>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="img"><img src="assets3/11.png" alt="CAD/CAM冠" /></div>
+        <div class="body">
+          <h3>CAD/CAM冠</h3>
+          <p>精度な設計と加工で、機能性と審美性を<br/>兼ね備えた補綴物を提供します。</p>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="img"><img src="assets3/12.png" alt="メタルクラウン" /></div>
+        <div class="body">
+          <h3>メタルクラウン</h3>
+          <p>高い強度と耐久性を持ち、<br/>長期的な安定性を実現します。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 自費製品 -->
+<section class="category" data-screen-label="Premium Products">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div class="ic-bubble">
+        <svg viewBox="0 0 60 60" fill="none">
+          <path d="M30 48 C 16 38, 10 28, 14 20 C 18 12, 26 14, 30 22 C 34 14, 42 12, 46 20 C 50 28, 44 38, 30 48 Z" stroke="#6ec9b8" stroke-width="2.4" fill="#fff"/>
+        </svg>
+      </div>
+      <h2>自費製品</h2>
+      <span class="desc">審美性・機能性にこだわった高品質な自費製品を取り揃えています。</span>
+    </div>
+    <div class="product-grid">
+      <article class="p-card reveal">
+        <div class="img"><img src="assets3/13.png" alt="ジルコニアクラウン" /></div>
+        <div class="body">
+          <h3>ジルコニアクラウン</h3>
+          <p>高い強度と自然な透明感で、<br/>美しく長持ちする補綴物です。</p>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="img"><img src="assets3/14.png" alt="e.max オールセラミック" /></div>
+        <div class="body">
+          <h3>e.max（オールセラミック）</h3>
+          <p>優れた審美性と生体親和性で、<br/>自然な仕上がりを実現します。</p>
+        </div>
+      </article>
+      <article class="p-card reveal">
+        <div class="img"><img src="assets3/15.png" alt="インプラント上部構造" /></div>
+        <div class="body">
+          <h3>インプラント上部構造</h3>
+          <p>精密な適合と高い審美性で、<br/>快適な口腔環境をサポートします。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TABLE -->
+<section class="table-section" data-screen-label="Other Products">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div class="ic-bubble">
+        <svg viewBox="0 0 60 60" fill="none" stroke="#4a90e2" stroke-width="2.2">
+          <rect x="16" y="16" width="28" height="32" rx="2" fill="#fff"/>
+          <rect x="22" y="12" width="16" height="6" rx="1" fill="#fff"/>
+          <path d="M22 28 l3 3 l6 -6" stroke="#6ec9b8"/>
+          <path d="M34 30 L42 30" stroke="#6ec9b8"/>
+          <path d="M22 38 l3 3 l6 -6" stroke="#6ec9b8"/>
+          <path d="M34 40 L42 40" stroke="#6ec9b8"/>
+        </svg>
+      </div>
+      <h2>その他取り扱い製品一覧</h2>
+    </div>
+    <table class="product-table reveal">
+      <thead>
+        <tr>
+          <th>分類</th>
+          <th>主な製品</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>クラウン・ブリッジ</td>
+          <td>保険用レジン冠／メタルボンド／PFM／ゴールドクラウン など</td>
+        </tr>
+        <tr>
+          <td>義歯</td>
+          <td>レジン床義歯／金属床義歯／ノンクラスプデンチャー など</td>
+        </tr>
+        <tr>
+          <td>インレー・アンレー</td>
+          <td>ゴールドインレー／CAD/CAMインレー／ハイブリッドインレー など</td>
+        </tr>
+        <tr>
+          <td>矯正装置</td>
+          <td>矯正用リテーナー／床矯正装置／マウスピース矯正装置 など</td>
+        </tr>
+        <tr>
+          <td>ホワイトニング関連</td>
+          <td>ホームホワイトニングトレー など</td>
+        </tr>
+        <tr>
+          <td>その他</td>
+          <td>咬合床／顎関模型／診断用ワックスアップ など</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" data-screen-label="Services">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div class="ic-bubble">
+        <svg viewBox="0 0 60 60" fill="none">
+          <path d="M30 12C22 12 16 18 16 26c0 6 3 11 6 16 2 4 3 8 3 12 0 1.5 0.6 2 1.5 2h7c0.9 0 1.5-0.5 1.5-2 0-4 1-8 3-12 3-5 6-10 6-16 0-8-6-14-14-14z" stroke="#4a90e2" stroke-width="2.4" fill="#fff"/>
+          <path d="M22 22 Q26 24 32 22" stroke="#4a90e2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <path d="M22 28 Q26 30 32 28" stroke="#4a90e2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2>対応可能なサービス</h2>
+      <span class="desc">最新設備と確かな技術で、歯科医院さまと患者さまのニーズにお応えします。</span>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <div class="ic"><img src="assets3/22.png" alt="" /></div>
+        <span class="pill">CAD/CAM設計・製作</span>
+        <p>デジタル技術を活用した精度な<br/>設計・製作を行います。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="ic"><img src="assets3/23.png" alt="" /></div>
+        <span class="pill teal">ジルコニア加工</span>
+        <p>高精度ミリングマシンによる<br/>高品質なジルコニア加工。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="ic"><img src="assets3/24.png" alt="" /></div>
+        <span class="pill">スキャナデータ対応</span>
+        <p>各種口腔内スキャナーのデータに<br/>対応可能です。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="ic"><img src="assets3/25.png" alt="" /></div>
+        <span class="pill teal">咬合器付模型製作</span>
+        <p>精密な咬合調整のための<br/>模型製作を行います。</p>
+      </div>
+      <div class="svc-card reveal">
+        <div class="ic"><img src="assets3/26.png" alt="" /></div>
+        <span class="pill">迅速・丁寧な納品</span>
+        <p>確かな品質を守りながら、<br/>スピーディーにお届けします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="contact" data-screen-label="CTA">
+  <div class="wrap">
+    <div class="box reveal">
+      <div class="icon-bubble">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      </div>
+      <div class="copy">
+        <h3>技工に関するご相談・ご依頼はお気軽にどうぞ</h3>
+        <p class="sub">先生の理想をカタチにするお手伝いをいたします。</p>
+      </div>
+      <a class="btn-white" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#06C755"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせはこちら
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="Footer">
+  <div class="wrap footer-grid">
+    <div class="brand-block">
+      <a href="index.html" class="logo">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" style="filter: brightness(0) invert(1); width: 96px;" />
+      </a>
+      <p>歯科技工のプロフェッショナルとして、<br/>先生と患者さまの笑顔のために。</p>
+    </div>
+    <div>
+      <h5>サービス</h5>
+      <ul>
+        <li><a href="products.html">オールセラミック</a></li>
+        <li><a href="products.html">インプラント</a></li>
+        <li><a href="products.html">義歯</a></li>
+        <li><a href="products.html">矯正装置</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>会社情報</h5>
+      <ul>
+        <li><a href="about.html">私たちについて</a></li>
+        <li><a href="index.html#flow">ご注文の流れ</a></li>
+        <li><a href="#">採用情報</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>お問い合わせ</h5>
+      <ul>
+        <li>〒816-0911<br/>福岡県大野城市大城3丁目10-35</li>
+        <li>受付：平日 9:00 – 18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 SMILE LABO. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+</script>
+</body>
+</html>

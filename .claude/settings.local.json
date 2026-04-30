@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /tmp/design_extract)",
+      "Read(//tmp/**)",
+      "Bash(tar -xzf \"/Users/kotaro/.claude/projects/-Users-kotaro-Desktop-tre-foil------/b8f760e5-5f5e-4144-ad1a-ea73d0936c8d/tool-results/webfetch-1777288533593-667ewn.bin\")",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(tar -tzf \"/Users/kotaro/.claude/projects/-Users-kotaro-Desktop-tre-foil------/37a8cd9f-36cf-43c1-b1d3-01c58f8b469e/tool-results/webfetch-1777290270572-rxk5kw.bin\")",
+      "Read(//private/tmp/design_pkg/**)",
+      "Bash(tar -xzf \"/Users/kotaro/.claude/projects/-Users-kotaro-Desktop-tre-foil------/37a8cd9f-36cf-43c1-b1d3-01c58f8b469e/tool-results/webfetch-1777290270572-rxk5kw.bin\")"
+    ]
+  }
+}
