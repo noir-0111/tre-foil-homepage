@@ -82,6 +82,42 @@
   .btn-contact-header:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
   .btn-contact-header svg { width: 16px; height: 16px; }
 
+  /* hamburger menu (mobile only) */
+  .menu-toggle {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    width: 40px; height: 40px;
+    padding: 0;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 5px;
+    z-index: 110;
+    position: relative;
+    margin-left: 8px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .3s, opacity .25s;
+  }
+  body.menu-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(45,58,74,0.45);
+    z-index: 95;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  body.menu-open .menu-backdrop {
+    display: block;
+    opacity: 1;
+  }
+
   /* BREADCRUMB */
   .breadcrumb {
     padding: 18px 0 0;
@@ -463,7 +499,33 @@
   .reveal.visible { opacity: 1; transform: none; }
 
   @media (max-width: 960px) {
-    nav.primary { display: none; }
+    .menu-toggle { display: flex; }
+    nav.primary {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      position: fixed;
+      top: 0; right: 0;
+      width: 78%; max-width: 320px;
+      height: 100vh;
+      background: #fff;
+      padding: 80px 28px 28px;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.12);
+      transform: translateX(100%);
+      transition: transform .35s ease;
+      z-index: 100;
+      gap: 0;
+    }
+    body.menu-open nav.primary { transform: translateX(0); }
+    nav.primary a {
+      padding: 16px 6px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15.5px;
+      font-weight: 500;
+    }
+    nav.primary a:last-child { border-bottom: none; }
+    nav.primary a.active::after { display: none; }
+    nav.primary a.active { color: var(--blue-deep); border-left: 3px solid var(--blue-deep); padding-left: 12px; }
     .btn-contact-header {
       padding: 8px 14px;
       font-size: 11.5px;
@@ -516,8 +578,12 @@
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
       LINEで問い合わせ
     </a>
+    <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<div class="menu-backdrop"></div>
 
 <!-- BREADCRUMB -->
 <div class="wrap breadcrumb">
@@ -780,6 +846,23 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // mobile hamburger menu
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuBackdrop = document.querySelector(".menu-backdrop");
+  const closeMenu = () => {
+    document.body.classList.remove("menu-open");
+    if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+  };
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const open = !document.body.classList.contains("menu-open");
+      document.body.classList.toggle("menu-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  if (menuBackdrop) menuBackdrop.addEventListener("click", closeMenu);
+  document.querySelectorAll("nav.primary a").forEach(a => a.addEventListener("click", closeMenu));
 </script>
 </body>
 </html>
