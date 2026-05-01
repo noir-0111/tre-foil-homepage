@@ -185,7 +185,29 @@
     color: var(--ink-2);
     line-height: 2;
     margin: 0 0 36px;
-    max-width: 460px;
+    max-width: 560px;
+  }
+  .hero-lead .lead-line {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 0 4px;
+    margin-bottom: 2px;
+    background-image: linear-gradient(transparent 62%, rgba(79,184,163,0.32) 62%, rgba(79,184,163,0.32) 92%, transparent 92%);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position: left center;
+    transition: background-size 0.9s ease-out;
+  }
+  .hero-text.visible .hero-lead .lead-line { background-size: 100% 100%; }
+  .hero-text.visible .hero-lead .lead-line:nth-of-type(1) { transition-delay: 0.4s; }
+  .hero-text.visible .hero-lead .lead-line:nth-of-type(2) { transition-delay: 1.0s; }
+  .hero-text.visible .hero-lead .lead-line:nth-of-type(3) { transition-delay: 1.6s; }
+  .hero-text.visible .hero-lead .lead-line:nth-of-type(4) { transition-delay: 2.2s; }
+  .hero-text.visible .hero-lead .lead-line:nth-of-type(5) { transition-delay: 2.8s; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-lead .lead-line { transition: none; }
+    .hero-text.visible .hero-lead .lead-line { background-size: 100% 100%; }
   }
   .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
   .btn {
@@ -1023,13 +1045,16 @@
         <span class="l2">Building trust.</span>
       </div>
       <h1 class="hero-title">
-        その技術が、<br />
-        患者さまの<span class="accent">笑顔</span>を<br />
-        つくる。
+        あなたの<br />
+        <span class="accent">笑顔</span>のために<br />
+        今日も誠実に
       </h1>
       <p class="hero-lead">
-        歯科技工のプロフェッショナルとして、<br />
-        先生の想いに寄り添い、最高の技工物をお届けします。
+        <span class="lead-line">私たちtre-foilは</span>
+        <span class="lead-line">患者様とクリニックとの深い信頼のうえに立ち</span>
+        <span class="lead-line">ひとつひとつの仕事を丁寧に、そして誠実に積み重ねてまいります。</span>
+        <span class="lead-line">“後悔のない選択を、毎日の仕事の中で”</span>
+        <span class="lead-line">それが私たちの、ものづくりへの誓いです。</span>
       </p>
     </div>
 
