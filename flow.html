@@ -1,0 +1,753 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ご注文の流れ | tre-foil</title>
+<meta name="description" content="株式会社tre-foilのご注文から納品までの流れ。確かな品質を、スピーディーにお届けするための体制を整えています。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="ご注文の流れ | tre-foil" />
+<meta property="og:description" content="お問い合わせから納品まで9ステップで分かりやすくご案内します。" />
+<meta property="og:url" content="https://noir-0111.github.io/tre-foil-homepage/flow.html" />
+<meta property="og:site_name" content="tre-foil" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blue: #4a90e2;
+    --blue-deep: #2f7adf;
+    --blue-soft: #e8f0fc;
+    --blue-bg: #f3f7fd;
+    --teal: #6ec9b8;
+    --teal-deep: #4fb8a3;
+    --teal-soft: #e6f5f1;
+    --ink: #2d3a4a;
+    --ink-2: #5a6878;
+    --ink-3: #8a96a4;
+    --line: #e7edf3;
+    --paper: #ffffff;
+    --bg: #f7fbfd;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(231,237,243,0.6);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { width: 56px; height: auto; }
+  .logo .brand-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  nav.primary { display: flex; align-items: center; gap: 36px; }
+  nav.primary a {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    position: relative; padding: 8px 0;
+    transition: color .2s;
+  }
+  nav.primary a.active { color: var(--blue-deep); }
+  nav.primary a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px; background: var(--blue-deep); border-radius: 2px;
+  }
+  nav.primary a:hover { color: var(--blue-deep); }
+  .btn-contact-header {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #06C755; color: #fff;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 4px 14px rgba(6,199,85,0.35);
+    transition: transform .15s, box-shadow .2s;
+  }
+  .btn-contact-header:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
+  .btn-contact-header svg { width: 16px; height: 16px; }
+
+  /* hamburger menu (mobile only) */
+  .menu-toggle {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    width: 40px; height: 40px;
+    padding: 0;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 5px;
+    z-index: 110;
+    position: relative;
+    margin-left: 8px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .3s, opacity .25s;
+  }
+  body.menu-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: transparent;
+    z-index: 30;
+  }
+  body.menu-open .menu-backdrop { display: block; }
+
+  /* BREADCRUMB */
+  .breadcrumb { padding: 18px 0 0; font-size: 11.5px; color: var(--ink-3); }
+  .breadcrumb a { color: var(--ink-3); transition: color .2s; }
+  .breadcrumb a:hover { color: var(--blue-deep); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .current { color: var(--ink-2); }
+
+  /* HERO */
+  .page-hero {
+    position: relative;
+    padding: 30px 0 50px;
+    overflow: hidden;
+  }
+  .page-hero .eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: var(--teal-deep);
+    font-size: 11.5px;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .page-hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 24px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+  .page-hero .lead {
+    font-size: 13.5px;
+    color: var(--ink-2);
+    line-height: 2.1;
+    margin: 0;
+    max-width: 580px;
+  }
+  .page-hero .deco { position: absolute; pointer-events: none; }
+  .page-hero .deco.circ-1 { width: 90px; height: 90px; border-radius: 50%; background: rgba(74,144,226,0.10); top: 50px; right: 28%;
+    animation: flowFloat 6s ease-in-out infinite; }
+  .page-hero .deco.circ-2 { width: 36px; height: 36px; border-radius: 50%; background: rgba(110,201,184,0.20); top: 100px; right: 24%;
+    animation: flowPulse 4s ease-in-out infinite; }
+  .page-hero .deco.tooth-line { width: 90px; top: 30px; right: 14%; opacity: 0.6;
+    animation: flowFloat 7s ease-in-out infinite; animation-delay: -1.5s; }
+  .page-hero .deco.dot-grid { width: 100px; top: 30px; right: 3%; opacity: 0.85;
+    animation: flowDrift 5.5s ease-in-out infinite; }
+  .page-hero .deco.blob-cluster { width: 130px; top: 130px; right: 8%; opacity: 0.7;
+    animation: flowFloat 8s ease-in-out infinite; animation-delay: -2s; }
+  @keyframes flowFloat {
+    0%, 100% { transform: translate(0,0) rotate(0deg); }
+    50%      { transform: translate(-10px,-12px) rotate(6deg); }
+  }
+  @keyframes flowPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.25); }
+  }
+  @keyframes flowDrift {
+    0%, 100% { transform: translate(0,0); }
+    50%      { transform: translate(8px,-10px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .page-hero .deco { animation: none; }
+  }
+
+  /* STEPS */
+  .flow-section {
+    padding: 30px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px 12px;
+    position: relative;
+  }
+  .step {
+    text-align: center;
+    position: relative;
+    padding: 0 4px;
+  }
+  .step .num {
+    font-family: "Montserrat", sans-serif;
+    color: var(--blue-deep);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .step .icon-circle {
+    width: 92px; height: 92px;
+    margin: 0 auto 16px;
+    background: var(--blue-soft);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .25s;
+  }
+  .step:hover .icon-circle { transform: translateY(-3px); }
+  .step .icon-circle img { width: 42px; height: auto; }
+  .step h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 0 0 10px;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .step p {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.85;
+    margin: 0;
+  }
+  /* arrow between steps */
+  .step::after {
+    content: "";
+    position: absolute;
+    top: 64px; right: -10px;
+    width: 20px; height: 20px;
+    background: var(--blue);
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'><polyline points='5 3 8 6 5 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+  }
+  .flow-grid.row1 .step:nth-child(5)::after { display: none; }
+  .flow-grid.row2 .step:last-child::after { display: none; }
+  .flow-grid.row2 .step:nth-child(4)::after { display: none; }
+  .flow-grid.row2 { grid-template-columns: repeat(5, 1fr); margin-top: 32px; }
+
+  /* CTA banner — gradient */
+  .cta-banner {
+    padding: 40px 0 70px;
+  }
+  .cta-banner .box {
+    background: linear-gradient(120deg, #4a90e2 0%, #6ec9b8 100%);
+    border-radius: 28px;
+    padding: 30px 44px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+    color: #fff;
+    box-shadow: 0 16px 40px rgba(74,144,226,0.22);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner .box::before {
+    content: ""; position: absolute;
+    width: 240px; height: 240px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    right: -80px; top: -100px;
+  }
+  .cta-banner .icon-bubble {
+    width: 64px; height: 64px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative; z-index: 1;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+  }
+  .cta-banner .icon-bubble img { width: 44px; height: auto; }
+  .cta-banner .copy { position: relative; z-index: 1; }
+  .cta-banner h3 { font-size: 17px; margin: 0 0 4px; font-weight: 700; letter-spacing: 0.04em; }
+  .cta-banner .sub { font-size: 12px; opacity: 0.95; margin: 0; }
+  .cta-banner .btn-white {
+    background: #fff;
+    color: var(--blue-deep);
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 12.5px;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    position: relative; z-index: 1;
+    transition: transform .15s;
+    white-space: nowrap;
+  }
+  .cta-banner .btn-white:hover { transform: translateY(-2px); }
+  .cta-banner .btn-white svg { width: 14px; height: 14px; }
+
+  /* STRENGTHS */
+  .strengths {
+    padding: 40px 0 70px;
+  }
+  .strengths-head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 22px;
+  }
+  .strengths-head .ic-tooth {
+    width: 28px; height: 28px;
+    color: var(--teal-deep);
+  }
+  .strengths-head h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+  }
+  .strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .strength-card {
+    background: var(--bg);
+    border-radius: 14px;
+    padding: 26px 24px;
+    text-align: center;
+    transition: transform .25s, box-shadow .25s;
+    border: 1px solid rgba(74,144,226,0.06);
+  }
+  .strength-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(45,58,74,0.08); }
+  .strength-card .ic {
+    width: 56px;
+    margin: 0 auto 14px;
+  }
+  .strength-card .ic img { width: 100%; }
+  .strength-card .lbl {
+    display: inline-block;
+    color: var(--blue-deep);
+    font-size: 13px;
+    font-weight: 700;
+    border-bottom: 1.5px solid var(--blue);
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .strength-card .lbl.teal { color: var(--teal-deep); border-color: var(--teal); }
+  .strength-card p {
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.85;
+    margin: 0;
+  }
+
+  /* INFO BAR — replaces phone bar with LINE info */
+  .info-bar {
+    padding: 20px 0 80px;
+  }
+  .info-bar .box {
+    background: var(--teal-soft);
+    border-radius: 18px;
+    padding: 22px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .info-bar .ic {
+    width: 56px; height: 56px;
+    background: #06C755;
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .info-bar .ic svg { width: 28px; }
+  .info-bar .copy { display: flex; flex-direction: column; gap: 4px; }
+  .info-bar .lbl { font-size: 12px; color: var(--ink-2); }
+  .info-bar .main-text {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+  .info-bar .hours {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 11px;
+    color: var(--ink-3);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+  .info-bar .line-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #06C755;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 999px;
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 6px 16px rgba(6,199,85,0.30);
+    transition: transform .15s, box-shadow .2s;
+    white-space: nowrap;
+  }
+  .info-bar .line-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(6,199,85,0.40); }
+  .info-bar .line-btn svg { width: 16px; height: 16px; }
+
+  /* FOOTER */
+  footer {
+    background: #2d3a4a;
+    color: #c0cad7;
+    padding: 60px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  footer .brand-block p { margin-top: 16px; font-size: 12px; line-height: 1.9; color: #8a96a4; }
+  footer h5 { color: #fff; font-size: 13px; font-weight: 600; margin: 0 0 16px; letter-spacing: 0.05em; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { font-size: 12.5px; color: #c0cad7; transition: color .2s; }
+  footer ul a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #8a96a4;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 960px) {
+    .menu-toggle { display: flex; }
+    nav.primary {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      position: fixed;
+      top: 0; right: 0;
+      width: 78%; max-width: 320px;
+      height: 100vh;
+      background: #fff;
+      padding: 80px 28px 28px;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.12);
+      transform: translateX(100%);
+      transition: transform .35s ease;
+      z-index: 100;
+      gap: 0;
+    }
+    body.menu-open nav.primary { transform: translateX(0); }
+    nav.primary a {
+      padding: 16px 6px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15.5px;
+      font-weight: 500;
+    }
+    nav.primary a:last-child { border-bottom: none; }
+    nav.primary a.active::after { display: none; }
+    nav.primary a.active { color: var(--blue-deep); border-left: 3px solid var(--blue-deep); padding-left: 12px; }
+    .btn-contact-header {
+      padding: 6px 11px;
+      font-size: 10.5px;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .btn-contact-header svg { width: 12px; height: 12px; }
+    .logo img { width: 46px; }
+    .logo .brand-name { font-size: 13.5px; }
+    .page-hero h1 { font-size: 26px; }
+    .flow-grid, .flow-grid.row2 { grid-template-columns: repeat(2, 1fr); gap: 24px 12px; }
+    .step::after { display: none; }
+    .strengths-grid { grid-template-columns: 1fr; }
+    .cta-banner .box, .info-bar .box { grid-template-columns: 1fr; text-align: center; padding: 26px 22px; }
+    .cta-banner .icon-bubble, .info-bar .ic { margin: 0 auto; }
+    .info-bar .main-text { font-size: 16px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+  @media (max-width: 540px) {
+    .btn-contact-header {
+      padding: 5px 9px;
+      font-size: 9.5px;
+      gap: 4px;
+    }
+    .btn-contact-header svg { width: 11px; height: 11px; }
+    .logo img { width: 40px; }
+    .logo .brand-name { font-size: 11.5px; }
+    .header-inner { padding: 10px 14px; }
+    .wrap { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" data-screen-label="Header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      <span class="brand-name">歯科技工所 tre-foil</span>
+    </a>
+    <nav class="primary">
+      <a href="https://noir-0111.github.io/tre-foil-homepage/index.html">ホーム</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/about.html">会社概要</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/products.html">製品紹介</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/flow.html" class="active">ご注文の流れ</a>
+      <a href="#">採用情報</a>
+    </nav>
+    <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+      LINEで問い合わせ
+    </a>
+    <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="menu-backdrop"></div>
+
+<div class="wrap breadcrumb">
+  <a href="index.html">ホーム</a><span class="sep">›</span><span class="current">ご注文の流れ</span>
+</div>
+
+<!-- HERO -->
+<section class="page-hero" data-screen-label="Flow Hero">
+  <div class="deco circ-1"></div>
+  <div class="deco circ-2"></div>
+  <img src="assets6/14.png" alt="" class="deco tooth-line" />
+  <img src="assets6/24.png" alt="" class="deco dot-grid" />
+  <img src="assets6/21.png" alt="" class="deco blob-cluster" />
+  <div class="wrap">
+    <span class="eyebrow">FLOW</span>
+    <h1>ご 注 文 の 流 れ</h1>
+    <p class="lead">
+      ご注文から納品までの流れをご案内します。<br/>
+      確かな品質を、スピーディーにお届けするための体制を整えています。
+    </p>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="flow-section" data-screen-label="Flow Steps">
+  <div class="wrap">
+    <div class="flow-grid row1">
+      <div class="step reveal">
+        <span class="num">01</span>
+        <div class="icon-circle"><img src="assets6/step-01.png" alt="" /></div>
+        <h4>お問い合わせ</h4>
+        <p>LINEまたはフォームより<br/>お問い合わせください。<br/>ご不明点もお気軽にご相談<br/>いただけます。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">02</span>
+        <div class="icon-circle"><img src="assets6/step-02.png" alt="" /></div>
+        <h4>お見積り</h4>
+        <p>ご依頼内容を確認し、<br/>お見積りを提出します。<br/>内容にご納得いただけましたら<br/>ご発注をお願いします。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">03</span>
+        <div class="icon-circle"><img src="assets6/step-03.png" alt="" /></div>
+        <h4>模型・データの送付</h4>
+        <p>模型または口腔内スキャンデータを<br/>ご送付ください。<br/>（デジタルデータの場合は<br/>オンライン送信も可能です）</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">04</span>
+        <div class="icon-circle"><img src="assets6/step-04.png" alt="" /></div>
+        <h4>設計・製作</h4>
+        <p>熟練の技工士が<br/>丁寧に設計・製作を行います。<br/>最新設備を活用し、精度の高い<br/>技工物を製作します。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">05</span>
+        <div class="icon-circle"><img src="assets6/13.png" alt="" /></div>
+        <h4>品質チェック</h4>
+        <p>厳しい品質基準のもと、<br/>精密な検査・確認を行います。<br/>細部まで徹底したチェックで<br/>品質を保証します。</p>
+      </div>
+    </div>
+
+    <div class="flow-grid row2">
+      <div class="step reveal">
+        <span class="num">06</span>
+        <div class="icon-circle"><img src="assets6/14.png" alt="" /></div>
+        <h4>完成</h4>
+        <p>品質検査をクリアした<br/>技工物が完成します。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">07</span>
+        <div class="icon-circle"><img src="assets6/step-07.png" alt="" /></div>
+        <h4>発送・納品</h4>
+        <p>丁寧に梱包し、迅速に<br/>発送いたします。<br/>ご指定の方式で納品します。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">08</span>
+        <div class="icon-circle"><img src="assets6/step-08.png" alt="" /></div>
+        <h4>ご確認</h4>
+        <p>納品物をご確認ください。<br/>ご不明点や調整が必要な場合は<br/>ご連絡をお願いします。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">09</span>
+        <div class="icon-circle"><img src="assets6/step-09.png" alt="" /></div>
+        <h4>アフターフォロー</h4>
+        <p>納品後も安心のサポート体制で、<br/>継続的にフォローさせて<br/>いただきます。</p>
+      </div>
+      <div class="step" style="visibility:hidden;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner" id="contact" data-screen-label="CTA">
+  <div class="wrap">
+    <div class="box reveal">
+      <div class="icon-bubble">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      </div>
+      <div class="copy">
+        <h3>スピーディーかつ高品質な技工物をお届けします</h3>
+        <p class="sub">お急ぎの場合も柔軟に対応いたします。まずはお気軽にご相談ください。</p>
+      </div>
+      <a class="btn-white" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#06C755"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせはこちら
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STRENGTHS -->
+<section class="strengths" data-screen-label="Strengths">
+  <div class="wrap">
+    <div class="strengths-head">
+      <svg class="ic-tooth" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M12 4c-3 0-5 2-5 5 0 3 1.4 4.7 2.5 7 1 2 1.4 3.5 1.4 5 0 0.5 0.3 1 0.8 1h0.6c0.5 0 0.8-0.5 0.8-1 0-1.5 0.4-3 1.4-5 1.1-2.3 2.5-4 2.5-7 0-3-2-5-5-5z"/>
+        <path d="M16 6 l1 2 l2 0.5 l-1.5 1.5 l0.5 2 l-2 -1 l-2 1 l0.5 -2 l-1.5 -1.5 l2 -0.5 z" stroke="none" fill="currentColor" opacity="0.5"/>
+      </svg>
+      <h2>tre-foilの強み</h2>
+    </div>
+    <div class="strengths-grid">
+      <div class="strength-card reveal">
+        <div class="ic"><img src="assets6/s-clock.png" alt="" /></div>
+        <span class="lbl">スピーディーな対応</span>
+        <p>最新設備と効率的な体制により、<br/>短納期のご要望にも対応します。</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="ic"><img src="assets6/s-diamond.png" alt="" /></div>
+        <span class="lbl">高品質な技工物</span>
+        <p>経験豊富な技工士が、細部までこだわり<br/>高品質な技工物を製作します。</p>
+      </div>
+      <div class="strength-card reveal">
+        <div class="ic"><img src="assets6/s-people.png" alt="" /></div>
+        <span class="lbl teal">丁寧なコミュニケーション</span>
+        <p>ご要望をしっかりとヒアリングし、<br/>最適なご提案をいたします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINE INFO BAR -->
+<section class="info-bar" data-screen-label="Line Info">
+  <div class="wrap">
+    <div class="box reveal">
+      <div class="ic">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/>
+        </svg>
+      </div>
+      <div class="copy">
+        <span class="lbl">お急ぎのご注文・ご相談はこちら</span>
+        <span class="main-text">公式LINEでお気軽にご連絡ください</span>
+        <span class="hours">受付：平日 9:00 – 18:00</span>
+      </div>
+      <a class="line-btn" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        公式LINEを追加
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer data-screen-label="Footer">
+  <div class="wrap footer-grid">
+    <div class="brand-block">
+      <a href="index.html" class="logo">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" style="filter: brightness(0) invert(1); width: 96px;" />
+      </a>
+      <p>歯科技工のプロフェッショナルとして、<br/>先生と患者さまの笑顔のために。</p>
+    </div>
+    <div>
+      <h5>サービス</h5>
+      <ul>
+        <li><a href="products.html">オールセラミック</a></li>
+        <li><a href="products.html">インプラント</a></li>
+        <li><a href="products.html">義歯</a></li>
+        <li><a href="products.html">矯正装置</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>会社情報</h5>
+      <ul>
+        <li><a href="about.html">私たちについて</a></li>
+        <li><a href="flow.html">ご注文の流れ</a></li>
+        <li><a href="#">採用情報</a></li>
+        <li><a href="#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>お問い合わせ</h5>
+      <ul>
+        <li>〒816-0911<br/>福岡県大野城市大城3丁目10-35</li>
+        <li>受付：平日 9:00 – 18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 tre-foil. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // mobile hamburger menu
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuBackdrop = document.querySelector(".menu-backdrop");
+  const closeMenu = () => {
+    document.body.classList.remove("menu-open");
+    if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+  };
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const open = !document.body.classList.contains("menu-open");
+      document.body.classList.toggle("menu-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  if (menuBackdrop) menuBackdrop.addEventListener("click", closeMenu);
+</script>
+</body>
+</html>
