@@ -919,13 +919,13 @@
     line-height: 2.15;
     margin: 0 0 32px;
   }
-  .ls-meanings { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .ls-meanings { display: flex; gap: 10px; flex-wrap: nowrap; align-items: center; }
   .ls-meaning {
-    display: inline-flex; align-items: center; gap: 10px;
+    display: inline-flex; align-items: center; gap: 9px; white-space: nowrap;
     background: #fff;
     border-radius: 999px;
-    padding: 12px 26px;
-    font-size: 16.5px;
+    padding: 11px 20px;
+    font-size: 15px;
     font-weight: 600;
     color: var(--ink);
     box-shadow: 0 4px 12px rgba(45,58,74,0.05);
@@ -1258,6 +1258,7 @@
     h2.section-title { font-size: 22px; }
   }
   @media (max-width: 540px) {
+    .ls-meanings { flex-wrap: wrap; }
     .btn-contact-header {
       padding: 5px 9px;
       font-size: 9.5px;
@@ -1625,7 +1626,7 @@
           (function typeChar() {
             if (ci >= seg.text.length) { si++; typeSeg(); return; }
             tn.textContent += seg.text[ci++];
-            setTimeout(typeChar, 11);
+            setTimeout(typeChar, 28);
           })();
         }
         typeSeg();

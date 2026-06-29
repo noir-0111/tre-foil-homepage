@@ -268,15 +268,14 @@
     width: 70%; height: 70%; left: 8%; top: 6%;
     animation: floatMain 6s ease-in-out infinite;
     transform-origin: center center;
-    background: #eef1f4;
   }
   .hero-collage .photo.main img {
-    transform: scale(0.82);
-    filter: brightness(1.12) saturate(1.04) contrast(0.99);
+    object-fit: cover; object-position: center 25%;
+    filter: brightness(1.1) saturate(1.03);
     transition: transform .8s ease;
   }
   .hero-collage .photo.main:hover { animation-play-state: paused; }
-  .hero-collage .photo.main:hover img { transform: scale(0.88); }
+  .hero-collage .photo.main:hover img { transform: scale(1.05); }
   .hero-collage .photo.prod {
     width: 32%; height: 32%; right: 4%; top: 8%;
     box-shadow: 0 14px 32px rgba(45,58,74,0.14);
@@ -295,6 +294,7 @@
     animation: shadowProd 4.5s ease-in-out infinite;
   }
   .hero-collage .photo.prod img {
+    object-fit: contain; padding: 14%; box-sizing: border-box;
     transition: transform .6s ease;
   }
   .hero-collage .photo.prod:hover { animation-play-state: paused; }
@@ -333,6 +333,7 @@
     animation-delay: -1.5s;
   }
   .hero-collage .photo.lab img {
+    object-fit: contain; padding: 13%; box-sizing: border-box;
     transition: transform .6s ease;
   }
   .hero-collage .photo.lab:hover { animation-play-state: paused; }
