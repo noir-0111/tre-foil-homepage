@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>納期カレンダー | tre-foil</title>
+<meta name="description" content="株式会社tre-foilの納期カレンダー。受付日から土日祝を除いた営業日で計算した、直近2か月の納品予定日の目安をご確認いただけます。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="納期カレンダー | tre-foil" />
+<meta property="og:description" content="受付日ごとの納品予定日（中3〜中7）を直近2か月分で自動表示。土日祝は休業として営業日計算しています。" />
+<meta property="og:url" content="https://noir-0111.github.io/tre-foil-homepage/delivery-calendar.html" />
+<meta property="og:site_name" content="tre-foil" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blue: #4a90e2;
+    --blue-deep: #2f7adf;
+    --blue-soft: #e8f0fc;
+    --blue-bg: #f3f7fd;
+    --teal: #6ec9b8;
+    --teal-deep: #4fb8a3;
+    --teal-soft: #e6f5f1;
+    --ink: #2d3a4a;
+    --ink-2: #5a6878;
+    --ink-3: #8a96a4;
+    --line: #e7edf3;
+    --paper: #ffffff;
+    --bg: #f7fbfd;
+    --sat: #eaf3fb;
+    --sun: #fdeef0;
+    --xmonth: #d64550;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(231,237,243,0.6);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { width: 56px; height: auto; }
+  .logo .brand-name {
+    font-size: 16px; font-weight: 700; color: var(--ink);
+    letter-spacing: 0.06em; white-space: nowrap; line-height: 1.2;
+  }
+  nav.primary { display: flex; align-items: center; gap: 32px; }
+  nav.primary a {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    position: relative; padding: 8px 0; transition: color .2s;
+  }
+  nav.primary a.active { color: var(--blue-deep); }
+  nav.primary a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px; background: var(--blue-deep); border-radius: 2px;
+  }
+  nav.primary a:hover { color: var(--blue-deep); }
+  .btn-contact-header {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #06C755; color: #fff;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 4px 14px rgba(6,199,85,0.35);
+    transition: transform .15s, box-shadow .2s;
+  }
+  .btn-contact-header:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
+  .btn-contact-header svg { width: 16px; height: 16px; }
+
+  /* hamburger menu (mobile only) */
+  .menu-toggle {
+    display: none; background: none; border: none; cursor: pointer;
+    width: 40px; height: 40px; padding: 0;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 5px; z-index: 110; position: relative; margin-left: 8px;
+  }
+  .menu-toggle span {
+    display: block; width: 22px; height: 2px;
+    background: var(--ink); border-radius: 2px;
+    transition: transform .3s, opacity .25s;
+  }
+  body.menu-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu-backdrop { display: none; position: fixed; inset: 0; background: transparent; z-index: 30; }
+  body.menu-open .menu-backdrop { display: block; }
+
+  /* BREADCRUMB */
+  .breadcrumb { padding: 18px 0 0; font-size: 11.5px; color: var(--ink-3); }
+  .breadcrumb a { color: var(--ink-3); transition: color .2s; }
+  .breadcrumb a:hover { color: var(--blue-deep); }
+  .breadcrumb .sep { margin: 0 10px; }
+  .breadcrumb .current { color: var(--ink-2); }
+
+  /* HERO */
+  .page-hero { position: relative; padding: 30px 0 26px; overflow: hidden; }
+  .page-hero .eyebrow {
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    letter-spacing: 0.32em; color: var(--teal-deep);
+    font-size: 11.5px; margin-bottom: 14px; display: block;
+  }
+  .page-hero h1 {
+    font-size: 38px; font-weight: 700; margin: 0 0 20px;
+    letter-spacing: 0.06em; color: var(--ink);
+  }
+  .page-hero .lead {
+    font-size: 13.5px; color: var(--ink-2); line-height: 2.0; margin: 0; max-width: 640px;
+  }
+
+  /* HOW-TO / NOTE */
+  .cal-note {
+    background: var(--blue-bg); border: 1px solid var(--line); border-radius: 14px;
+    padding: 28px 32px; margin: 6px 0 30px; font-size: 16px; color: var(--ink-2); line-height: 2.0;
+  }
+  .cal-note b { color: var(--ink); }
+  /* 左右2カラム：左＝見方／右＝凡例 */
+  .cal-note .note-cols {
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; align-items: start;
+  }
+  .cal-note .note-col-right {
+    border-left: 1px solid #dfe7f2; padding-left: 36px;
+  }
+  .cal-note .note-title { margin: 0 0 14px; font-size: 18px; font-weight: 700; color: var(--ink); }
+  .cal-note .note-list { margin: 0; padding-left: 2px; list-style: none; }
+  .cal-note .note-list li { position: relative; padding-left: 24px; margin-bottom: 12px; }
+  .cal-note .note-list li::before {
+    content: ""; position: absolute; left: 4px; top: 13px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--teal-deep);
+  }
+  .cal-note .note-foot { margin: 22px 0 0; padding-top: 16px; border-top: 1px solid #dfe7f2; font-size: 13.5px; color: var(--ink-3); }
+  .legend { display: flex; flex-direction: column; gap: 14px; margin-top: 4px; font-size: 15.5px; }
+  .legend span { display: inline-flex; align-items: center; gap: 11px; }
+  .legend i { width: 22px; height: 22px; border-radius: 5px; border: 1px solid var(--line); display:inline-block; flex-shrink: 0; }
+  .legend .l-today { background: #fff3b0; border-color: #f1b400; }
+  .legend .l-sat { background: var(--sat); }
+  .legend .l-sun { background: var(--sun); }
+  .legend .l-x { background:#fff; color: var(--xmonth); font-weight:700; border:none; width:auto; }
+
+  /* CALENDAR */
+  .cal-section { padding: 6px 0 30px; }
+  .cal-foot { margin: 0 0 20px; font-size: 13px; color: var(--ink-2); line-height: 1.9; }
+  .section-label {
+    font-size: 19px; font-weight: 700; color: var(--ink);
+    margin: 0 0 18px; letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content:""; width: 5px; height: 22px; background: var(--teal-deep); border-radius: 3px; }
+  .cal-grid {
+    display: flex; flex-direction: column; gap: 24px;
+  }
+  .cal-card {
+    width: 100%;
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(74,124,190,0.07); background:#fff;
+  }
+  .cal-head {
+    background: linear-gradient(120deg, #eef5f3, #e7f0f8);
+    padding: 12px 16px; display: flex; align-items: baseline; gap: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cal-head .yr { font-family:"Montserrat",sans-serif; font-size: 12px; color: var(--ink-3); letter-spacing:.08em; }
+  .cal-head .mo { font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing:.04em; }
+  table.cal { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.cal th {
+    background: #dfeaee; color: var(--ink); font-weight: 700; font-size: 12px;
+    padding: 7px 2px; border: 1px solid #d3e0e6; text-align: center;
+  }
+  table.cal td {
+    border: 1px solid var(--line); text-align: center; padding: 5px 2px;
+    font-variant-numeric: tabular-nums; height: 30px;
+  }
+  table.cal td.d { font-weight: 600; color: var(--ink); }
+  table.cal td.w { color: var(--ink-2); }
+  table.cal tbody td:nth-child(n+3) { font-weight: 700; color: var(--ink); }
+  table.cal td.x { color: var(--xmonth); }
+  table.cal tr.sat { background: var(--sat); }
+  table.cal tr.sat td.w { color: var(--blue-deep); }
+  table.cal tr.sun { background: var(--sun); }
+  table.cal tr.sun td.w { color: var(--xmonth); }
+  table.cal tr.today { background: #fff3b0; box-shadow: inset 3px 0 0 #f1b400; }
+  table.cal tr.today td { font-weight: 700; }
+  table.cal tr.today td.d { color: #b07b00; }
+  table.cal tr.recv-pick td.d { box-shadow: inset 3px 0 0 #e8730c; color: #b85000; }
+  table.cal td.cell-pick {
+    background: #ffcf5e !important; color: #6b3b00 !important; font-weight: 700;
+    box-shadow: inset 0 0 0 2px #e8730c;
+    animation: cellPick 0.85s ease 2;
+  }
+  @keyframes cellPick {
+    0%, 100% { box-shadow: inset 0 0 0 2px #e8730c; }
+    50%      { box-shadow: inset 0 0 0 3px #d65a00; background: #ffbe34; }
+  }
+
+  /* REFERENCE — 横並びの一覧 */
+  .ref-section { padding: 14px 0 30px; }
+  .ref-tap {
+    margin: 0 0 10px; padding: 11px 16px; border-radius: 10px;
+    background: var(--teal-soft); border: 1px solid #cfe9e2;
+    font-size: 13.5px; color: var(--ink); line-height: 1.8;
+  }
+  .ref-tap b { color: var(--teal-deep); }
+  .ref-intro { font-size: 13px; color: var(--ink-2); margin: 0 0 20px; line-height: 1.95; }
+  .ref-list { border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 8px 24px rgba(74,124,190,0.06); }
+  .ref-row { display: flex; align-items: stretch; border-bottom: 1px solid var(--line); }
+  .ref-row:last-child { border-bottom: none; }
+  .ref-cat {
+    flex: 0 0 168px; display: flex; align-items: center;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--teal) 100%);
+    color: #fff; font-weight: 700; font-size: 13px; letter-spacing: .02em; padding: 14px 16px;
+  }
+  .ref-items { flex: 1; display: flex; flex-wrap: wrap; gap: 8px 10px; padding: 13px 16px; background:#fff; }
+  .ref-item {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #f3f8fc; border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 8px 6px 13px; font-size: 12px; color: var(--ink-2); white-space: nowrap;
+  }
+  .ref-item b { background: var(--blue-soft); color: var(--blue-deep); font-weight: 700; border-radius: 999px; padding: 2px 9px; font-size: 11.5px; }
+  .ref-item.clickable { cursor: pointer; transition: background .15s, border-color .15s, box-shadow .15s, transform .1s; }
+  .ref-item.clickable:hover { background: #e6f0fa; border-color: #bcd6ef; box-shadow: 0 3px 10px rgba(74,124,190,0.18); }
+  .ref-item.clickable:active { transform: translateY(1px); }
+  .ref-item.clickable:focus-visible { outline: 2px solid var(--blue-deep); outline-offset: 2px; }
+
+  /* CTA */
+  .cal-cta { padding: 0 0 70px; }
+  .cal-cta .box {
+    background: linear-gradient(130deg,#ffffff,#eef4fc); border:1px solid var(--line);
+    border-radius: 20px; padding: 30px 34px; display:flex; align-items:center; justify-content:space-between;
+    gap: 22px; flex-wrap: wrap; box-shadow: 0 16px 40px rgba(74,124,190,0.10);
+  }
+  .cal-cta .t { font-size: 18px; font-weight: 700; color:#213a59; }
+  .cal-cta .t span { display:block; font-size: 13px; font-weight: 400; color: var(--ink-2); margin-top: 6px; }
+  .cal-cta .line-btn {
+    background: linear-gradient(135deg,#21c96e,#06bd4f); color:#fff; padding: 15px 26px; border-radius:999px;
+    font-size: 15px; font-weight:700; display:inline-flex; align-items:center; gap:12px;
+    box-shadow:0 12px 26px rgba(17,191,82,0.3); white-space:nowrap; transition: transform .15s, box-shadow .2s;
+  }
+  .cal-cta .line-btn:hover { transform: translateY(-2px); box-shadow:0 16px 32px rgba(17,191,82,0.42); }
+  .cal-cta .line-btn svg { width: 18px; height: 18px; }
+
+  /* FOOTER */
+  footer { background: #2d3a4a; color: #c0cad7; padding: 60px 0 28px; }
+  .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  footer .brand-block p { margin-top: 16px; font-size: 12px; line-height: 1.9; color: #8a96a4; }
+  footer h5 { color: #fff; font-size: 13px; font-weight: 600; margin: 0 0 16px; letter-spacing: 0.05em; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { font-size: 12.5px; color: #c0cad7; transition: color .2s; }
+  footer ul a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 22px; text-align: center;
+    font-size: 11px; color: #8a96a4; font-family: "Montserrat", sans-serif; letter-spacing: 0.1em;
+  }
+
+  @media (max-width: 960px) {
+    .menu-toggle { display: flex; }
+    nav.primary {
+      display: flex; flex-direction: column; align-items: stretch;
+      position: fixed; top: 0; right: 0; width: 78%; max-width: 320px; height: 100vh;
+      background: #fff; padding: 80px 28px 28px; box-shadow: -10px 0 30px rgba(0,0,0,0.12);
+      transform: translateX(100%); transition: transform .35s ease; z-index: 100; gap: 0;
+    }
+    body.menu-open nav.primary { transform: translateX(0); }
+    nav.primary a { padding: 16px 6px; border-bottom: 1px solid var(--line); font-size: 15.5px; font-weight: 500; }
+    nav.primary a:last-child { border-bottom: none; }
+    nav.primary a.active::after { display: none; }
+    nav.primary a.active { color: var(--blue-deep); border-left: 3px solid var(--blue-deep); padding-left: 12px; }
+    .btn-contact-header { padding: 6px 11px; font-size: 10.5px; gap: 5px; white-space: nowrap; }
+    .btn-contact-header svg { width: 12px; height: 12px; }
+    .logo img { width: 46px; }
+    .logo .brand-name { font-size: 13.5px; }
+    .page-hero h1 { font-size: 26px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .cal-note .note-cols { grid-template-columns: 1fr; gap: 22px; }
+    .cal-note .note-col-right { border-left: none; padding-left: 0; border-top: 1px solid #dfe7f2; padding-top: 20px; }
+  }
+  @media (max-width: 540px) {
+    .btn-contact-header { padding: 5px 9px; font-size: 9.5px; gap: 4px; }
+    .btn-contact-header svg { width: 11px; height: 11px; }
+    .logo img { width: 40px; }
+    .logo .brand-name { font-size: 11.5px; }
+    .header-inner { padding: 10px 14px; }
+    .wrap { padding: 0 16px; }
+    table.cal { font-size: 11.5px; }
+    table.cal td { height: 28px; }
+    .ref-row { flex-direction: column; }
+    .ref-cat { flex-basis: auto; padding: 10px 14px; }
+    .cal-cta .box { flex-direction: column; align-items: flex-start; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header" data-screen-label="Header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+      <span class="brand-name">歯科技工所 tre-foil</span>
+    </a>
+    <nav class="primary">
+      <a href="https://noir-0111.github.io/tre-foil-homepage/index.html">ホーム</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/about.html">会社概要</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/products.html">製品紹介</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/flow.html">ご注文の流れ</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/delivery-calendar.html" class="active">納期カレンダー</a>
+      <a href="#">採用情報</a>
+    </nav>
+    <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+      LINEで問い合わせ
+    </a>
+    <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="menu-backdrop"></div>
+
+<div class="wrap breadcrumb">
+  <a href="index.html">ホーム</a><span class="sep">›</span><span class="current">納期カレンダー</span>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="wrap">
+    <span class="eyebrow">DELIVERY CALENDAR</span>
+    <h1>納期カレンダー</h1>
+  </div>
+</section>
+
+<!-- NOTE / HOW TO READ -->
+<div class="wrap">
+  <div class="cal-note">
+    <div class="note-cols">
+      <div class="note-col note-col-left">
+        <p class="note-title"><b>カレンダーの見方</b></p>
+        <ul class="note-list">
+          <li>製品の<b>作業日数に当たる「中○」列</b>が納品予定日です。<br>例）作業日数4日の製品 → <b>中4</b>の列</li>
+          <li>土日・祝日は休業のため、受付・納品の対象外です</li>
+          <li><b>受付当日は数えず</b>、翌営業日から起算しています</li>
+          <li>祝日・振替休日・国民の休日は暦どおり</li>
+        </ul>
+      </div>
+      <div class="note-col note-col-right">
+        <p class="note-title"><b>色分けの凡例</b></p>
+        <div class="legend">
+          <span><i class="l-today"></i>本日</span>
+          <span><i class="l-sat"></i>土曜</span>
+          <span><i class="l-sun"></i>日曜・祝日（休業）</span>
+        </div>
+      </div>
+    </div>
+    <p class="note-foot">※ 納期はあくまで目安であり、症例・物量により前後する場合があります。</p>
+  </div>
+</div>
+
+<!-- REFERENCE — 作業内容と作業日数（カレンダーの上・横並び一覧） -->
+<section class="ref-section">
+  <div class="wrap">
+    <h2 class="section-label">作業内容と作業日数</h2>
+    <p class="ref-tap">👆 気になる作業内容をタップすると、本日ご依頼いただいた場合の<b>納品予定日がカレンダーに表示</b>されます。</p>
+    <p class="ref-intro">日数＝作業日数です。（3日＝中3日の作業日数を要します）</p>
+    <div class="ref-list">
+      <div class="ref-row">
+        <div class="ref-cat">フルデンチャー</div>
+        <div class="ref-items">
+          <span class="ref-item">印象 → バイト<b>3日</b></span>
+          <span class="ref-item">バイト → シテキ<b>3日</b></span>
+          <span class="ref-item">シテキ → 完成<b>4日</b></span>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-cat">パーシャル デンチャー</div>
+        <div class="ref-items">
+          <span class="ref-item">印象 → メタル付きバイト<b>6日</b></span>
+          <span class="ref-item">メタル付きバイト → 配列シテキ<b>3日</b></span>
+          <span class="ref-item">配列シテキ → 完成<b>4日</b></span>
+          <span class="ref-item">メタル付きバイト → シテキなし完成<b>4日</b></span>
+          <span class="ref-item">印象 → 完成<b>7日</b></span>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-cat">保険</div>
+        <div class="ref-items">
+          <span class="ref-item">メタルコア<b>3日</b></span>
+          <span class="ref-item">ファイバーコア<b>3日</b></span>
+          <span class="ref-item">メタル In<b>3日</b></span>
+          <span class="ref-item">メタル On<b>3日</b></span>
+          <span class="ref-item">FMC（2本まで）<b>3日</b></span>
+          <span class="ref-item">チタンクラウン<b>4日</b></span>
+          <span class="ref-item">前装冠、チタン前装冠（2本まで）<b>4日</b></span>
+          <span class="ref-item">臼歯 Br（4本まで）<b>4日</b></span>
+          <span class="ref-item">TEK（4本まで）<b>4日</b></span>
+          <span class="ref-item">CAD/CAM 冠<b>4日</b></span>
+          <span class="ref-item">CAD/CAM インレー<b>4日</b></span>
+          <span class="ref-item">Peek. エンドクラウン<b>4日</b></span>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-cat">自費</div>
+        <div class="ref-items">
+          <span class="ref-item">Zr TRY (pmma)<b>4日</b></span>
+          <span class="ref-item">e.max ステイン (臼歯)<b>5日</b></span>
+          <span class="ref-item">Zir ステイン (臼歯)<b>5日</b></span>
+          <span class="ref-item">e.max ステイン (前歯)<b>6日</b></span>
+          <span class="ref-item">Zir ステイン (前歯)<b>6日</b></span>
+          <span class="ref-item">e.max レイヤリング (前歯)<b>7日</b></span>
+          <span class="ref-item">Zir レイヤリング (前歯)<b>7日</b></span>
+          <span class="ref-item">MB（3本まで）<b>5日</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALENDAR -->
+<section class="cal-section">
+  <div class="wrap">
+    <h2 class="section-label">納品予定カレンダー（本日から2か月分）</h2>
+    <p class="cal-foot">ご依頼の製品の作業日数 = カレンダーの「中○」の日数に対応します（例：メタルコア＝作業日数3日 → カレンダーの中3の列）。</p>
+    <div class="cal-grid" id="cal-root"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cal-cta">
+  <div class="wrap">
+    <div class="box">
+      <div class="t">納期・お見積りはお気軽にご相談ください
+        <span>急ぎの症例もまずはご相談を。技工物・新規お取引のご相談も歓迎です。</span>
+      </div>
+      <a class="line-btn" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせ
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="Footer">
+  <div class="wrap footer-grid">
+    <div class="brand-block">
+      <a href="index.html" class="logo">
+        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" style="filter: brightness(0) invert(1); width: 96px;" />
+      </a>
+      <p>歯科技工のプロフェッショナルとして、<br/>先生と患者さまの笑顔のために。</p>
+    </div>
+    <div>
+      <h5>サービス</h5>
+      <ul>
+        <li><a href="products.html#ios">IOS（口腔内スキャナー対応）</a></li>
+        <li><a href="products.html#jihi">自費</a></li>
+        <li><a href="products.html#hoken">保険</a></li>
+        <li><a href="products.html#denture">デンチャー</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>会社情報</h5>
+      <ul>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="products.html">製品紹介</a></li>
+        <li><a href="flow.html">ご注文の流れ</a></li>
+        <li><a href="delivery-calendar.html">納期カレンダー</a></li>
+        <li><a href="#">採用情報</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>お問い合わせ</h5>
+      <ul>
+        <li>〒816-0911<br/>福岡県大野城市大城3丁目10-35</li>
+        <li>受付：平日 9:00 – 18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 tre-foil. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  // ===== 日本の祝日計算 =====
+  function ymd(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  const TODAY = new Date();
+  const TODAY_KEY = ymd(TODAY);
+  function nthMonday(year, month, n){ // month: 1-12
+    let d = new Date(year, month-1, 1), count=0;
+    while(true){ if(d.getDay()===1){ count++; if(count===n) return new Date(d.getFullYear(),d.getMonth(),d.getDate()); } d.setDate(d.getDate()+1); }
+  }
+  function shunbun(y){ return Math.floor(20.8431 + 0.242194*(y-1980) - Math.floor((y-1980)/4)); } // 春分の日
+  function shubun(y){ return Math.floor(23.2488 + 0.242194*(y-1980) - Math.floor((y-1980)/4)); }   // 秋分の日
+
+  function baseHolidays(year){
+    const h = {};
+    const add = (m,d,name)=> { h[ymd(new Date(year,m-1,d))] = name; };
+    add(1,1,'元日');
+    h[ymd(nthMonday(year,1,2))] = '成人の日';
+    add(2,11,'建国記念の日');
+    add(2,23,'天皇誕生日');
+    add(3, shunbun(year), '春分の日');
+    add(4,29,'昭和の日');
+    add(5,3,'憲法記念日');
+    add(5,4,'みどりの日');
+    add(5,5,'こどもの日');
+    h[ymd(nthMonday(year,7,3))] = '海の日';
+    add(8,11,'山の日');
+    h[ymd(nthMonday(year,9,3))] = '敬老の日';
+    add(9, shubun(year), '秋分の日');
+    h[ymd(nthMonday(year,10,2))] = 'スポーツの日';
+    add(11,3,'文化の日');
+    add(11,23,'勤労感謝の日');
+    return h;
+  }
+
+  const _holCache = {};
+  function holidaySet(year){
+    if(_holCache[year]) return _holCache[year];
+    const base = baseHolidays(year);
+    const set = new Set(Object.keys(base));
+    // 国民の休日：祝日に挟まれた平日
+    for(let m=0;m<12;m++){
+      const dim = new Date(year, m+1, 0).getDate();
+      for(let day=1; day<=dim; day++){
+        const d = new Date(year, m, day);
+        const key = ymd(d);
+        if(set.has(key)) continue;
+        const prev = ymd(new Date(year, m, day-1));
+        const next = ymd(new Date(year, m, day+1));
+        if(base[prev] && base[next] && d.getDay()!==0) set.add(key);
+      }
+    }
+    // 振替休日：日曜と重なった祝日は翌平日へ
+    [...set].filter(k=>{ const [y,mo,da]=k.split('-').map(Number); return new Date(y,mo-1,da).getDay()===0; }).forEach(k=>{
+      const [y,mo,da]=k.split('-').map(Number);
+      let d = new Date(y,mo-1,da);
+      do { d.setDate(d.getDate()+1); } while(set.has(ymd(d)));
+      set.add(ymd(d));
+    });
+    _holCache[year] = set;
+    return set;
+  }
+  function isPublicHoliday(d){ return holidaySet(d.getFullYear()).has(ymd(d)); }
+  function isClosed(d){ const w=d.getDay(); return w===0 || w===6 || isPublicHoliday(d); }
+
+  // 受付日の翌営業日から n 営業日後を返す（受付当日は数えない）
+  function addBusinessDays(start, n){
+    const d = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    let c=0;
+    while(c<n){ d.setDate(d.getDate()+1); if(!isClosed(d)) c++; }
+    return d;
+  }
+
+  // 中3〜中7（作業日数）。納期 = 受付 + (作業日数 + 1)営業日。
+  const TIERS = [3,4,5,6,7];
+  const WD = ['日','月','火','水','木','金','土'];
+
+  function renderMonth(year, month, rangeStart, rangeEnd){ // month: 0-11、rangeStart〜rangeEnd の日のみ描画
+    const dim = new Date(year, month+1, 0).getDate();
+    let rows = '';
+    for(let day=1; day<=dim; day++){
+      const d = new Date(year, month, day);
+      if(d < rangeStart || d > rangeEnd) continue; // 表示範囲外（本日より前・2か月より後）はスキップ
+      const w = d.getDay();
+      const holiday = isPublicHoliday(d);
+      const closed = (w===0 || w===6 || holiday);
+      let cls = (w===6) ? 'sat' : ((w===0 || holiday) ? 'sun' : '');
+      if(ymd(d)===TODAY_KEY) cls += ' today';
+      let cells = '';
+      for(const t of TIERS){
+        if(closed){ cells += '<td data-tier="'+t+'"></td>'; }
+        else {
+          const del = addBusinessDays(d, t+1);
+          if(del.getFullYear()===year && del.getMonth()===month){ cells += '<td data-tier="'+t+'">'+del.getDate()+'</td>'; }
+          else { cells += '<td class="x" data-tier="'+t+'">'+(del.getMonth()+1)+'/'+del.getDate()+'</td>'; }
+        }
+      }
+      rows += '<tr class="'+cls+'" data-date="'+ymd(d)+'"><td class="d">'+day+'</td><td class="w">'+WD[w]+'</td>'+cells+'</tr>';
+    }
+    if(!rows) return ''; // 範囲内の日が無い月は出力しない
+    return '<div class="cal-card"><div class="cal-head"><span class="yr">'+year+'</span><span class="mo">'+(month+1)+'月</span></div>'
+      + '<table class="cal"><thead><tr><th>日</th><th>曜日</th><th>中3</th><th>中4</th><th>中5</th><th>中6</th><th>中7</th></tr></thead>'
+      + '<tbody>'+rows+'</tbody></table></div>';
+  }
+
+  // 表示範囲：本日 〜 本日の2か月後の前日（＝今日から2か月分）。検証用に ?from=YYYY-MM-DD で本日を上書き可。
+  const params = new URLSearchParams(location.search);
+  let baseDay = new Date(TODAY.getFullYear(), TODAY.getMonth(), TODAY.getDate());
+  const from = params.get('from');
+  if(from){
+    const md = from.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/) || from.match(/^(\d{4})-(\d{1,2})$/);
+    if(md) baseDay = new Date(+md[1], +md[2]-1, md[3] ? +md[3] : 1);
+  }
+  const RANGE_START = baseDay;
+  const RANGE_END = new Date(baseDay.getFullYear(), baseDay.getMonth()+2, baseDay.getDate());
+  RANGE_END.setDate(RANGE_END.getDate() - 1);
+
+  let html = '';
+  let cur = new Date(RANGE_START.getFullYear(), RANGE_START.getMonth(), 1);
+  const lastMonth = new Date(RANGE_END.getFullYear(), RANGE_END.getMonth(), 1);
+  while(cur <= lastMonth){
+    html += renderMonth(cur.getFullYear(), cur.getMonth(), RANGE_START, RANGE_END);
+    cur = new Date(cur.getFullYear(), cur.getMonth()+1, 1);
+  }
+  document.getElementById('cal-root').innerHTML = html;
+
+  // ===== 作業内容ピル → 今日の受付行の「中○」セルへスクロール＆ハイライト =====
+  function nextOpenDay(start){
+    const d = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+    while(isClosed(d)) d.setDate(d.getDate()+1);
+    return d;
+  }
+  let pkCell = null, pkRow = null;
+  function pickTier(n){
+    const recv = nextOpenDay(TODAY); // 受付日＝今日（休業日なら次の営業日）
+    const row = document.querySelector('tr[data-date="'+ymd(recv)+'"]');
+    if(!row) return;
+    const cell = row.querySelector('td[data-tier="'+n+'"]');
+    if(!cell) return;
+    if(pkCell) pkCell.classList.remove('cell-pick');
+    if(pkRow) pkRow.classList.remove('recv-pick');
+    cell.classList.add('cell-pick');
+    row.classList.add('recv-pick');
+    pkCell = cell; pkRow = row;
+    cell.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  document.querySelectorAll('.ref-item').forEach(item => {
+    const b = item.querySelector('b');
+    const m = b ? b.textContent.match(/\d+/) : null;
+    if(!m) return;
+    const n = parseInt(m[0], 10);
+    if(n < 3 || n > 7) return; // カレンダーは中3〜中7のみ
+    item.classList.add('clickable');
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+    item.addEventListener('click', () => pickTier(n));
+    item.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); pickTier(n); } });
+  });
+
+  // ===== 共通スクリプト（ハンバーガーメニュー） =====
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuBackdrop = document.querySelector(".menu-backdrop");
+  const closeMenu = () => { document.body.classList.remove("menu-open"); if (menuToggle) menuToggle.setAttribute("aria-expanded","false"); };
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const open = !document.body.classList.contains("menu-open");
+      document.body.classList.toggle("menu-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  if (menuBackdrop) menuBackdrop.addEventListener("click", closeMenu);
+</script>
+</body>
+</html>

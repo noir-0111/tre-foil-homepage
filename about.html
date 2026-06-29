@@ -121,8 +121,9 @@
 
   /* BREADCRUMB */
   .breadcrumb {
-    padding: 18px 0 0;
-    font-size: 11.5px;
+    padding: 20px 0 0;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--ink-3);
   }
   .breadcrumb a { color: var(--ink-3); transition: color .2s; }
@@ -167,101 +168,156 @@
   /* HERO */
   .page-hero {
     position: relative;
-    padding: 28px 0 96px;
+    padding: 40px 0 130px;
     overflow: hidden;
+  }
+  /* big flowing wave at the bottom */
+  /* centered container so decorations stay within content width */
+  .page-hero .hero-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+  }
+  .page-hero .hero-wave {
+    position: absolute;
+    left: -4%; right: -4%; bottom: -10px;
+    width: 108%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
   }
   .hero-grid {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
-    gap: 56px;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 52px;
     align-items: center;
     position: relative;
-    margin-top: 30px;
+    z-index: 2;
+    margin-top: 16px;
+  }
+  .hero-text { position: relative; }
+  .hero-text .eyebrow {
+    text-align: left;
+    font-size: 15px;
+    letter-spacing: 0.34em;
+    margin-bottom: 22px;
   }
   .hero-text h1 {
-    font-size: 38px;
-    line-height: 1.55;
+    font-size: 45px;
+    line-height: 1.45;
     font-weight: 700;
-    margin: 0 0 28px;
+    margin: 0 0 6px;
     color: var(--ink);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
+    position: relative;
+    white-space: nowrap;
   }
-  .hero-text p {
-    font-size: 13.5px;
-    color: var(--ink-2);
-    line-height: 2.1;
+  .hero-text .h-sparkle {
+    position: absolute;
+    width: 52px;
+    top: -58px; right: -1%;
+    z-index: 3;
+    animation: aboutTwinkle 3s ease-in-out infinite;
+  }
+  .hero-text .h-swoosh {
+    display: block;
+    width: 340px; max-width: 84%;
+    height: auto;
+    margin: -12px 0 18px;
+  }
+  .hero-text .h-swoosh path {
+    stroke-dasharray: 360;
+    stroke-dashoffset: 360;
+    transition: stroke-dashoffset 1s ease;
+  }
+  .hero-text.visible .h-swoosh path { stroke-dashoffset: 0; transition-delay: .3s; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-text .h-swoosh path { stroke-dashoffset: 0; transition: none; }
+  }
+  .hero-text .creed {
     margin: 0;
+    position: relative;
+    z-index: 2;
+    font-size: 21px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  /* 中間幅では長い行が写真に被らないよう少し縮める */
+  @media (min-width: 961px) and (max-width: 1240px) {
+    .hero-text .creed { font-size: 16px; }
+  }
+  .hero-text .creed .line {
+    display: table;            /* 文字幅にぴったり沿わせる */
+    white-space: nowrap;       /* 各行を1行に保つ */
+    background: rgba(255,255,255,0.82);
+    border-radius: 6px;
+    padding: 4px 12px;
+    margin-bottom: 8px;
+    line-height: 1.55;
+    /* タイプライター：スクロールで左から書き出す（ゆっくりめ） */
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 1.2s steps(30, end);
+  }
+  .hero-text.visible .creed .line { clip-path: inset(0 0 0 0); }
+  .hero-text.visible .creed .line:nth-child(1) { transition-delay: .4s; }
+  .hero-text.visible .creed .line:nth-child(2) { transition-delay: 1.8s; }
+  .hero-text.visible .creed .line:nth-child(3) { transition-delay: 3.2s; }
+  .hero-text.visible .creed .line:nth-child(4) { transition-delay: 4.4s; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-text .creed .line { clip-path: none; transition: none; }
+  }
+  /* photo + blob + tooth badge */
+  .hero-photo-col { position: relative; }
+  .hero-photo-col .photo-blob {
+    position: absolute;
+    width: 72%;
+    left: -10%; bottom: -14%;
+    z-index: 0;
+    pointer-events: none;
+    animation: aboutFloatB 9s ease-in-out infinite;
   }
   .hero-photo {
     position: relative;
-    border-radius: 14px;
+    z-index: 2;
+    border-radius: 24px 24px 96px 24px;
     overflow: hidden;
-    aspect-ratio: 4/2.7;
-    box-shadow: 0 18px 44px rgba(45,58,74,0.10);
-  }
-  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
-
-  /* hero deco */
-  .page-hero .deco { position: absolute; pointer-events: none; }
-  .page-hero .deco.blob-tl {
-    width: 120px;
-    top: 50px; left: 0%;
-    opacity: 0.95;
-    animation: aboutFloatA 7s ease-in-out infinite;
-  }
-  .page-hero .deco.dot-blue {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--blue);
-    top: 60px; left: 35%;
-    opacity: 0.7;
-    animation: aboutPulse 4.5s ease-in-out infinite;
-    animation-delay: -1s;
-  }
-  .page-hero .deco.ring-tl {
-    width: 22px; height: 22px;
-    border: 1.5px solid var(--blue);
-    border-radius: 50%;
-    top: 30px; left: 44%;
-    opacity: 0.4;
-    animation: aboutDrift 5s ease-in-out infinite;
-    animation-delay: -2s;
-  }
-  .page-hero .deco.tooth-line {
-    width: 110px;
-    bottom: 80px; left: 1%;
-    opacity: 0.55;
-    animation: aboutFloatC 6.5s ease-in-out infinite;
-    animation-delay: -1.5s;
-  }
-  .page-hero .deco.dot-grid-br {
-    width: 90px;
-    bottom: 60px; right: 2%;
-    opacity: 0.85;
-    animation: aboutFloatB 6s ease-in-out infinite;
-  }
-  /* curve - SVG flowing line */
-  .page-hero .curve {
-    position: absolute;
-    left: 8%; top: 150px;
-    width: 60%; height: 280px;
-    pointer-events: none;
-    opacity: 0.5;
-    animation: aboutCurveDraw 4s ease-in-out infinite;
-  }
-  .page-hero .curve path {
-    stroke-dasharray: 800;
-    stroke-dashoffset: 0;
-    animation: curveDash 6s linear infinite;
-  }
-
-  /* hero photo gentle floating */
-  .hero-photo {
+    aspect-ratio: 4/3;
+    box-shadow: 0 22px 50px rgba(45,58,74,0.14);
     animation: aboutPhotoFloat 6s ease-in-out infinite;
   }
-  .hero-photo img { transition: transform .6s ease; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
   .hero-photo:hover { animation-play-state: paused; }
-  .hero-photo:hover img { transform: scale(1.04); }
+  .hero-photo:hover img { transform: scale(1.05); }
+  .hero-photo-col .tooth-badge {
+    position: absolute;
+    right: -2%; bottom: -8%;
+    width: 130px; height: 130px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 12px 30px rgba(45,58,74,0.14);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 3;
+    animation: toothBadgeBob 3.2s ease-in-out infinite;
+  }
+  .hero-photo-col .tooth-badge img { width: 90px; height: auto; }
+
+  /* hero deco */
+  .page-hero .deco { position: absolute; pointer-events: none; z-index: 1; }
+  .page-hero .deco.blob-tl { width: 150px; top: 28px; left: -3%; opacity: 0.85; animation: aboutFloatA 8s ease-in-out infinite; }
+  .page-hero .deco.dotgrid-l { width: 96px; top: 240px; left: 1%; opacity: 0.7; animation: aboutDrift 6s ease-in-out infinite; }
+  .page-hero .deco.dotgrid-bl { width: 78px; bottom: 80px; left: 7%; opacity: 0.65; animation: aboutDrift 5.5s ease-in-out infinite; animation-delay: -2s; }
+  .page-hero .deco.blob-bl { width: 95px; bottom: 56px; left: -1%; opacity: 0.7; animation: aboutFloatC 7s ease-in-out infinite; }
+  .page-hero .deco.sparkle-tl { width: 34px; top: -8px; left: 40%; opacity: 0.85; animation: aboutTwinkle 2.8s ease-in-out infinite; animation-delay: -1s; }
+  .page-hero .deco.dot-blue { width: 12px; height: 12px; border-radius: 50%; background: var(--blue); top: 20px; left: 47%; opacity: 0.7; animation: aboutPulse 4.5s ease-in-out infinite; }
+  .page-hero .deco.ring-tr { width: 24px; height: 24px; border: 1.5px solid var(--blue); border-radius: 50%; top: 0px; left: 33%; opacity: 0.4; animation: aboutDrift 5s ease-in-out infinite; animation-delay: -2s; }
+
+  /* side decorations (bleed softly from the viewport edges) */
+  .page-hero .side-deco { position: absolute; z-index: 0; pointer-events: none; }
+  .page-hero .side-deco.sl1 { width: 240px; bottom: 10px;  left: -80px; opacity: 0.45; animation: aboutFloatC 9s ease-in-out infinite; }
+  .page-hero .side-deco.sl2 { width: 90px;  top: 120px;    left: 3%;    opacity: 0.5;  animation: aboutDrift 6.5s ease-in-out infinite; animation-delay: -1.5s; }
+  .page-hero .side-deco.sr1 { width: 270px; top: 30px;     right: -90px; opacity: 0.4;  animation: aboutFloatA 11s ease-in-out infinite; }
+  .page-hero .side-deco.sr2 { width: 130px; bottom: 40px;  right: 2%;   opacity: 0.5;  animation: aboutDrift 7s ease-in-out infinite; }
 
   @keyframes aboutFloatA {
     0%, 100% { transform: translate(0,0)        rotate(0deg); }
@@ -271,7 +327,7 @@
   }
   @keyframes aboutFloatB {
     0%, 100% { transform: translate(0,0)         rotate(0deg); }
-    50%      { transform: translate(-18px,-22px) rotate(-10deg); }
+    50%      { transform: translate(-18px,-22px) rotate(-6deg); }
   }
   @keyframes aboutFloatC {
     0%, 100% { transform: translate(0,0)        rotate(0deg); }
@@ -290,20 +346,23 @@
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-10px); }
   }
-  @keyframes curveDash {
-    0%   { stroke-dashoffset: 800; }
-    100% { stroke-dashoffset: 0; }
+  @keyframes aboutTwinkle {
+    0%, 100% { transform: scale(0.8) rotate(0deg);  opacity: 0.55; }
+    50%      { transform: scale(1.15) rotate(20deg); opacity: 1; }
   }
-  @keyframes aboutCurveDraw {
-    0%, 100% { opacity: 0.35; }
-    50%      { opacity: 0.65; }
+  @keyframes toothBadgeBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .page-hero .deco,
-    .page-hero .curve,
-    .page-hero .curve path,
-    .hero-photo { animation: none; }
+    .page-hero .side-deco,
+    .page-hero .hero-wave,
+    .hero-photo,
+    .hero-text .h-sparkle,
+    .hero-photo-col .photo-blob,
+    .hero-photo-col .tooth-badge { animation: none; }
   }
 
   /* MESSAGE */
@@ -341,17 +400,39 @@
     align-items: center;
     position: relative;
   }
+  .message-photo-col { position: relative; }
+  .message-photo-col .msg-photo-blob {
+    position: absolute; width: 88%; top: -9%; left: -15%;
+    z-index: 0; pointer-events: none;
+    animation: msgBlobFloat 9s ease-in-out infinite;
+  }
+  .message-photo-col .msg-loop {
+    position: absolute; width: 62%; left: -18%; bottom: -12%;
+    z-index: 0; pointer-events: none; opacity: 0.9;
+    animation: msgBlobFloat 11s ease-in-out infinite reverse;
+  }
   .message-photo {
     position: relative;
-    border-radius: 16px;
+    z-index: 1;
+    border-radius: 22px;
     overflow: hidden;
     aspect-ratio: 4/4.6;
     background: linear-gradient(180deg, #f5f9fc, #eef4fb);
-    box-shadow: 0 12px 30px rgba(45,58,74,0.10);
-    animation: msgPhotoFloat 5s ease-in-out infinite;
+    box-shadow: 0 16px 38px rgba(45,58,74,0.16);
+    animation: blobMorph 8s ease-in-out infinite, msgPhotoFloat 6s ease-in-out infinite;
     transform-origin: center bottom;
     cursor: pointer;
     transition: box-shadow .3s ease;
+  }
+  /* 四角ベースで角だけやわらかく変形（ぷにっと） */
+  @keyframes blobMorph {
+    0%, 100% { border-radius: 18px 30px 20px 28px; }
+    33%      { border-radius: 30px 18px 28px 20px; }
+    66%      { border-radius: 24px 28px 30px 18px; }
+  }
+  @keyframes msgBlobFloat {
+    0%,100% { transform: translate(0,0) rotate(0deg); }
+    50%     { transform: translate(8px,-12px) rotate(4deg); }
   }
   .message-photo::before {
     content: "";
@@ -414,17 +495,67 @@
     50%      { opacity: 0.95; transform: scale(1.15) rotate(180deg); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .message-photo, .message-card .msg-sparkle { animation: none; }
+    .message-photo,
+    .message-photo-col .msg-photo-blob,
+    .message-photo-col .msg-loop,
+    .message-card .msg-dotgrid,
+    .message-card .msg-sparkle { animation: none; }
   }
-  .message-body .eyebrow { text-align: left; color: var(--teal-deep); margin-bottom: 18px; }
+  .message-body .eyebrow {
+    text-align: left; color: var(--teal-deep);
+    margin-bottom: 18px; display: inline-block;
+    font-size: 16px; letter-spacing: 0.34em;
+  }
+  .message-body .eyebrow::after {
+    content: ""; display: block;
+    width: 66px; height: 3px; border-radius: 2px;
+    background: var(--teal); margin-top: 12px;
+  }
+  /* highlighter marker (same teal as MESSAGE) */
+  .message-text .mk {
+    background: linear-gradient(transparent 56%, rgba(110,201,184,0.45) 56%);
+    font-weight: 600;
+    padding: 0 1px;
+  }
   .message-body h2 {
-    font-size: 30px; font-weight: 700;
-    margin: 0 0 32px; color: var(--ink);
-    letter-spacing: 0.04em; line-height: 1.4;
+    font-size: 40px; font-weight: 700;
+    margin: 0 0 30px; color: var(--ink);
+    letter-spacing: 0.04em; line-height: 1.35;
+  }
+  /* body text with a vertical teal line + dot on the left */
+  .message-text { position: relative; padding-left: 28px; }
+  .message-text::before {
+    content: ""; position: absolute;
+    left: 0; top: 14px; bottom: 96px;
+    width: 2px; border-radius: 2px;
+    background: linear-gradient(var(--teal), rgba(110,201,184,0.15));
+  }
+  .message-text::after {
+    content: ""; position: absolute;
+    left: -3px; top: 8px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
   }
   .message-body p {
     font-size: 14px; color: var(--ink);
     line-height: 2.15; margin: 0 0 16px;
+  }
+  /* 冒頭の挨拶文を1.3倍に */
+  .message-text p:first-child {
+    font-size: 18.2px;
+    font-weight: 500;
+    margin-bottom: 22px;
+  }
+  /* 代表メッセージをタイピング風に表示（JSで制御） */
+  .message-text .lead-typing { display: inline; white-space: normal; clip-path: none; animation: none; }
+  .type-cursor {
+    display: inline-block; width: 2px; height: 1.05em; margin-left: 2px;
+    background: var(--teal-deep); vertical-align: -0.16em; border-radius: 1px;
+    animation: typeBlink 0.7s step-end infinite;
+  }
+  @keyframes typeBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) {
+    .type-cursor { display: none; }
   }
   .message-body p:last-of-type { margin-bottom: 30px; }
   .message-sign { text-align: right; margin-top: 18px; }
@@ -435,43 +566,40 @@
   .message-sign .role .name { margin-left: 14px; font-weight: 500; }
   .message-sign .signature {
     font-family: "Caveat", cursive;
-    font-size: 30px; color: var(--ink);
+    font-size: 32px; color: var(--teal-deep);
     line-height: 1.1; letter-spacing: 0.02em;
+  }
+  /* dot grid at the card's top-left */
+  .message-card .msg-dotgrid {
+    position: absolute;
+    top: -16px; left: -16px;
+    width: 120px; z-index: 2;
+    pointer-events: none;
+    animation: msgBlobFloat 8s ease-in-out infinite;
   }
 
   /* PHILOSOPHY */
   .philosophy {
-    padding: 90px 0 110px;
-    background: var(--blue-bg);
+    padding: 100px 0 140px;
+    background: linear-gradient(180deg, #eaf3fc 0%, #eef5fd 55%, #e9f1fb 100%);
     position: relative;
     overflow: hidden;
   }
-  .philosophy::before {
-    content: ""; position: absolute; inset: 0;
-    background:
-      radial-gradient(20% 30% at 0% 0%, rgba(110,201,184,0.10), transparent 60%),
-      radial-gradient(20% 30% at 100% 100%, rgba(74,144,226,0.10), transparent 60%);
-    pointer-events: none;
-  }
-  /* wave-shaped section boundaries */
+  /* animated wave dividers (top & bottom) */
   .philosophy .wave {
-    position: absolute;
-    left: 0; right: 0;
-    height: 40px;
-    pointer-events: none;
-    z-index: 3;
-    background-repeat: repeat-x;
-    background-size: 1440px 40px;
+    position: absolute; left: 0; right: 0;
+    height: 30px; pointer-events: none; z-index: 3;
+    background-repeat: repeat-x; background-size: 1440px 30px;
   }
   .philosophy .wave-top {
-    top: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40' preserveAspectRatio='none'><path d='M0 0 Q360 60 720 0 Q1080 60 1440 0 Z' fill='%23f8fbff'/></svg>");
-    animation: philoWaveFlow 12s linear infinite;
+    top: -1px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 30' preserveAspectRatio='none'><path d='M0 0 Q360 18 720 0 Q1080 18 1440 0 Z' fill='%23f3f7fd'/></svg>");
+    animation: philoWaveFlow 16s linear infinite;
   }
   .philosophy .wave-bottom {
-    bottom: 0;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 40' preserveAspectRatio='none'><path d='M0 40 Q360 -20 720 40 Q1080 -20 1440 40 Z' fill='%23ffffff'/></svg>");
-    animation: philoWaveFlow 14s linear infinite;
+    bottom: -1px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 30' preserveAspectRatio='none'><path d='M0 30 Q360 12 720 30 Q1080 12 1440 30 Z' fill='%23ffffff'/></svg>");
+    animation: philoWaveFlow 18s linear infinite;
   }
   @keyframes philoWaveFlow {
     0%   { background-position-x: 0; }
@@ -480,145 +608,229 @@
   @media (prefers-reduced-motion: reduce) {
     .philosophy .wave { animation: none; }
   }
+  /* background deco */
+  .philosophy .pdeco { position: absolute; z-index: 0; pointer-events: none; }
+  .philosophy .pdeco.bean-l { width: 290px; top: 3%; left: -70px; opacity: 0.8; animation: philoFloat 10s ease-in-out infinite; }
+  .philosophy .pdeco.bean-r { width: 250px; top: -30px; right: -60px; opacity: 0.7; animation: philoFloat 12s ease-in-out infinite reverse; }
+  .philosophy .pdeco.dotgrid-tl { width: 110px; top: 26px; left: 3%; opacity: 0.8; animation: philoDrift 7s ease-in-out infinite; }
+  .philosophy .pdeco.dotgrid-mr { width: 92px; top: 48%; right: 4%; opacity: 0.7; animation: philoDrift 8s ease-in-out infinite; animation-delay: -2s; }
+  .philosophy .pdeco.circle-tl { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--blue); opacity: 0.4; top: 84px; left: 17%; animation: philoDrift 6s ease-in-out infinite; }
+  .philosophy .pdeco.wave-line { width: 32%; top: 150px; left: -2%; opacity: 0.7; }
+  .philosophy .psparkle { position: absolute; z-index: 1; pointer-events: none; animation: philoTwinkle 3s ease-in-out infinite; }
+  .philosophy .psparkle.s1 { width: 44px; top: 78px; left: 27%; }
+  .philosophy .psparkle.s2 { width: 52px; top: 66px; right: 26%; animation-delay: -1.2s; }
+  .philosophy .psparkle.s3 { width: 30px; top: 14px; left: 39%; animation-delay: -0.6s; }
+  @keyframes philoFloat { 0%,100%{ transform: translate(0,0) rotate(0deg); } 50%{ transform: translate(14px,-18px) rotate(5deg); } }
+  @keyframes philoDrift { 0%,100%{ transform: translate(0,0); } 50%{ transform: translate(8px,-12px); } }
+  @keyframes philoTwinkle { 0%,100%{ transform: scale(0.8) rotate(0deg); opacity: 0.5; } 50%{ transform: scale(1.15) rotate(20deg); opacity: 1; } }
+
+  .philosophy .wrap { position: relative; z-index: 2; max-width: 1200px; }
+  /* heading */
+  .philosophy .phead { text-align: center; margin-bottom: 64px; }
+  .philosophy .phead .eyebrow { font-size: 18px; letter-spacing: 0.34em; margin-bottom: 14px; }
+  .philosophy .phead h2 {
+    font-size: 48px; font-weight: 700; color: var(--ink);
+    margin: 0; letter-spacing: 0.16em; line-height: 1.3;
+  }
+  /* underline: tucked under the text, stretches in like a rubber band */
+  .philosophy .title-underline {
+    width: 340px; height: 5px; border-radius: 999px;
+    background: linear-gradient(90deg, #6ec9b8, #4a90e2);
+    margin: 6px auto 0;
+    transform: scaleX(0);
+    transform-origin: center;
+  }
+  .philosophy .phead.visible .title-underline {
+    animation: underlineBoing 1.2s ease-out .25s forwards;
+  }
+  @keyframes underlineBoing {
+    0%   { transform: scaleX(0); }
+    35%  { transform: scaleX(1.12); }
+    55%  { transform: scaleX(0.94); }
+    72%  { transform: scaleX(1.05); }
+    86%  { transform: scaleX(0.98); }
+    100% { transform: scaleX(1); }
+  }
+
+  /* cards */
   .philo-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+    gap: 32px;
     position: relative;
+    z-index: 2;
   }
   .philo-card {
-    background: #fff;
-    border-radius: 16px;
-    padding: 30px 26px;
-    box-shadow: 0 4px 20px rgba(45,58,74,0.04);
-    transition: transform .25s, box-shadow .25s;
-    display: flex; gap: 16px; align-items: flex-start;
+    background: rgba(255,255,255,0.94);
+    border-radius: 24px;
+    padding: 48px 32px 44px;
+    text-align: center;
+    box-shadow: 0 14px 40px rgba(74,144,226,0.10);
+    transition: transform .3s, box-shadow .3s;
   }
-  .philo-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(45,58,74,0.08); }
-  .philo-card .ic { width: 52px; flex-shrink: 0; }
-  .philo-card .ic img { width: 100%; }
-  .philo-card .ic svg { width: 100%; }
-  .philo-card .body { flex: 1; min-width: 0; padding-top: 4px; }
+  .philo-card:hover { transform: translateY(-8px); box-shadow: 0 24px 52px rgba(74,144,226,0.18); }
+  .philo-card .ic {
+    width: 132px; height: 132px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    box-shadow: 0 8px 22px rgba(74,144,226,0.10);
+  }
+  .philo-card:nth-child(1) .ic,
+  .philo-card:nth-child(3) .ic { background: radial-gradient(circle, #edf5ff 55%, #d8e9ff 100%); }
+  .philo-card:nth-child(2) .ic { background: radial-gradient(circle, #e9f7f1 55%, #d2f0e4 100%); }
+  .philo-card .ic::after {
+    content: ""; position: absolute;
+    top: 4px; right: 6px; width: 24px; height: 24px;
+    background: url("素材11/accent_sparkle_blue.png") no-repeat center / contain;
+    opacity: 0.9; pointer-events: none;
+  }
+  .philo-card:nth-child(2) .ic::after { background-image: url("素材11/accent_sparkle_green.png"); }
+  .philo-card .ic img { width: 58%; height: auto; animation: philoIcBob 4s ease-in-out infinite; }
+  .philo-card:nth-child(2) .ic img { animation-delay: -1.3s; }
+  .philo-card:nth-child(3) .ic img { animation-delay: -2.6s; }
+  @keyframes philoIcBob { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-6px); } }
   .philo-card h3 {
-    font-size: 14px; margin: 0 0 8px;
+    font-size: 20px; margin: 0 0 18px;
     font-weight: 700; color: var(--ink);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+  .philo-card .divider {
+    width: 70%; height: 2px; margin: 0 auto 20px;
+    background-image: radial-gradient(circle, rgba(74,144,226,0.5) 1px, transparent 1.4px);
+    background-size: 9px 2px; background-repeat: repeat-x;
   }
   .philo-card p {
-    font-size: 12px; color: var(--ink-2);
-    line-height: 1.85; margin: 0;
+    font-size: 14.5px; color: var(--ink-2);
+    line-height: 1.95; margin: 0;
+  }
+  /* staggered reveal */
+  .philo-grid .philo-card.reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity .6s ease, transform .7s cubic-bezier(.2,.85,.3,1);
+  }
+  .philo-grid .philo-card.reveal.visible { opacity: 1; transform: none; }
+  .philo-grid .philo-card:nth-child(2).reveal { transition-delay: .15s; }
+  .philo-grid .philo-card:nth-child(3).reveal { transition-delay: .3s; }
+  @media (prefers-reduced-motion: reduce) {
+    .philosophy .pdeco, .philosophy .psparkle, .philo-card .ic img { animation: none; }
+    .philo-grid .philo-card.reveal { opacity: 1; transform: none; transition: none; }
+    .philosophy .title-underline { transform: scaleX(1); animation: none; }
   }
 
   /* COMPANY INFO */
   .company {
-    padding: 100px 0 100px;
+    padding: 110px 0 120px;
     position: relative;
     overflow: hidden;
+    background: linear-gradient(180deg, #eef5fd 0%, #f3f8fe 60%, #ecf3fc 100%);
   }
+  /* background deco */
+  .company .cdeco { position: absolute; z-index: 0; pointer-events: none; }
+  .company .cdeco.blob-l { width: 250px; top: 28%; left: -80px; opacity: 0.75; animation: compFloat 10s ease-in-out infinite; }
+  .company .cdeco.blob-r { width: 240px; bottom: -50px; right: -70px; opacity: 0.7; animation: compFloat 12s ease-in-out infinite reverse; }
+  .company .cdeco.dots-tl { width: 90px; top: 70px; left: 1%; opacity: 0.7; animation: compDrift 7s ease-in-out infinite; }
+  .company .cdeco.dots-br { width: 80px; bottom: 14%; right: 3%; opacity: 0.7; animation: compDrift 8s ease-in-out infinite; animation-delay: -2s; }
+  .company .cdeco.spark { width: 38px; z-index: 1; animation: compTwinkle 3s ease-in-out infinite; }
+  .company .cdeco.spark.sp1 { top: 92px; left: 31%; }
+  .company .cdeco.spark.sp2 { top: 30%; right: 32%; animation-delay: -1.4s; }
+  @keyframes compFloat { 0%,100%{ transform: translate(0,0) rotate(0deg); } 50%{ transform: translate(12px,-16px) rotate(5deg); } }
+  @keyframes compDrift { 0%,100%{ transform: translate(0,0); } 50%{ transform: translate(8px,-12px); } }
+  @keyframes compTwinkle { 0%,100%{ transform: scale(0.8) rotate(0deg); opacity: .5; } 50%{ transform: scale(1.15) rotate(20deg); opacity: 1; } }
+
+  .company .wrap { position: relative; z-index: 2; max-width: 1200px; }
   .company-grid {
     display: grid;
     grid-template-columns: 1fr 1.05fr;
     gap: 56px;
     align-items: start;
   }
-  .company-content .eyebrow { margin-bottom: 12px; }
+  /* heading */
+  .company-content .eyebrow {
+    text-align: left; display: inline-block;
+    color: var(--teal-deep); font-size: 16px;
+    letter-spacing: 0.3em; margin-bottom: 12px;
+  }
+  .company-content .eyebrow::after {
+    content: ""; display: block; width: 60px; height: 3px;
+    border-radius: 2px; background: var(--teal); margin-top: 10px;
+  }
   .company-content h2 {
-    font-size: 26px; font-weight: 700;
-    margin: 0 0 26px; color: var(--ink);
-    letter-spacing: 0.16em;
+    font-size: 44px; font-weight: 700;
+    margin: 0 0 6px; color: var(--ink);
+    letter-spacing: 0.14em; line-height: 1.3;
   }
-  .info-table { width: 100%; border-collapse: collapse; }
-  .info-table tr { border-top: 1px solid var(--line); }
-  .info-table tr:last-child { border-bottom: 1px solid var(--line); }
-  .info-table th, .info-table td {
-    padding: 14px 4px;
-    text-align: left;
-    vertical-align: top;
-    font-size: 12.5px;
-    line-height: 1.7;
+  .company-content .csub { font-size: 14px; color: var(--ink-2); margin: 0 0 30px; }
+
+  /* info rows with icon badges */
+  .info-list { display: flex; flex-direction: column; gap: 14px; }
+  .info-row {
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border-radius: 16px;
+    padding: 13px 20px;
+    box-shadow: 0 6px 20px rgba(74,144,226,0.08);
+    transition: transform .25s, box-shadow .25s;
   }
-  .info-table th {
-    width: 32%;
-    color: var(--blue-deep);
-    font-weight: 500;
+  .info-row:hover { transform: translateX(4px); box-shadow: 0 10px 26px rgba(74,144,226,0.14); }
+  .info-row .ic { width: 46px; height: 46px; flex-shrink: 0; }
+  .info-row .ic img { width: 100%; height: 100%; object-fit: contain; }
+  .info-row .lbl {
+    width: 96px; flex-shrink: 0;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    border-right: 2px dotted #cfe0d9; padding-right: 12px;
+    letter-spacing: 0.04em;
   }
-  .info-table td { color: var(--ink); font-weight: 400; }
+  .info-row .val { font-size: 13.5px; color: var(--ink-2); line-height: 1.7; }
+  /* staggered reveal for rows */
+  .info-list .info-row.reveal { opacity: 0; transform: translateX(-26px); transition: opacity .5s ease, transform .6s cubic-bezier(.2,.85,.3,1); }
+  .info-list .info-row.reveal.visible { opacity: 1; transform: none; }
+  .info-list .info-row:nth-child(2).reveal { transition-delay: .08s; }
+  .info-list .info-row:nth-child(3).reveal { transition-delay: .16s; }
+  .info-list .info-row:nth-child(4).reveal { transition-delay: .24s; }
+  .info-list .info-row:nth-child(5).reveal { transition-delay: .32s; }
+  .info-list .info-row:nth-child(6).reveal { transition-delay: .40s; }
+
+  /* map */
   .company-photo-col { position: relative; }
   .company-photo {
-    border-radius: 16px;
+    border-radius: 22px;
     overflow: hidden;
-    aspect-ratio: 4/3.4;
-    box-shadow: 0 16px 40px rgba(45,58,74,0.10);
-    background: linear-gradient(180deg, #cfdbe8, #aabfd6);
+    aspect-ratio: 4/3.2;
+    box-shadow: 0 18px 44px rgba(74,144,226,0.16);
+    border: 4px solid #fff;
   }
-  .company-photo img { width: 100%; height: 100%; object-fit: cover; }
   .company-photo iframe { width: 100%; height: 100%; border: 0; display: block; }
-  .company-photo .placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 8px;
-    color: rgba(255,255,255,0.85);
-    background: linear-gradient(135deg, #b8cee0 0%, #8fa9c2 60%, #6f8ba6 100%);
-  }
-  .company-photo .placeholder .lbl {
-    font-family: "Montserrat", sans-serif;
-    font-size: 11px; letter-spacing: 0.3em; opacity: 0.85;
-  }
-  .company-photo .placeholder .ttl {
-    font-size: 18px; font-weight: 600; letter-spacing: 0.12em;
-  }
+
+  /* access card */
   .access-card {
     background: #fff;
-    border-radius: 14px;
-    padding: 16px 22px;
-    margin-top: 20px;
-    box-shadow: 0 8px 24px rgba(45,58,74,0.08);
-    display: flex; gap: 14px; align-items: center;
+    border-radius: 20px;
+    padding: 20px 26px;
+    margin-top: 22px;
+    box-shadow: 0 10px 28px rgba(74,144,226,0.10);
+    border: 1.5px dashed rgba(110,201,184,0.55);
+    display: flex; gap: 18px; align-items: center;
   }
-  .access-card .pin {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--teal-soft);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .access-card .pin svg { width: 18px; color: var(--teal-deep); }
+  .access-card .pin-ic { width: 66px; flex-shrink: 0; }
+  .access-card .pin-ic img { width: 100%; }
+  .access-card .a-body { flex: 1; }
   .access-card .a-label {
     font-family: "Montserrat", sans-serif;
-    font-size: 10.5px; font-weight: 600;
-    letter-spacing: 0.22em;
-    color: var(--teal-deep);
-    margin-bottom: 4px;
+    font-size: 16px; font-weight: 700;
+    letter-spacing: 0.2em; color: var(--teal-deep);
+    margin-bottom: 10px;
   }
-  .access-card .a-text {
-    font-size: 12px; color: var(--ink); line-height: 1.8;
+  .access-card .a-line {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13.5px; color: var(--ink); margin-bottom: 6px;
   }
-
-  /* deco for company */
-  .company .deco { position: absolute; pointer-events: none; }
-  .company .deco.dot-grid {
-    width: 100px; bottom: 18%; right: 1%; opacity: 0.75;
-    animation: compDrift 5.5s ease-in-out infinite;
-  }
-  .company .deco.cloud {
-    width: 100px; bottom: 26%; right: -12px; opacity: 0.7;
-    animation: compFloat 7s ease-in-out infinite; animation-delay: -1s;
-  }
-  .company .deco.ellipse {
-    width: 110px; top: 52%; left: 0%;
-    opacity: 0.5; transform: rotate(8deg);
-    animation: compEllipse 6.5s ease-in-out infinite;
-  }
-  @keyframes compFloat {
-    0%, 100% { transform: translate(0,0)        rotate(0deg); }
-    50%      { transform: translate(-14px,-18px) rotate(-8deg); }
-  }
-  @keyframes compDrift {
-    0%, 100% { transform: translate(0,0); }
-    50%      { transform: translate(8px,-14px); }
-  }
-  @keyframes compEllipse {
-    0%, 100% { transform: translate(0,0)   rotate(8deg); }
-    50%      { transform: translate(-12px,-12px) rotate(-4deg); }
+  .access-card .a-line:last-child { margin-bottom: 0; }
+  .access-card .a-line svg { width: 20px; height: 20px; color: var(--blue-deep); flex-shrink: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .company .cdeco { animation: none; }
+    .info-list .info-row.reveal { opacity: 1; transform: none; transition: none; }
   }
 
   /* LOGO STORY */
@@ -677,13 +889,14 @@
     font-weight: 600;
   }
   .ls-mark .label-jp {
-    font-size: 13px;
-    color: var(--ink-2);
-    margin-bottom: 24px;
-    letter-spacing: 0.06em;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 30px;
+    letter-spacing: 0.1em;
   }
   .ls-mark .mark-img {
-    max-width: 200px;
+    max-width: 320px;
     margin: 0 auto;
     animation: lsMarkBob 4.5s ease-in-out infinite;
     transform-origin: center;
@@ -693,34 +906,34 @@
     50%      { transform: translateY(-8px) rotate(2deg); }
   }
   .ls-content h2 {
-    font-size: 26px;
+    font-size: 40px;
     font-weight: 700;
-    margin: 0 0 22px;
-    line-height: 1.55;
+    margin: 0 0 28px;
+    line-height: 1.5;
     color: var(--ink);
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
   }
   .ls-content p {
-    font-size: 13.5px;
+    font-size: 18px;
     color: var(--ink-2);
-    line-height: 2.1;
-    margin: 0 0 28px;
+    line-height: 2.15;
+    margin: 0 0 32px;
   }
   .ls-meanings { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
   .ls-meaning {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 10px;
     background: #fff;
     border-radius: 999px;
-    padding: 8px 18px;
-    font-size: 12px;
-    font-weight: 500;
+    padding: 12px 26px;
+    font-size: 16.5px;
+    font-weight: 600;
     color: var(--ink);
     box-shadow: 0 4px 12px rgba(45,58,74,0.05);
   }
-  .ls-meaning .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
-  .ls-meaning:nth-of-type(2) .dot { background: var(--teal-deep); }
-  .ls-meaning:nth-of-type(3) .dot { background: #f4a460; }
-  .ls-meanings .x { color: var(--ink-3); margin: 0 4px; font-weight: 400; font-size: 11px; }
+  .ls-meaning .dot { width: 12px; height: 12px; border-radius: 50%; background: #f5b400; }
+  .ls-meaning:nth-child(3) .dot { background: #e2453c; }
+  .ls-meaning:nth-child(5) .dot { background: var(--blue); }
+  .ls-meanings .x { color: var(--ink-3); margin: 0 4px; font-weight: 400; font-size: 13px; }
 
   /* HISTORY */
   .history {
@@ -1018,12 +1231,24 @@
     .btn-contact-header svg { width: 12px; height: 12px; }
     .logo img { width: 46px; }
     .logo .brand-name { font-size: 13.5px; }
-    .hero-grid, .company-grid, .ls-grid { grid-template-columns: 1fr; gap: 36px; }
-    .hero-text h1 { font-size: 26px; }
+    .hero-grid, .company-grid, .ls-grid { grid-template-columns: 1fr; gap: 40px; }
+    .company-content h2 { font-size: 30px; }
+    .company .cdeco.blob-l, .company .cdeco.blob-r { width: 160px; }
+    .info-row { padding: 12px 16px; gap: 12px; }
+    .info-row .lbl { width: 80px; padding-right: 10px; }
+    .hero-text h1 { font-size: 32px; }
+    .hero-text .h-sparkle { width: 48px; top: -26px; }
+    .hero-text .h-swoosh { width: 210px; }
+    .hero-photo-col .tooth-badge { width: 92px; height: 92px; right: 2%; }
+    .hero-photo-col .tooth-badge img { width: 46px; }
+    .page-hero { padding: 24px 0 90px; }
     .message-card { grid-template-columns: 1fr; padding: 32px 24px; gap: 28px; }
     .message-photo { aspect-ratio: 4/3.6; }
     .message-body h2 { font-size: 22px; }
-    .philo-grid { grid-template-columns: 1fr; }
+    .philo-grid { grid-template-columns: 1fr; gap: 22px; }
+    .philosophy .phead h2 { font-size: 30px; }
+    .philosophy .pdeco.bean-l, .philosophy .pdeco.bean-r { width: 170px; }
+    .philosophy .psparkle.s1, .philosophy .psparkle.s2 { display: none; }
     .timeline-row { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .timeline-card::after { display: none; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1043,6 +1268,7 @@
     .logo .brand-name { font-size: 11.5px; }
     .header-inner { padding: 10px 14px; }
     .wrap { padding: 0 16px; }
+    .page-hero .hero-inner { padding: 0 16px; }
   }
 </style>
 </head>
@@ -1060,6 +1286,7 @@
       <a href="https://noir-0111.github.io/tre-foil-homepage/about.html" class="active">会社概要</a>
       <a href="https://noir-0111.github.io/tre-foil-homepage/products.html">製品紹介</a>
       <a href="https://noir-0111.github.io/tre-foil-homepage/flow.html">ご注文の流れ</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/delivery-calendar.html">納期カレンダー</a>
       <a href="#">採用情報</a>
     </nav>
     <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
@@ -1080,29 +1307,51 @@
 
 <!-- HERO -->
 <section class="page-hero" data-screen-label="About Hero">
-  <img src="assets2/27.png" alt="" class="deco blob-tl" />
-  <div class="deco ring-tl"></div>
-  <div class="deco dot-blue"></div>
-  <img src="assets2/33.png" alt="" class="deco tooth-line" />
-  <img src="assets2/30.png" alt="" class="deco dot-grid-br" />
+  <img src="素材9/deco_circles_cluster.png" alt="" class="side-deco sl1" />
+  <img src="素材9/accent_dotgrid.png" alt="" class="side-deco sl2" />
+  <img src="素材9/deco_blob_greenblue.png" alt="" class="side-deco sr1" />
+  <img src="素材9/accent_dotgrid.png" alt="" class="side-deco sr2" />
 
-  <svg class="curve" viewBox="0 0 600 280" fill="none" preserveAspectRatio="none">
-    <path d="M0 180 C 120 60, 280 60, 380 140 S 580 220, 600 120" stroke="#6ec9b8" stroke-width="1.2" fill="none" stroke-dasharray="0" />
-  </svg>
+  <div class="hero-inner">
+    <img src="素材9/deco_blob_greenblue.png" alt="" class="deco blob-tl" />
+    <img src="素材9/accent_dotgrid.png" alt="" class="deco dotgrid-l" />
+    <img src="素材9/accent_dotgrid.png" alt="" class="deco dotgrid-bl" />
+    <img src="素材9/deco_blob_green.png" alt="" class="deco blob-bl" />
+    <img src="素材9/accent_sparkle_blue.png" alt="" class="deco sparkle-tl" />
+    <div class="deco dot-blue"></div>
+    <div class="deco ring-tr"></div>
 
-  <div class="wrap hero-grid">
-    <div class="hero-text reveal">
-      <span class="eyebrow left">ABOUT US</span>
-      <h1>信頼される技工所で<br/>あり続けるために。</h1>
-      <p>
-        【tre-foil 社是】<br/>
-        「誠実に、妥協なく、笑顔のために」<br/>
-        信頼は積み重ねるもの。<br/>
-        未来の自分が誇れる仕事を、今この瞬間の誓いとする。
-      </p>
-    </div>
-    <div class="hero-photo reveal">
-      <img src="assets2/07.png" alt="技工所内観" />
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <span class="eyebrow left">ABOUT US</span>
+        <h1>信頼される技工所で<br/>あり続けるために。
+          <img src="素材9/accent_sparkle_triple.png" alt="" class="h-sparkle" />
+        </h1>
+        <svg class="h-swoosh" viewBox="0 0 340 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="swooshGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#6ec9b8"/>
+              <stop offset="1" stop-color="#4fb8a3"/>
+            </linearGradient>
+          </defs>
+          <path d="M5 30 C 116 16, 224 10, 335 8" stroke="url(#swooshGrad)" stroke-width="6" stroke-linecap="round"/>
+        </svg>
+        <p class="creed">
+          <span class="line">【tre-foil 社是】</span>
+          <span class="line">「誠実に、妥協なく、笑顔のために」</span>
+          <span class="line">信頼は積み重ねるもの。</span>
+          <span class="line">未来の自分が誇れる仕事を、今この瞬間の誓いとする。</span>
+        </p>
+      </div>
+      <div class="hero-photo-col reveal">
+        <img src="素材9/deco_blob_greenblue.png" alt="" class="photo-blob" />
+        <div class="hero-photo">
+          <img src="gallery/hero2.jpg" alt="技工所内観" />
+        </div>
+        <div class="tooth-badge">
+          <img src="素材9/icon_tooth_sparkle.png" alt="" />
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1111,118 +1360,29 @@
 <section class="message" data-screen-label="Message">
   <div class="wrap">
     <div class="message-card reveal">
-      <span class="msg-sparkle sp1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
-      <span class="msg-sparkle sp2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
-      <span class="msg-sparkle sp3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
-      <span class="msg-sparkle sp4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L13.8 8.5 L20.5 10.3 L13.8 12.1 L12 18.6 L10.2 12.1 L3.5 10.3 L10.2 8.5 Z"/></svg></span>
-      <div class="message-photo">
-        <img src="人物写真/大園%20鎮正.jpg" alt="代表取締役 大園 鎮正" />
+      <img src="素材10/accent_dotgrid_large.png" alt="" class="msg-dotgrid" />
+      <div class="message-photo-col">
+        <img src="素材10/deco_blob_green2.png" alt="" class="msg-photo-blob" />
+        <img src="素材10/accent_loop_line.png" alt="" class="msg-loop" />
+        <div class="message-photo">
+          <img src="人物写真/大園%20鎮正.jpg" alt="代表取締役 大園 鎮正" />
+        </div>
       </div>
       <div class="message-body">
         <span class="eyebrow">MESSAGE</span>
         <h2>代表メッセージ</h2>
-        <p>歯科医療は、チーム医療です。</p>
-        <p>
-          私たち技工士は、目に見えないところで<br/>
-          治療を支える存在ですが、その責任と誇りを<br/>
-          胸に、日々技術を磨いています。
-        </p>
-        <p>
-          これからも、先生方の良きパートナーとして、<br/>
-          最高の技工物をお届けし続けます。
-        </p>
-        <div class="message-sign">
-          <div class="role">代表取締役<span class="name">大園 鎮正</span></div>
-          <div class="signature">Shizumasa Ozono</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PHILOSOPHY -->
-<section class="philosophy" data-screen-label="Philosophy">
-  <div class="wave wave-top"></div>
-  <div class="wrap">
-    <span class="eyebrow">PHILOSOPHY</span>
-    <h2 class="section-title spaced">私たちの想い</h2>
-    <div class="philo-grid">
-      <div class="philo-card reveal">
-        <div class="ic"><img src="assets2/icon-tooth.png" alt="" /></div>
-        <div class="body">
-          <h3>患者さまの笑顔のために</h3>
-          <p>一つひとつの技工物に心を込めて、<br/>快適で美しい口元を支えます。</p>
-        </div>
-      </div>
-      <div class="philo-card reveal">
-        <div class="ic"><img src="assets2/icon-hands.png" alt="" /></div>
-        <div class="body">
-          <h3>信頼されるパートナーとして</h3>
-          <p>丁寧なコミュニケーションを大切にし、<br/>先生方の信頼に応えます。</p>
-        </div>
-      </div>
-      <div class="philo-card reveal">
-        <div class="ic">
-          <svg viewBox="0 0 60 60" fill="none">
-            <path d="M14 48 L14 38 L20 38 L20 48z" stroke="#4a90e2" stroke-width="2" fill="none" stroke-linejoin="round"/>
-            <path d="M26 48 L26 28 L32 28 L32 48z" stroke="#4a90e2" stroke-width="2" fill="none" stroke-linejoin="round"/>
-            <path d="M38 48 L38 18 L44 18 L44 48z" stroke="#4a90e2" stroke-width="2" fill="none" stroke-linejoin="round"/>
-            <path d="M14 32 L24 22 L34 28 L46 12" stroke="#6ec9b8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M42 12 L46 12 L46 16" stroke="#6ec9b8" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="body">
-          <h3>技術の研鑽と進化</h3>
-          <p>最新の技術と設備を取り入れ、<br/>常に高い品質を追求します。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="wave wave-bottom"></div>
-</section>
-
-<!-- COMPANY INFO -->
-<section class="company" data-screen-label="Company Info">
-  <img src="assets2/30.png" alt="" class="deco dot-grid" />
-  <img src="assets2/32.png" alt="" class="deco cloud" />
-  <img src="assets2/31.png" alt="" class="deco ellipse" />
-
-  <div class="wrap company-grid">
-    <div class="company-content reveal">
-      <span class="eyebrow left blue">COMPANY INFO</span>
-      <h2>会 社 概 要</h2>
-      <table class="info-table">
-        <tr><th>会社名</th><td>株式会社tre-foil</td></tr>
-        <tr><th>所在地</th><td>〒816-0911<br/>福岡県大野城市大城3丁目10-35</td></tr>
-        <tr><th>設立</th><td>2010年4月1日</td></tr>
-        <tr><th>代表者</th><td>大園 鎮正</td></tr>
-        <tr><th>資本金</th><td>1,000万円</td></tr>
-        <tr><th>従業員数</th><td>28名</td></tr>
-        <tr><th>事業内容</th><td>歯科技工物の製作・販売</td></tr>
-        <tr><th>取引銀行</th><td>三井住友銀行 渋谷支店<br/>みずほ銀行 青山支店</td></tr>
-      </table>
-    </div>
-    <div class="company-photo-col reveal">
-      <div class="company-photo">
-        <iframe
-          src="https://maps.google.com/maps?q=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E5%A4%A7%E9%87%8E%E5%9F%8E%E5%B8%82%E5%A4%A7%E5%9F%8E3%E4%B8%81%E7%9B%AE10-35&hl=ja&z=17&output=embed"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="株式会社tre-foil 所在地マップ"></iframe>
-      </div>
-      <div class="access-card">
-        <div class="pin">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"/>
-            <circle cx="12" cy="10" r="2.5"/>
-          </svg>
-        </div>
-        <div>
-          <div class="a-label">ACCESS</div>
-          <div class="a-text">
-            太宰府インターより車で2分<br/>
-            白木原駅より車で8分
+        <div class="message-text">
+          <p class="lead"><span class="lead-typing">こんにちは！歯科技工所tre-foil代表の大園 鎮正です</span></p>
+          <p><span class="mk">当社は歯科技工所として二十余年、地域の歯科医院の先生方とともに、患者さんのお口元を支える仕事を続けてまいりました。</span>メタルボンドやe.maxプレス、インレーまで、一つひとつの補綴物の向こうには<span class="mk">必ず「その歯で噛み、笑う人」がいます。</span>だからこそ私たちは、目に見えない内部の適合や咬み合わせにこそ手を抜かないことを、何より大切にしてきました。</p>
+          <p>技工は、先生方の治療があって初めて患者さんに届く仕事です。私たちはその一端を担う者として、<span class="mk">確かな品質と、安心してお任せいただける対応で応えたいと考えています。</span></p>
+          <p>掲げているのは、<span class="mk">「誠実に、妥協なく、笑顔のために。」</span>という言葉です。誠実であること、技術に妥協しないこと、そしてその先にある誰かの笑顔のために働くこと。これは、<span class="mk">未来の自分が胸を張れる仕事をしたい</span>という、私自身への約束でもあります。</p>
+          <p>
+            同じ志を持つ仲間と、これからも一つずつ丁寧に積み重ねてまいります。
+            どうぞお気軽にお声がけください。
+          </p>
+          <div class="message-sign">
+            <div class="role">歯科技工所tre-foil 代表<span class="name">大園 鎮正</span></div>
+            <div class="signature">Shizumasa Ozono</div>
           </div>
         </div>
       </div>
@@ -1235,161 +1395,147 @@
   <div class="wrap">
     <div class="ls-grid">
       <div class="ls-mark reveal">
-        <div class="label">LOGO STORY</div>
         <div class="label-jp">ロゴに込めた想い</div>
         <img class="mark-img" src="素材2/tre-foilロゴ.png" alt="tre-foil ロゴマーク" />
       </div>
       <div class="ls-content reveal">
-        <h2>歯とハート、人のつながりを<br/>モチーフにしたロゴマーク</h2>
+        <h2>3者のつながりで、<br/>患者さんの笑顔を実現する</h2>
         <p>
-          歯の形をベースに、ハートと人のつながりを<br/>
-          モチーフにしたロゴマーク。<br/>
-          「寄り添う心」と「確かな技術」で、<br/>
-          患者さまと先生を笑顔でつなぐ存在で<br/>
-          ありたいという想いを込めています。
+          ロゴのマークには、患者様・歯科医の先生・<br/>
+          私たちtre-foilの3者が関わり、<br/>
+          互いにバランスを取りながら、<br/>
+          患者さんの幸せを実現したいという<br/>
+          想いが込められています。
         </p>
         <div class="ls-meanings">
-          <span class="ls-meaning"><span class="dot"></span>歯・技術</span>
+          <span class="ls-meaning"><span class="dot"></span>黄：患者様</span>
           <span class="x">×</span>
-          <span class="ls-meaning"><span class="dot"></span>想いやり</span>
+          <span class="ls-meaning"><span class="dot"></span>赤：先生</span>
           <span class="x">×</span>
-          <span class="ls-meaning"><span class="dot"></span>つながり</span>
+          <span class="ls-meaning"><span class="dot"></span>青：tre-foil</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HISTORY -->
-<section class="history" data-screen-label="History">
-  <img src="assets2/27.png" alt="" class="deco blob-tl" />
-  <img src="assets2/36.png" alt="" class="deco sparkle-tl" />
-  <img src="assets2/30.png" alt="" class="deco dot-grid-br" />
-  <img src="素材/16.png" alt="" class="deco cloud-tr" />
-  <img src="素材/13.png" alt="" class="deco dots-mr" />
-  <img src="素材/21.png" alt="" class="deco sparkle-bl" />
-  <img src="素材/24.png" alt="" class="deco sparkle-br" />
+<!-- PHILOSOPHY -->
+<section class="philosophy" data-screen-label="Philosophy">
+  <div class="wave wave-top"></div>
+  <img src="素材11/deco_bean_green.png" alt="" class="pdeco bean-l" />
+  <img src="素材11/deco_bean_blue.png" alt="" class="pdeco bean-r" />
+  <img src="素材11/accent_dotgrid_green.png" alt="" class="pdeco dotgrid-tl" />
+  <img src="素材11/accent_dotgrid_blue.png" alt="" class="pdeco dotgrid-mr" />
+  <img src="素材11/accent_wave_line_c.png" alt="" class="pdeco wave-line" />
+  <div class="pdeco circle-tl"></div>
+  <img src="素材11/accent_sparkle_green.png" alt="" class="psparkle s1" />
+  <img src="素材11/accent_sparkle_blue.png" alt="" class="psparkle s2" />
+  <img src="素材11/accent_sparkle_blue.png" alt="" class="psparkle s3" />
 
   <div class="wrap">
-    <span class="eyebrow blue">HISTORY</span>
-    <h2 class="section-title spaced">沿  革</h2>
-    <div class="timeline-row">
-      <div class="timeline-card reveal">
-        <span class="year">2010</span>
-        <div class="ic">
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="14" y="18" width="32" height="32" rx="2"/>
-            <path d="M22 26h4M30 26h4M38 26h4M22 34h4M30 34h4M38 34h4M22 42h4M30 42h4M38 42h4"/>
-            <path d="M14 18 L30 8 L46 18"/>
-          </svg>
-        </div>
-        <p>東京都渋谷区にて<br/>スマイルラボ株式会社を設立</p>
+    <div class="phead reveal">
+      <span class="eyebrow">OUR MISSION</span>
+      <h2>私たちの想い</h2>
+      <div class="title-underline"></div>
+    </div>
+    <div class="philo-grid">
+      <div class="philo-card reveal">
+        <div class="ic"><img src="素材11/icon_tooth_c.png" alt="" /></div>
+        <h3>患者さまの笑顔のために</h3>
+        <div class="divider"></div>
+        <p>一つひとつのご縁を大切にし、<br/>患者さまに寄り添ったものづくりを<br/>続けてまいります。</p>
       </div>
-      <div class="timeline-card reveal">
-        <span class="year">2012</span>
-        <div class="ic">
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M30 14C24 14 19 19 19 25c0 5 3 9 5 13 2 3 3 6 3 8 0 1 1 2 2 2h2c1 0 2-1 2-2 0-2 1-5 3-8 2-4 5-8 5-13 0-6-5-11-11-11z" fill="none"/>
-            <circle cx="26" cy="24" r="1.4" fill="currentColor"/>
-            <path d="M24 36 L36 36" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <p>CAD/CAMシステムを導入し<br/>デジタル技工を開始</p>
+      <div class="philo-card reveal">
+        <div class="ic"><img src="素材11/icon_handshake_c.png" alt="" /></div>
+        <h3>信頼されるパートナーとして</h3>
+        <div class="divider"></div>
+        <p>丁寧なコミュニケーションと<br/>確かな技術で、安心してお任せ<br/>いただける存在を目指します。</p>
       </div>
-      <div class="timeline-card reveal">
-        <span class="year">2016</span>
-        <div class="ic">
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="22" cy="22" r="5"/>
-            <circle cx="38" cy="22" r="5"/>
-            <path d="M14 44 c0 -5 4 -9 8 -9 c4 0 8 4 8 9"/>
-            <path d="M30 44 c0 -5 4 -9 8 -9 c4 0 8 4 8 9"/>
-          </svg>
-        </div>
-        <p>技工所を拡張し<br/>新ラボへ移転</p>
+      <div class="philo-card reveal">
+        <div class="ic"><img src="素材11/icon_graph_c.png" alt="" /></div>
+        <h3>未来の可能性を創る</h3>
+        <div class="divider"></div>
+        <p>技術と人の力を掛け合わせ、<br/>今にない価値を生み出して<br/>いくことに挑戦し続けます。</p>
       </div>
-      <div class="timeline-card reveal">
-        <span class="year">2020</span>
-        <div class="ic">
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="30" cy="26" r="10"/>
-            <path d="M30 22 l1.5 3 l3 0.4 l-2.2 2 l0.6 3 l-2.9 -1.5 l-2.9 1.5 l0.6 -3 l-2.2 -2 l3 -0.4z" fill="currentColor" opacity="0.4"/>
-            <path d="M22 36 L18 50 L24 46 L26 50 Z" fill="none"/>
-            <path d="M38 36 L42 50 L36 46 L34 50 Z" fill="none"/>
-          </svg>
+    </div>
+  </div>
+
+</section>
+
+<!-- COMPANY INFO -->
+<section class="company" data-screen-label="Company Info">
+  <img src="素材12/deco_blob_green.png" alt="" class="cdeco blob-l" />
+  <img src="素材12/deco_blob_bluegreen.png" alt="" class="cdeco blob-r" />
+  <img src="素材12/accent_dotgrid_blue.png" alt="" class="cdeco dots-tl" />
+  <img src="素材12/accent_dotgrid_green.png" alt="" class="cdeco dots-br" />
+  <img src="素材12/accent_sparkle_green.png" alt="" class="cdeco spark sp1" />
+  <img src="素材12/accent_sparkle_blue.png" alt="" class="cdeco spark sp2" />
+
+  <div class="wrap company-grid">
+    <div class="company-content reveal">
+      <span class="eyebrow">COMPANY INFO</span>
+      <h2>会 社 概 要</h2>
+      <p class="csub">当社の基本情報をご紹介します。</p>
+      <div class="info-list">
+        <div class="info-row reveal">
+          <div class="ic"><img src="素材12/icon_building_badge.png" alt="" /></div>
+          <div class="lbl">会社名</div>
+          <div class="val">株式会社tre-foil</div>
         </div>
-        <p>品質管理体制の強化と<br/>ISO取得</p>
+        <div class="info-row reveal">
+          <div class="ic"><img src="素材12/icon_pin_badge.png" alt="" /></div>
+          <div class="lbl">所在地</div>
+          <div class="val">〒816-0911<br/>福岡県大野城市大城3丁目10-35</div>
+        </div>
+        <div class="info-row reveal">
+          <div class="ic"><img src="素材12/icon_calendar_badge.png" alt="" /></div>
+          <div class="lbl">設立</div>
+          <div class="val">平成15年1月5日（法人化して現在9期目）</div>
+        </div>
+        <div class="info-row reveal">
+          <div class="ic"><img src="素材12/icon_person_badge.png" alt="" /></div>
+          <div class="lbl">代表者</div>
+          <div class="val">大園 鎮正</div>
+        </div>
+        <div class="info-row reveal">
+          <div class="ic"><img src="素材12/icon_people_badge.png" alt="" /></div>
+          <div class="lbl">従業員数</div>
+          <div class="val">15名（代表・パートスタッフを含む）</div>
+        </div>
+        <div class="info-row reveal">
+          <div class="ic"><img src="素材12/icon_tooth_badge.png" alt="" /></div>
+          <div class="lbl">事業内容</div>
+          <div class="val">歯科技工物の製作・販売<br/>（インレー／義歯（入れ歯）／メタルボンド／e.max など）</div>
+        </div>
       </div>
-      <div class="timeline-card reveal">
-        <span class="year">2024</span>
-        <div class="ic">
-          <svg viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M20 18 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2 z" fill="currentColor" opacity="0.6" stroke="none"/>
-            <path d="M40 30 l1.5 4 l4 1.5 l-4 1.5 l-1.5 4 l-1.5 -4 l-4 -1.5 l4 -1.5 z" fill="currentColor" opacity="0.6" stroke="none"/>
-            <path d="M30 14 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1 z" fill="currentColor" opacity="0.4" stroke="none"/>
-            <path d="M28 44 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1 z" fill="currentColor" opacity="0.4" stroke="none"/>
-          </svg>
+    </div>
+    <div class="company-photo-col reveal">
+      <div class="company-photo">
+        <iframe
+          src="https://maps.google.com/maps?q=%E7%A6%8F%E5%B2%A1%E7%9C%8C%E5%A4%A7%E9%87%8E%E5%9F%8E%E5%B8%82%E5%A4%A7%E5%9F%8E3%E4%B8%81%E7%9B%AE10-35&hl=ja&z=15&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="株式会社tre-foil 所在地マップ"></iframe>
+      </div>
+      <div class="access-card">
+        <div class="pin-ic"><img src="素材12/icon_pin_tooth_badge.png" alt="" /></div>
+        <div class="a-body">
+          <div class="a-label">ACCESS</div>
+          <div class="a-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 11l1.5-4.5A2 2 0 018.4 5h7.2a2 2 0 011.9 1.5L19 11m-14 0h14m-14 0v6m14-6v6M7 17h.01M17 17h.01M5 17h14"/><rect x="3" y="11" width="18" height="6" rx="2"/></svg>
+            太宰府インターより車で2分
+          </div>
+          <div class="a-line">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="12" height="13" rx="2"/><path d="M6 10h12M9 17l-2 3m8-3l2 3"/><circle cx="9" cy="13.5" r="0.6" fill="currentColor"/><circle cx="15" cy="13.5" r="0.6" fill="currentColor"/></svg>
+            白木原駅より車で8分
+          </div>
         </div>
-        <p>最新設備の導入で<br/>さらなる品質向上へ</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STATS -->
-<section class="stats" data-screen-label="Stats">
-  <div class="wrap">
-    <span class="eyebrow">OUR STRENGTH</span>
-    <h2 class="section-title">数字で見るtre-foil</h2>
-    <div class="stats-grid">
-      <div class="stat-card reveal">
-        <span class="label">取引歯科医院数</span>
-        <div class="ic"><img src="素材5/01.png" alt="" /></div>
-        <div class="num">500<span class="unit">院以上</span></div>
-      </div>
-      <div class="stat-card reveal">
-        <span class="label teal">年間製作数</span>
-        <div class="ic"><img src="素材5/02.png" alt="" /></div>
-        <div class="num">50,000<span class="unit">件以上</span></div>
-      </div>
-      <div class="stat-card reveal">
-        <span class="label">リピート率</span>
-        <div class="ic"><img src="素材5/03.png" alt="" /></div>
-        <div class="num">95<span class="unit">%以上</span></div>
-      </div>
-      <div class="stat-card reveal">
-        <span class="label teal">技工士数</span>
-        <div class="ic"><img src="素材5/04.png" alt="" /></div>
-        <div class="num">20<span class="unit">名以上</span></div>
-      </div>
-      <div class="stat-card reveal">
-        <span class="label">平均納期</span>
-        <div class="ic"><img src="素材5/05.png" alt="" /></div>
-        <div class="num">3.2<span class="unit">日</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-banner" id="contact" data-screen-label="CTA">
-  <div class="wrap">
-    <div class="box reveal">
-      <div class="icon-bubble">
-        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
-      </div>
-      <div class="copy">
-        <h3>技工に関するご相談・ご依頼はお気軽にどうぞ</h3>
-        <p class="sub">先生の理想をカタチにするお手伝いをいたします。</p>
-      </div>
-      <a class="btn-white" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#06C755"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-        LINEで問い合わせはこちら
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- FOOTER -->
 <footer data-screen-label="Footer">
@@ -1403,19 +1549,20 @@
     <div>
       <h5>サービス</h5>
       <ul>
-        <li><a href="products.html">オールセラミック</a></li>
-        <li><a href="products.html">インプラント</a></li>
-        <li><a href="products.html">義歯</a></li>
-        <li><a href="products.html">矯正装置</a></li>
+        <li><a href="products.html#ios">IOS（口腔内スキャナー対応）</a></li>
+        <li><a href="products.html#jihi">自費</a></li>
+        <li><a href="products.html#hoken">保険</a></li>
+        <li><a href="products.html#denture">デンチャー</a></li>
       </ul>
     </div>
     <div>
       <h5>会社情報</h5>
       <ul>
-        <li><a href="about.html">私たちについて</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="products.html">製品紹介</a></li>
         <li><a href="flow.html">ご注文の流れ</a></li>
+        <li><a href="delivery-calendar.html">納期カレンダー</a></li>
         <li><a href="#">採用情報</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
       </ul>
     </div>
     <div>
@@ -1434,6 +1581,69 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // 代表メッセージのタイピング演出
+  (function () {
+    const card = document.querySelector(".message-card");
+    if (!card) return;
+    const paras = [...card.querySelectorAll(".message-text > p")];
+    if (!paras.length) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return; // 動きを抑える設定では通常表示
+    // 元の構造（テキスト/強調spanの並び）を保存
+    const segs = paras.map(p => [...p.childNodes].map(n =>
+      n.nodeType === 3
+        ? { tag: null, cls: "", text: n.textContent }
+        : { tag: n.tagName.toLowerCase(), cls: n.className || "", text: n.textContent }
+    ));
+    paras.forEach(p => { p.innerHTML = ""; p.style.visibility = "hidden"; });
+    let started = false;
+    function run() {
+      if (started) return; started = true;
+      const cursor = document.createElement("span");
+      cursor.className = "type-cursor";
+      let pi = 0;
+      function typePara() {
+        if (pi >= paras.length) { if (cursor.parentNode) cursor.parentNode.removeChild(cursor); return; }
+        const p = paras[pi], parts = segs[pi];
+        p.style.visibility = "visible";
+        p.appendChild(cursor);
+        let si = 0;
+        function typeSeg() {
+          if (si >= parts.length) { pi++; setTimeout(typePara, 240); return; }
+          const seg = parts[si];
+          const tn = document.createTextNode("");
+          if (seg.tag) {
+            const el = document.createElement(seg.tag);
+            if (seg.cls) el.className = seg.cls;
+            el.appendChild(tn);
+            p.insertBefore(el, cursor);
+          } else {
+            p.insertBefore(tn, cursor);
+          }
+          let ci = 0;
+          (function typeChar() {
+            if (ci >= seg.text.length) { si++; typeSeg(); return; }
+            tn.textContent += seg.text[ci++];
+            setTimeout(typeChar, 11);
+          })();
+        }
+        typeSeg();
+      }
+      typePara();
+    }
+    function maybeStart() {
+      const r = card.getBoundingClientRect();
+      if (r.top < (window.innerHeight || 800) * 0.85 && r.bottom > 0) {
+        run();
+        window.removeEventListener("scroll", maybeStart);
+        window.removeEventListener("resize", maybeStart);
+      }
+    }
+    window.addEventListener("scroll", maybeStart, { passive: true });
+    window.addEventListener("resize", maybeStart);
+    maybeStart();
+  })();
 
   // mobile hamburger menu
   const menuToggle = document.querySelector(".menu-toggle");

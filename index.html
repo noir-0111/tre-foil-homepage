@@ -181,16 +181,22 @@
     z-index: -1; border-radius: 3px;
   }
   .hero-lead {
-    font-size: 14.5px;
+    font-size: 17.4px;
     color: var(--ink-2);
     line-height: 2;
     margin: 0 0 36px;
-    max-width: 560px;
+    max-width: 620px;
+  }
+  .hero-lead strong { font-weight: 700; color: var(--ink); }
+  /* 中間幅ではテキスト列が狭いので、1行に収まるよう縮小 */
+  @media (max-width: 1180px) {
+    .hero-lead { font-size: 14px; }
   }
   .hero-lead .lead-line {
     display: block;
     width: fit-content;
     max-width: 100%;
+    white-space: nowrap;
     padding: 0 4px;
     margin-bottom: 2px;
     background-image: linear-gradient(transparent 62%, rgba(79,184,163,0.32) 62%, rgba(79,184,163,0.32) 92%, transparent 92%);
@@ -262,12 +268,15 @@
     width: 70%; height: 70%; left: 8%; top: 6%;
     animation: floatMain 6s ease-in-out infinite;
     transform-origin: center center;
+    background: #eef1f4;
   }
   .hero-collage .photo.main img {
+    transform: scale(0.82);
+    filter: brightness(1.12) saturate(1.04) contrast(0.99);
     transition: transform .8s ease;
   }
   .hero-collage .photo.main:hover { animation-play-state: paused; }
-  .hero-collage .photo.main:hover img { transform: scale(1.05); }
+  .hero-collage .photo.main:hover img { transform: scale(0.88); }
   .hero-collage .photo.prod {
     width: 32%; height: 32%; right: 4%; top: 8%;
     box-shadow: 0 14px 32px rgba(45,58,74,0.14);
@@ -498,58 +507,195 @@
 
   /* ============ STRENGTHS ============ */
   .strengths {
-    padding: 100px 0 90px;
-    background: var(--blue-bg);
+    padding: 110px 0 100px;
+    background: linear-gradient(180deg, #eef5fd 0%, #f4f9fe 60%, #eef6fc 100%);
     position: relative;
     overflow: hidden;
   }
-  .strengths::before {
-    content: ""; position: absolute; inset: 0;
-    background:
-      radial-gradient(20% 30% at 0% 0%, rgba(110,201,184,0.10), transparent 60%),
-      radial-gradient(20% 30% at 100% 100%, rgba(74,144,226,0.10), transparent 60%);
-    pointer-events: none;
+  .strengths .wrap { position: relative; z-index: 2; max-width: 1280px; }
+
+  /* floating background blobs */
+  .strengths .s-blob { position: absolute; z-index: 0; pointer-events: none; opacity: 0.9; }
+  .strengths .s-blob.b1 { width: 300px; top: -50px; left: -70px; animation: sBlobFloat 9s ease-in-out infinite; }
+  .strengths .s-blob.b2 { width: 320px; bottom: -60px; right: -80px; animation: sBlobFloat 11s ease-in-out infinite reverse; }
+  .strengths .s-blob.b3 { width: 150px; top: 42%; right: 3%; opacity: 0.55; animation: sBlobFloat 8s ease-in-out infinite; animation-delay: -2s; }
+
+  /* scattered floating dots */
+  .strengths .s-dot { position: absolute; z-index: 0; pointer-events: none; }
+  .strengths .s-dot.d1 { width: 26px; top: 32%; left: 6%; animation: sDotBounce 5s ease-in-out infinite; }
+  .strengths .s-dot.d2 { width: 16px; top: 22%; left: 14%; animation: sDotBounce 4.2s ease-in-out infinite; animation-delay: -1.5s; }
+  .strengths .s-dot.d3 { width: 20px; bottom: 16%; right: 11%; animation: sDotBounce 4.6s ease-in-out infinite; animation-delay: -1s; }
+
+  /* scattered sparkles */
+  .strengths .s-sparkle { position: absolute; z-index: 1; pointer-events: none; animation: sTwinkle 3s ease-in-out infinite; }
+  .strengths .s-sparkle.sk1 { width: 40px; top: 14%; left: 22%; animation-delay: 0s; }
+  .strengths .s-sparkle.sk2 { width: 24px; top: 58%; left: 30%; animation-delay: -1s; }
+  .strengths .s-sparkle.sk3 { width: 34px; top: 18%; right: 24%; animation-delay: -1.6s; }
+  .strengths .s-sparkle.sk4 { width: 22px; bottom: 22%; right: 32%; animation-delay: -0.6s; }
+
+  @keyframes sBlobFloat {
+    0%,100% { transform: translate(0,0) rotate(0deg); }
+    50%     { transform: translate(14px,-18px) rotate(6deg); }
   }
+  @keyframes sDotBounce {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-16px); }
+  }
+  @keyframes sTwinkle {
+    0%,100% { transform: scale(0.7) rotate(0deg); opacity: 0.5; }
+    50%     { transform: scale(1.15) rotate(25deg); opacity: 1; }
+  }
+
+  /* heading with pop "3" */
+  .strengths .head-wrap { text-align: center; margin-bottom: 70px; }
+  .strengths .head-wrap .eyebrow { font-size: 21px; letter-spacing: 0.34em; margin-bottom: 18px; }
+  .strengths .s-title {
+    font-size: 50px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    display: inline-block;
+    position: relative;
+  }
+  .strengths .s-title .three {
+    position: relative;
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 74px;
+    line-height: 1;
+    margin: 0 8px;
+    vertical-align: -10px;
+    background: linear-gradient(160deg, #6ec9b8 0%, #4a90e2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: threePop 2.6s ease-in-out infinite;
+  }
+  .strengths .s-title .three .burst {
+    position: absolute;
+    width: 42px;
+    top: -22px; right: -28px;
+    animation: sTwinkle 2.4s ease-in-out infinite;
+  }
+  @keyframes threePop {
+    0%,100% { transform: translateY(0) scale(1); }
+    50%     { transform: translateY(-5px) scale(1.08); }
+  }
+  .strengths .title-underline {
+    width: 96px; height: 6px;
+    margin: 20px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #6ec9b8, #4a90e2);
+  }
+
+  /* cards grid */
   .strengths-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 34px;
+    position: relative;
+    z-index: 2;
+  }
+  /* dotted connectors between cards */
+  .strengths-grid .connector {
+    position: absolute;
+    top: 30%;
+    width: 130px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+  }
+  .strengths-grid .connector.c1 { left: 27%; }
+  .strengths-grid .connector.c2 { left: 60%; }
+
+  .card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(4px);
+    border-radius: 26px;
+    padding: 60px 34px 52px;
+    text-align: center;
+    box-shadow: 0 12px 36px rgba(74,144,226,0.12);
+    transition: transform .3s, box-shadow .3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover { transform: translateY(-8px); box-shadow: 0 22px 48px rgba(74,144,226,0.20); }
+  /* sequential slide-in (left → right, staggered) */
+  .strengths-grid .card.reveal {
+    opacity: 0;
+    transform: translateX(-70px);
+    transition: opacity .7s ease, transform .85s cubic-bezier(.2,.85,.3,1);
+  }
+  .strengths-grid .card.reveal.visible { opacity: 1; transform: none; }
+  .strengths-grid .card:nth-of-type(2).reveal { transition-delay: 1s; }
+  .strengths-grid .card:nth-of-type(3).reveal { transition-delay: 2s; }
+  /* icon */
+  .card .icon-wrap {
+    width: 172px; height: 172px;
+    margin: 0 auto 30px;
+    display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  .card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 40px 28px 36px;
-    text-align: center;
-    box-shadow: 0 4px 24px rgba(45,58,74,0.04);
-    transition: transform .25s, box-shadow .25s;
-  }
-  .card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(45,58,74,0.08); }
-  .card .icon-wrap {
-    width: 96px; height: 96px;
-    margin: 0 auto 22px;
-    background: var(--blue-soft);
+  .card .icon-wrap .glow {
+    position: absolute; inset: 0;
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(circle, rgba(255,255,255,0.95) 32%, rgba(110,201,184,0.14) 68%, transparent 74%);
+    z-index: 0;
   }
-  .card .icon-wrap.teal { background: var(--teal-soft); }
-  .card .icon-wrap img { width: 54px; height: auto; }
+  .card .icon-wrap img.ic {
+    width: 134px; height: auto;
+    position: relative; z-index: 1;
+    animation: icBob 4s ease-in-out infinite;
+  }
+  .card:nth-child(3) .icon-wrap img.ic { animation-delay: -1.3s; }
+  .card:nth-child(4) .icon-wrap img.ic { animation-delay: -2.6s; }
+  @keyframes icBob {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50%     { transform: translateY(-7px) rotate(2deg); }
+  }
+  /* sparkle on card */
+  .card .card-sparkle {
+    position: absolute;
+    width: 24px;
+    top: 28%; right: 16%;
+    z-index: 2;
+    pointer-events: none;
+    animation: sTwinkle 2.8s ease-in-out infinite;
+  }
+  /* gradient pill badge */
   .card .badge {
     display: inline-block;
-    background: var(--blue);
+    background: linear-gradient(120deg, #6ec9b8 0%, #4a90e2 100%);
     color: #fff;
-    padding: 7px 26px;
+    padding: 15px 34px;
     border-radius: 999px;
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+    white-space: nowrap;
+    box-shadow: 0 10px 22px rgba(74,144,226,0.28);
   }
-  .card .badge.teal { background: var(--teal); }
+  /* dotted divider */
+  .card .divider {
+    width: 60%; height: 1px;
+    margin: 0 auto 22px;
+    background: repeating-linear-gradient(90deg, var(--blue) 0 4px, transparent 4px 9px);
+    opacity: 0.4;
+  }
   .card p {
-    font-size: 13.5px;
+    font-size: 16px;
     color: var(--ink-2);
     margin: 0;
-    line-height: 1.9;
+    line-height: 2.05;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .strengths .s-blob, .strengths .s-dot, .strengths .s-sparkle,
+    .strengths .s-title .three, .strengths .s-title .three .burst,
+    .card .icon-wrap img.ic, .card .card-sparkle { animation: none; }
+    .strengths-grid .card.reveal { opacity: 1; transform: none; transition: none; }
   }
 
   /* ============ ABOUT ============ */
@@ -558,136 +704,261 @@
     position: relative;
     overflow: hidden;
   }
+  .about .wrap { max-width: 1320px; }
   .about-grid {
     display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    gap: 64px;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 72px;
     align-items: center;
   }
-  .about-photo {
-    border-radius: 24px;
-    overflow: hidden;
-    aspect-ratio: 4/3.2;
-    box-shadow: 0 20px 50px rgba(45,58,74,0.12);
-    position: relative;
-  }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .about-photo::after {
-    content: ""; position: absolute;
-    right: -22px; bottom: -22px;
-    width: 90px; height: 90px;
-    border: 2px solid var(--teal);
-    border-radius: 8px;
-    opacity: 0.5;
-    z-index: -1;
-  }
+  /* photo + mint blob behind */
   .about-photo-wrap { position: relative; }
   .about-photo-wrap::before {
-    content: ""; position: absolute;
-    left: -18px; top: -18px;
-    width: 70px; height: 70px;
-    background: radial-gradient(circle, var(--teal-soft) 1.5px, transparent 2px);
-    background-size: 12px 12px;
-    opacity: 0.7;
+    content: "";
+    position: absolute;
+    left: -32px; top: -32px;
+    right: 40px; bottom: 40px;
+    background: var(--teal-soft);
+    border-radius: 30px;
     z-index: 0;
   }
-  .about-content .eyebrow { text-align: left; }
+  .about-photo {
+    position: relative;
+    z-index: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 24px 56px rgba(45,58,74,0.16);
+  }
+  .about-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: scale(1.2);
+    transform-origin: 60% 60%;
+  }
+  /* icon variant (line illustration instead of photo) */
+  .about-photo.is-icon {
+    background: linear-gradient(160deg, #ffffff 0%, var(--teal-soft) 100%);
+  }
+  .about-photo.is-icon img {
+    object-fit: contain;
+    transform: none;
+    padding: 14%;
+  }
+  /* text column */
+  .about-content { position: relative; z-index: 2; }
+  .about-content .eyebrow {
+    display: flex; align-items: center; gap: 16px;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+  .about-content .eyebrow .lbl { flex-shrink: 0; }
+  .about-content .eyebrow .line { flex: 1; height: 1px; background: var(--teal); opacity: 0.45; }
+  .about-content .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
   .about-content h2 {
-    font-size: 36px;
+    font-size: 46px;
     font-weight: 700;
-    line-height: 1.5;
-    margin: 0 0 28px;
+    line-height: 1.45;
+    margin: 0 0 22px;
     color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .about-content .h2-underline {
+    width: 64px; height: 4px;
+    border-radius: 999px;
+    background: var(--teal);
+    margin-bottom: 32px;
   }
   .about-content p {
-    font-size: 14px;
+    font-size: 17px;
     color: var(--ink-2);
-    line-height: 2.1;
-    margin: 0 0 32px;
+    line-height: 2.25;
+    margin: 0 0 42px;
   }
+  .about-content .btn-secondary { padding: 19px 48px; font-size: 16px; }
   .about-tooth {
     position: absolute;
-    right: 4%;
-    bottom: 8%;
-    width: 120px;
-    opacity: 0.35;
+    right: 13%;
+    bottom: 12%;
+    width: 210px;
     pointer-events: none;
+    z-index: 0;
+    transform-origin: bottom center;
+  }
+  /* hidden until it scrolls into view */
+  .about-tooth.reveal { opacity: 0; transform: none; transition: none; animation: none; }
+  /* on reveal: whoosh in from the left, then hop in place */
+  .about-tooth.reveal.visible {
+    animation:
+      toothSlideIn 2.4s cubic-bezier(.16,.8,.3,1) both,
+      toothHop 2.8s ease-in-out 2.6s infinite;
+  }
+  @keyframes toothSlideIn {
+    0%   { opacity: 0;    transform: translateX(-130vw) scale(0.9); }
+    12%  { opacity: 0.95; }
+    100% { opacity: 0.95; transform: translateX(0) scale(1); }
+  }
+  @keyframes toothHop {
+    0%   { transform: translateY(0)    scale(1, 1); }
+    12%  { transform: translateY(-26px) scale(0.95, 1.06); }
+    26%  { transform: translateY(0)    scale(1.06, 0.94); }
+    38%  { transform: translateY(-12px) scale(0.98, 1.03); }
+    50%  { transform: translateY(0)    scale(1.03, 0.97); }
+    60%  { transform: translateY(0)    scale(1, 1); }
+    100% { transform: translateY(0)    scale(1, 1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .about-tooth.reveal,
+    .about-tooth.reveal.visible { opacity: 0.95; transform: none; animation: none; }
   }
 
   /* ============ PRODUCTS ============ */
   .products {
-    padding: 100px 0 90px;
-    background: var(--bg);
+    padding: 100px 0 100px;
+    background: linear-gradient(180deg, #eef4fd 0%, #f4f8fe 60%, #eef5fc 100%);
     position: relative;
     overflow: hidden;
   }
-  .products::before {
-    content: ""; position: absolute;
-    width: 240px; height: 240px;
-    background: radial-gradient(circle, rgba(74,144,226,0.08), transparent 70%);
-    border-radius: 50%;
-    top: 60px; left: 4%;
-    pointer-events: none;
+  /* background blobs */
+  .products .p-blob { position: absolute; z-index: 0; pointer-events: none; }
+  .products .p-blob.pb1 { width: 330px; top: -50px; left: -80px; opacity: 0.85; animation: pBlobFloat 10s ease-in-out infinite; }
+  .products .p-blob.pb2 { width: 300px; bottom: -60px; right: -80px; opacity: 0.8; animation: pBlobFloat 12s ease-in-out infinite reverse; }
+  .products .p-blob.pb3 { width: 200px; top: 28%; right: 4%; opacity: 0.5; animation: pBlobFloat 9s ease-in-out infinite; animation-delay: -3s; }
+  @keyframes pBlobFloat {
+    0%,100% { transform: translate(0,0) rotate(0deg); }
+    50%     { transform: translate(16px,-20px) rotate(6deg); }
+  }
+  .products .wrap { position: relative; z-index: 2; max-width: 1240px; }
+
+  /* title block */
+  .products .p-head { text-align: center; margin-bottom: 46px; }
+  .products .p-eyebrow {
+    display: inline-flex; align-items: center; gap: 16px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600; letter-spacing: 0.3em;
+    color: var(--blue-deep); font-size: 13px;
+    margin-bottom: 18px;
+  }
+  .products .p-eyebrow::before,
+  .products .p-eyebrow::after {
+    content: ""; width: 56px; height: 1px;
+    background: var(--blue); opacity: 0.45;
+  }
+  .products .p-title {
+    font-size: 34px; font-weight: 700;
+    color: var(--ink); margin: 0 0 14px;
+    letter-spacing: 0.03em; line-height: 1.4;
+  }
+  .products .p-sub { font-size: 14px; color: var(--ink-2); margin: 0; }
+
+  /* frosted panel wrapping cards */
+  .products-panel {
+    position: relative;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.85);
+    border-radius: 32px;
+    padding: 40px 36px;
+    box-shadow: 0 22px 60px rgba(74,144,226,0.10);
+    backdrop-filter: blur(6px);
+    z-index: 2;
   }
   .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 22px;
+    gap: 24px;
     position: relative;
   }
   .product-card {
     background: #fff;
-    border-radius: 18px;
-    padding: 18px 18px 24px;
+    border-radius: 20px;
+    padding: 20px 20px 26px;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(45,58,74,0.05);
-    transition: transform .25s, box-shadow .25s;
+    box-shadow: 0 8px 24px rgba(45,58,74,0.07);
+    transition: transform .3s, box-shadow .3s;
+    position: relative;
   }
-  .product-card:hover { transform: translateY(-4px); box-shadow: 0 14px 32px rgba(45,58,74,0.10); }
+  .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(45,58,74,0.13); }
+  /* staggered pop-in */
+  .products-grid .product-card.reveal {
+    opacity: 0; transform: translateY(40px) scale(0.96);
+    transition: opacity .6s ease, transform .7s cubic-bezier(.2,.85,.3,1);
+  }
+  .products-grid .product-card.reveal.visible { opacity: 1; transform: none; }
+  .products-grid .product-card:nth-child(2).reveal { transition-delay: .12s; }
+  .products-grid .product-card:nth-child(3).reveal { transition-delay: .24s; }
+  .products-grid .product-card:nth-child(4).reveal { transition-delay: .36s; }
   .product-card .img-wrap {
     aspect-ratio: 1/1;
-    background: linear-gradient(180deg, #f5f9fc, #eef4fb);
-    border-radius: 12px;
+    background: linear-gradient(160deg, #f3f8fd 0%, #e9f1fb 100%);
+    border-radius: 16px;
     overflow: hidden;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     display: flex; align-items: center; justify-content: center;
+    position: relative;
   }
-  .product-card .img-wrap img { width: 80%; height: 80%; object-fit: contain; }
+  .product-card .img-wrap img.photo {
+    width: 86%; height: 86%; object-fit: contain;
+    filter: drop-shadow(0 8px 14px rgba(45,58,74,0.12));
+    transition: transform .4s ease;
+    animation: prodBob 4.5s ease-in-out infinite;
+  }
+  .product-card:nth-child(2) .img-wrap img.photo { animation-delay: -1s; }
+  .product-card:nth-child(3) .img-wrap img.photo { animation-delay: -2s; }
+  .product-card:nth-child(4) .img-wrap img.photo { animation-delay: -3s; }
+  .product-card:hover .img-wrap img.photo { transform: scale(1.08); }
+  @keyframes prodBob {
+    0%,100% { transform: translateY(0); }
+    50%     { transform: translateY(-6px); }
+  }
+  /* number badge */
+  .product-card .num-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(45,58,74,0.10);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700; font-size: 16px;
+    color: var(--blue-deep);
+    z-index: 3;
+  }
   .product-card h3 {
-    font-size: 15px;
-    font-weight: 700;
-    margin: 0 0 8px;
-    color: var(--ink);
+    font-size: 16px; font-weight: 700;
+    margin: 0 0 12px; color: var(--ink);
+    letter-spacing: 0.04em;
+    position: relative; display: inline-block;
+    padding-bottom: 10px;
+  }
+  .product-card h3::after {
+    content: ""; position: absolute;
+    left: 50%; transform: translateX(-50%);
+    bottom: 0; width: 28px; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--blue), var(--teal));
   }
   .product-card p {
-    font-size: 12px;
-    color: var(--ink-2);
-    line-height: 1.8;
-    margin: 0 0 18px;
-    min-height: 3.6em;
+    font-size: 12.5px; color: var(--ink-2);
+    line-height: 1.85; margin: 0 0 18px;
+    min-height: 3.4em;
   }
   .product-card .more {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 36px; height: 36px;
-    border-radius: 50%;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    border-radius: 999px;
     background: var(--blue-soft);
     color: var(--blue-deep);
-    transition: background .2s;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.02em;
+    transition: background .25s, color .25s, transform .25s;
   }
-  .product-card:hover .more { background: var(--blue); color: #fff; }
-  .product-card .more svg { width: 14px; height: 14px; }
-  .placeholder-img {
-    width: 80%; aspect-ratio: 1/1;
-    background:
-      repeating-linear-gradient(45deg, rgba(74,144,226,0.06), rgba(74,144,226,0.06) 8px, rgba(74,144,226,0.12) 8px, rgba(74,144,226,0.12) 16px);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-family: "Montserrat", monospace;
-    font-size: 10px;
-    color: var(--blue-deep);
-    letter-spacing: 0.1em;
+  .product-card:hover .more { background: var(--blue); color: #fff; transform: translateY(-2px); }
+  .product-card .more svg { width: 15px; height: 15px; }
+  .all-products-cta { text-align: center; margin-top: 50px; }
+  @media (prefers-reduced-motion: reduce) {
+    .products .p-blob, .product-card .img-wrap img.photo { animation: none; }
+    .products-grid .product-card.reveal { opacity: 1; transform: none; transition: none; }
   }
-  .all-products-cta { text-align: center; margin-top: 48px; }
 
   /* ============ FLOW ============ */
   .flow {
@@ -807,6 +1078,8 @@
     object-fit: cover;
     transition: transform .6s ease;
   }
+  /* gallery4（縦長の炉写真）は下部の機械本体が見えるよう表示位置を下げる */
+  .gallery-item img[src*="gallery4"] { object-position: center 78%; }
   .gallery-item:hover img { transform: scale(1.08); }
   @keyframes gallerySlide {
     from { transform: translateX(0); }
@@ -976,10 +1249,21 @@
       row-gap: 32px;
     }
     .hero-text, .hero-collage, .hero-ctas { align-self: stretch; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-grid { grid-template-columns: 1fr; gap: 44px; }
+    .about-content h2 { font-size: 30px; }
+    .about-tooth { width: 120px; opacity: 0.9; bottom: 4%; right: 6%; }
     h1.hero-title { font-size: 36px; }
-    .strengths-grid { grid-template-columns: 1fr; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .strengths-grid { grid-template-columns: 1fr; gap: 22px; }
+    .strengths-grid .connector { display: none; }
+    .strengths .s-title { font-size: 30px; }
+    .strengths .s-title .three { font-size: 46px; }
+    .strengths .card .badge { white-space: normal; font-size: 15px; }
+    .strengths .s-blob.b1, .strengths .s-blob.b2 { width: 200px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .products-panel { padding: 20px 16px; border-radius: 24px; }
+    .products .p-title { font-size: 24px; }
+    .products .p-eyebrow::before, .products .p-eyebrow::after { width: 32px; }
+    .products .p-blob.pb1, .products .p-blob.pb2 { width: 200px; }
     .flow-row { grid-template-columns: repeat(3, 1fr); gap: 24px 8px; }
     .step::after { display: none; }
     .cta-banner .box { grid-template-columns: 1fr; text-align: center; padding: 36px 28px; }
@@ -1015,6 +1299,7 @@
       <a href="https://noir-0111.github.io/tre-foil-homepage/about.html">会社概要</a>
       <a href="https://noir-0111.github.io/tre-foil-homepage/products.html">製品紹介</a>
       <a href="https://noir-0111.github.io/tre-foil-homepage/flow.html">ご注文の流れ</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/delivery-calendar.html">納期カレンダー</a>
       <a href="#">採用情報</a>
     </nav>
     <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
@@ -1050,10 +1335,10 @@
         今日も誠実に
       </h1>
       <p class="hero-lead">
-        <span class="lead-line">私たちtre-foilは</span>
-        <span class="lead-line">患者様とクリニックとの深い信頼のうえに立ち</span>
-        <span class="lead-line">ひとつひとつの仕事を丁寧に、そして誠実に積み重ねてまいります。</span>
-        <span class="lead-line">“後悔のない選択を、毎日の仕事の中で”</span>
+        <span class="lead-line">私たち<strong>tre-foil</strong>は</span>
+        <span class="lead-line">患者様とクリニックとの深い<strong>信頼</strong>のうえに立ち</span>
+        <span class="lead-line">ひとつひとつの仕事を<strong>丁寧</strong>に、そして<strong>誠実に</strong>積み重ねてまいります。</span>
+        <span class="lead-line"><strong>“後悔のない選択を、毎日の仕事の中で”</strong></span>
         <span class="lead-line">それが私たちの、ものづくりへの誓いです。</span>
       </p>
     </div>
@@ -1063,9 +1348,9 @@
       <div class="ring r1"></div>
       <div class="ring r2"></div>
       <div class="ring r3"></div>
-      <div class="photo main"><img src="assets/03.png" alt="技工士" /></div>
-      <div class="photo prod"><img src="assets/05.png" alt="セラミック製品" /></div>
-      <div class="photo lab"><img src="assets/04.png" alt="技工所" /></div>
+      <div class="photo main"><img src="人物写真/前田.jpg" alt="技工士 前田" /></div>
+      <div class="photo prod"><img src="素材/61_nobg.png" alt="セラミックブリッジ" /></div>
+      <div class="photo lab"><img src="素材/62_nobg.png" alt="義歯・デンチャー" /></div>
       <img src="assets/24.png" alt="" class="sparkle s1" />
       <img src="assets/60.png" alt="" class="sparkle s2" />
       <span class="label l-top">高品質を、<br/>確かな技術で。</span>
@@ -1085,42 +1370,18 @@
   </div>
 </section>
 
-<!-- ============ STRENGTHS ============ -->
-<section class="strengths" id="strengths" data-screen-label="Strengths">
-  <div class="wrap">
-    <span class="eyebrow">OUR STRENGTHS</span>
-    <h2 class="section-title">選ばれる<span class="num">3</span>つの理由</h2>
-    <div class="strengths-grid">
-      <div class="card reveal">
-        <div class="icon-wrap"><img src="素材4/01.png" alt="" /></div>
-        <span class="badge">高品質・高精度</span>
-        <p>最新の設備と高度な技術で、<br/>精度の高い技工物を提供します。</p>
-      </div>
-      <div class="card reveal">
-        <div class="icon-wrap"><img src="素材4/02.png" alt="" /></div>
-        <span class="badge">丁寧なコミュニケーション</span>
-        <p>先生のご要望をしっかりと伺い、<br/>最適なご提案を行います。</p>
-      </div>
-      <div class="card reveal">
-        <div class="icon-wrap"><img src="素材4/03.png" alt="" /></div>
-        <span class="badge">スピーディーな対応</span>
-        <p>迅速な製作・配送体制で、<br/>診療をしっかりサポートします。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ ABOUT ============ -->
 <section class="about" id="about" data-screen-label="About">
   <div class="wrap about-grid">
     <div class="about-photo-wrap reveal">
       <div class="about-photo">
-        <img src="assets/04.png" alt="技工所内観" />
+        <img src="gallery/gallery1.jpg" alt="顕微鏡で精密な技工物を製作する様子" />
       </div>
     </div>
     <div class="about-content reveal">
-      <span class="eyebrow teal">ABOUT US</span>
+      <span class="eyebrow teal"><span class="lbl">ABOUT US</span><span class="line"></span><span class="dot"></span></span>
       <h2>信頼される技工所で<br/>あり続けるために</h2>
+      <div class="h2-underline"></div>
       <p>
         私たちは、歯科技術の一端を担うパートナーとして、<br/>
         常に最新の技工と品質の追求を怠りません。<br/>
@@ -1133,52 +1394,57 @@
       </a>
     </div>
   </div>
-  <img src="assets/42.png" alt="" class="about-tooth" />
+  <img src="素材2/tre-foilロゴ.png" alt="tre-foil" class="about-tooth reveal" />
 </section>
 
 <!-- ============ PRODUCTS ============ -->
 <section class="products" id="products" data-screen-label="Products">
+  <img src="素材8/deco_blob_blue.png" alt="" class="p-blob pb1" />
+  <img src="素材8/deco_blob_green.png" alt="" class="p-blob pb2" />
+  <img src="素材8/deco_circles_overlap.png" alt="" class="p-blob pb3" />
+
   <div class="wrap">
-    <span class="eyebrow">PRODUCTS</span>
-    <h2 class="section-title">幅広いニーズに応える製品ラインナップ</h2>
-    <p style="text-align:center; margin: -40px 0 50px; color: var(--ink-2); font-size: 13.5px;">
-      オールセラミック・インプラント、矯正装置まで幅広い製品をお取り扱い。
-    </p>
-    <div class="products-grid">
-      <div class="product-card reveal">
-        <div class="img-wrap"><img src="assets/05.png" alt="オールセラミック" /></div>
-        <h3>オールセラミック</h3>
-        <p>自然な透明感と<br/>美しい色合いを再現。</p>
-        <a class="more" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="product-card reveal">
-        <div class="img-wrap">
-          <div class="placeholder-img">IMPLANT</div>
-        </div>
-        <h3>インプラント上部構造</h3>
-        <p>精度の高い上部構造で、<br/>安定した咬合をサポート。</p>
-        <a class="more" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="product-card reveal">
-        <div class="img-wrap"><img src="assets/06.png" alt="義歯・部分床義歯" /></div>
-        <h3>義歯・部分床義歯</h3>
-        <p>装着感に優れた義歯で、<br/>毎日の食事を快適に。</p>
-        <a class="more" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
-      <div class="product-card reveal">
-        <div class="img-wrap">
-          <div class="placeholder-img">ORTHO</div>
-        </div>
-        <h3>矯正装置</h3>
-        <p>精度の高い矯正装置で、<br/>治療をスムーズにサポート。</p>
-        <a class="more" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </div>
+    <div class="p-head reveal">
+      <span class="p-eyebrow">PRODUCTS</span>
+      <h2 class="p-title">幅広いニーズに応える製品ラインナップ</h2>
+      <p class="p-sub">IOS・自費・保険・デンチャーまで、幅広い製品をお取り扱い。</p>
     </div>
-    <div class="all-products-cta">
-      <a class="btn btn-secondary" href="#products">
-        すべての製品を見る
-        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+
+    <div class="products-panel">
+      <div class="products-grid">
+        <div class="product-card reveal">
+          <div class="img-wrap">
+            <img src="素材14/photo_scanner_scene.png" alt="IOS（口腔内スキャナー対応）" class="photo" />
+          </div>
+          <h3>IOS<span style="font-size:0.6em;font-weight:600;letter-spacing:0;">（口腔内スキャナー対応）</span></h3>
+          <p>スキャンデータから、<br/>精密な補綴物を製作。</p>
+          <a class="more" href="products.html#ios">詳細を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="product-card reveal">
+          <div class="img-wrap">
+            <img src="素材14/photo_bridge.png" alt="自費" class="photo" />
+          </div>
+          <h3>自費</h3>
+          <p>自然な透明感と色調にこだわる、<br/>審美性の高い自費補綴。</p>
+          <a class="more" href="products.html#jihi">詳細を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="product-card reveal">
+          <div class="img-wrap">
+            <img src="素材14/photo_crown_milling.png" alt="保険" class="photo" />
+          </div>
+          <h3>保険</h3>
+          <p>CAD/CAM冠から金属冠まで、<br/>保険診療に幅広く対応。</p>
+          <a class="more" href="products.html#hoken">詳細を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="product-card reveal">
+          <div class="img-wrap">
+            <img src="素材14/photo_denture.png" alt="デンチャー" class="photo" />
+          </div>
+          <h3>デンチャー</h3>
+          <p>装着感に優れた義歯で、<br/>毎日の食事を快適に。</p>
+          <a class="more" href="products.html#denture">詳細を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1238,48 +1504,90 @@
   </div>
 </section>
 
-<!-- ============ GALLERY SLIDER ============ -->
-<section class="gallery" data-screen-label="Gallery">
-  <div class="gallery-track">
-    <div class="gallery-item"><img src="assets/03.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/04.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/05.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/06.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/07.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/08.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/10.png" alt="" /></div>
-    <div class="gallery-item"><img src="assets/11.png" alt="" /></div>
-    <!-- duplicate for seamless loop -->
-    <div class="gallery-item" aria-hidden="true"><img src="assets/03.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/04.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/05.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/06.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/07.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/08.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/10.png" alt="" /></div>
-    <div class="gallery-item" aria-hidden="true"><img src="assets/11.png" alt="" /></div>
-  </div>
-</section>
+<!-- ============ STRENGTHS ============ -->
+<section class="strengths" id="strengths" data-screen-label="Strengths">
+  <!-- background deco -->
+  <img src="素材1/deco_blob_green_blue.png" alt="" class="s-blob b1" />
+  <img src="素材1/deco_blob_blue_cloud.png" alt="" class="s-blob b2" />
+  <img src="素材1/deco_blob_green.png" alt="" class="s-blob b3" />
+  <img src="素材1/deco_dot_green.png" alt="" class="s-dot d1" />
+  <img src="素材1/deco_dot_blue.png" alt="" class="s-dot d2" />
+  <img src="素材1/deco_dot_blue_2.png" alt="" class="s-dot d3" />
+  <img src="素材1/accent_sparkle_green.png" alt="" class="s-sparkle sk1" />
+  <img src="素材1/accent_sparkle_blue.png" alt="" class="s-sparkle sk2" />
+  <img src="素材1/accent_sparkle_twin.png" alt="" class="s-sparkle sk3" />
+  <img src="素材1/brand_sparkle.png" alt="" class="s-sparkle sk4" />
 
-<!-- ============ CTA BANNER ============ -->
-<section class="cta-banner" id="contact" data-screen-label="CTA">
   <div class="wrap">
-    <div class="box reveal">
-      <div class="icon-bubble">
-        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
+    <div class="head-wrap reveal">
+      <span class="eyebrow">OUR STRENGTHS</span>
+      <h2 class="s-title">選ばれる<span class="three">3<img src="素材1/accent_burst_blue.png" alt="" class="burst" /></span>つの理由</h2>
+      <div class="title-underline"></div>
+    </div>
+
+    <div class="strengths-grid">
+      <img src="素材1/accent_dottedline_wave1.png" alt="" class="connector c1" />
+      <img src="素材1/accent_dottedline_wave2.png" alt="" class="connector c2" />
+
+      <div class="card reveal">
+        <div class="icon-wrap">
+          <span class="glow"></span>
+          <img src="素材1/icon_tooth_badge.png" alt="" class="ic" />
+        </div>
+        <img src="素材1/accent_sparkle_blue.png" alt="" class="card-sparkle" />
+        <span class="badge">高品質・高精度</span>
+        <div class="divider"></div>
+        <p>最新の設備と高度な技術で、<br/>精度の高い技工物を提供します。</p>
       </div>
-      <div class="copy">
-        <h3>技工に関するご相談・ご依頼はお気軽にどうぞ</h3>
-        <p class="sub">先生の想いをカタチにするため、丁寧に伺います。</p>
+
+      <div class="card reveal">
+        <div class="icon-wrap">
+          <span class="glow"></span>
+          <img src="素材1/icon_people_badge.png" alt="" class="ic" />
+        </div>
+        <img src="素材1/accent_sparkle_green.png" alt="" class="card-sparkle" />
+        <span class="badge">丁寧なコミュニケーション</span>
+        <div class="divider"></div>
+        <p>先生のご要望をしっかりと伺い、<br/>最適なご提案を行います。</p>
       </div>
-      <a class="btn-white" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#06C755"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-        LINEで問い合わせはこちら
-        <svg class="arrow" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+
+      <div class="card reveal">
+        <div class="icon-wrap">
+          <span class="glow"></span>
+          <img src="素材1/icon_clock_badge.png" alt="" class="ic" />
+        </div>
+        <img src="素材1/accent_sparkle_blue.png" alt="" class="card-sparkle" />
+        <span class="badge">スピーディーな対応</span>
+        <div class="divider"></div>
+        <p>迅速な製作・配送体制で、<br/>診療をしっかりサポートします。</p>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- ============ GALLERY SLIDER ============ -->
+<section class="gallery" data-screen-label="Gallery">
+  <div class="gallery-track">
+    <div class="gallery-item"><img src="gallery/gallery1.jpg" alt="技工作業の様子" /></div>
+    <div class="gallery-item"><img src="gallery/gallery2.jpg" alt="技工所の様子" /></div>
+    <div class="gallery-item"><img src="gallery/gallery3.jpg" alt="製作中の技工物" /></div>
+    <div class="gallery-item"><img src="gallery/gallery4.jpg" alt="技工作業の様子" /></div>
+    <div class="gallery-item"><img src="gallery/gallery5.jpg" alt="技工所の様子" /></div>
+    <div class="gallery-item"><img src="gallery/gallery6.jpg" alt="製作中の技工物" /></div>
+    <div class="gallery-item"><img src="gallery/gallery7.jpg" alt="技工作業の様子" /></div>
+    <div class="gallery-item"><img src="gallery/gallery8.jpg" alt="完成した技工物" /></div>
+    <!-- duplicate for seamless loop -->
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery1.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery2.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery3.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery4.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery5.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery6.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery7.jpg" alt="" /></div>
+    <div class="gallery-item" aria-hidden="true"><img src="gallery/gallery8.jpg" alt="" /></div>
+  </div>
+</section>
+
 
 <!-- ============ FOOTER ============ -->
 <footer data-screen-label="Footer">
@@ -1293,19 +1601,20 @@
     <div>
       <h5>サービス</h5>
       <ul>
-        <li><a href="products.html">オールセラミック</a></li>
-        <li><a href="products.html">インプラント</a></li>
-        <li><a href="products.html">義歯</a></li>
-        <li><a href="products.html">矯正装置</a></li>
+        <li><a href="products.html#ios">IOS（口腔内スキャナー対応）</a></li>
+        <li><a href="products.html#jihi">自費</a></li>
+        <li><a href="products.html#hoken">保険</a></li>
+        <li><a href="products.html#denture">デンチャー</a></li>
       </ul>
     </div>
     <div>
       <h5>会社情報</h5>
       <ul>
-        <li><a href="about.html">私たちについて</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="products.html">製品紹介</a></li>
         <li><a href="flow.html">ご注文の流れ</a></li>
+        <li><a href="delivery-calendar.html">納期カレンダー</a></li>
         <li><a href="#">採用情報</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
       </ul>
     </div>
     <div>

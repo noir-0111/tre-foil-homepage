@@ -130,118 +130,62 @@
   .breadcrumb .sep { margin: 0 10px; }
   .breadcrumb .current { color: var(--ink-2); }
 
-  /* PAGE INTRO */
+  /* PAGE INTRO (hero) */
   .page-intro {
     position: relative;
-    padding: 30px 0 56px;
+    padding: 44px 0 70px;
     overflow: hidden;
   }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.12fr;
+    gap: 30px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .intro-text { position: relative; z-index: 3; }
   .page-intro .eyebrow {
     font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.32em;
-    color: var(--teal-deep);
-    font-size: 11.5px;
-    margin: 24px 0 14px;
-    display: block;
+    font-weight: 600; letter-spacing: 0.32em;
+    color: var(--teal-deep); font-size: 21px;
+    margin: 0 0 16px; display: block;
   }
   .page-intro h1 {
-    font-size: 38px;
-    margin: 0 0 22px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: var(--ink);
+    font-size: 54px; margin: 0 0 24px;
+    font-weight: 700; letter-spacing: 0.1em; color: var(--ink);
+    line-height: 1.2;
   }
   .page-intro p {
-    font-size: 13.5px;
-    color: var(--ink-2);
-    line-height: 2;
-    margin: 0;
-    max-width: 540px;
+    font-size: 17px; color: var(--ink-2);
+    line-height: 2.05; margin: 0; max-width: 560px;
   }
-  /* deco */
-  .page-intro .deco { position: absolute; pointer-events: none; }
-  .page-intro .deco.tooth-line {
-    width: 110px;
-    top: 70px; right: 24%;
-    opacity: 0.45;
-    animation: flowToothSpin 14s linear infinite;
-    animation-delay: -7s;
+
+  /* hero visual (product cluster) */
+  .intro-visual { position: relative; min-height: 380px; }
+  .intro-visual .iv-blob { position: absolute; z-index: 0; pointer-events: none; }
+  .intro-visual .iv-blob.green { width: 64%; top: 2%; left: 4%; opacity: .9; animation: ivFloat 9s ease-in-out infinite; }
+  .intro-visual .iv-blob.blue  { width: 68%; bottom: -2%; right: -2%; opacity: .9; animation: ivFloat 11s ease-in-out infinite reverse; }
+  .intro-visual .iv-photo { position: absolute; z-index: 2; pointer-events: none; filter: drop-shadow(0 14px 26px rgba(45,58,74,.16)); }
+  .intro-visual .iv-photo.bridge { width: 47%; left: 0; top: 10%; animation: ivBob 5s ease-in-out infinite; }
+  .intro-visual .iv-photo.single { width: 15%; left: 50%; top: 40%; animation: ivBob 5.5s ease-in-out infinite; animation-delay: -1.5s; }
+  .intro-visual .iv-photo.metal  { width: 26%; right: 1%; bottom: 4%; animation: ivBob 6s ease-in-out infinite; animation-delay: -3s; }
+  /* セラミックを白く明るく補正（メタルは除く） */
+  .intro-visual .iv-photo.bridge,
+  .intro-visual .iv-photo.single {
+    filter: drop-shadow(0 12px 22px rgba(45,58,74,.16));
   }
-  .page-intro .deco.cloud-blue {
-    width: 78px;
-    top: 80px; right: 12%;
-    opacity: 0.55;
-    animation: flowCloudBlue 16s linear infinite;
-    animation-delay: -4s;
-  }
-  .page-intro .deco.dots-tr {
-    width: 110px;
-    top: 30px; right: 4%;
-    opacity: 0.85;
-    animation: flowDotsWave 13s linear infinite;
-    animation-delay: -2s;
-  }
-  .page-intro .deco.cloud-blob {
-    width: 130px;
-    top: 200px; right: 0%;
-    opacity: 0.85;
-    animation: flowBlobBig 18s linear infinite;
-    animation-delay: -10s;
-  }
-  .page-intro .deco.dot-blue {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--blue-deep);
-    top: 100px; right: 38%;
-    opacity: 0.5;
-    animation: flowDotBounce 10s linear infinite;
-    animation-delay: -5s;
-  }
-  @keyframes flowToothSpin {
-    0%   { transform: translateX(-95vw)  rotate(0deg)   scale(0.8); opacity: 0; }
-    10%  { opacity: 0.45; }
-    90%  { opacity: 0.45; }
-    100% { transform: translateX(95vw)   rotate(720deg) scale(1.1); opacity: 0; }
-  }
-  @keyframes flowCloudBlue {
-    0%   { transform: translate(-95vw, 0)   rotate(0deg);  opacity: 0; }
-    10%  { opacity: 0.55; }
-    25%  { transform: translate(-45vw, -15px) rotate(8deg); }
-    50%  { transform: translate(0, 5px)      rotate(-6deg); }
-    75%  { transform: translate(45vw, -18px) rotate(8deg); }
-    90%  { opacity: 0.55; }
-    100% { transform: translate(95vw, 0)     rotate(0deg);  opacity: 0; }
-  }
-  @keyframes flowDotsWave {
-    0%   { transform: translate(-95vw, 0); opacity: 0; }
-    10%  { opacity: 0.85; }
-    20%  { transform: translate(-55vw, -28px); }
-    40%  { transform: translate(-15vw, 18px); }
-    60%  { transform: translate(15vw, -28px); }
-    80%  { transform: translate(55vw, 18px); }
-    90%  { opacity: 0.85; }
-    100% { transform: translate(95vw, 0); opacity: 0; }
-  }
-  @keyframes flowBlobBig {
-    0%   { transform: translate(-95vw, 0)  scale(0.7);  opacity: 0; }
-    10%  { opacity: 0.85; }
-    50%  { transform: translate(0, -12px)  scale(1.15); }
-    90%  { opacity: 0.85; }
-    100% { transform: translate(95vw, 0)   scale(0.7);  opacity: 0; }
-  }
-  @keyframes flowDotBounce {
-    0%   { transform: translate(-95vw, 0); opacity: 0; }
-    10%  { opacity: 0.7; }
-    20%  { transform: translate(-55vw, -45px); }
-    35%  { transform: translate(-25vw, 0); }
-    50%  { transform: translate(0, -45px); }
-    65%  { transform: translate(25vw, 0); }
-    80%  { transform: translate(55vw, -45px); }
-    90%  { opacity: 0.7; }
-    100% { transform: translate(95vw, 0); opacity: 0; }
-  }
+  @keyframes ivFloat { 0%,100%{ transform: translate(0,0) rotate(0deg); } 50%{ transform: translate(10px,-14px) rotate(4deg); } }
+  @keyframes ivBob { 0%,100%{ transform: translateY(0); } 50%{ transform: translateY(-8px); } }
+
+  /* section background deco */
+  .page-intro .pi-deco { position: absolute; z-index: 0; pointer-events: none; }
+  .page-intro .pi-deco.dots-tr { width: 130px; top: 18px; right: 3%; opacity: .8; animation: ivFloat 8s ease-in-out infinite; }
+  .page-intro .pi-deco.dots-bl { width: 90px; bottom: 14px; left: 1%; opacity: .7; animation: ivFloat 7s ease-in-out infinite; animation-delay: -2s; }
+  .page-intro .pi-deco.c1 { width: 70px; top: 56px; left: 3%; opacity: .9; animation: ivFloat 9s ease-in-out infinite; animation-delay: -1s; }
+
   @media (prefers-reduced-motion: reduce) {
-    .page-intro .deco { animation: none; }
+    .intro-visual .iv-blob, .intro-visual .iv-photo, .page-intro .pi-deco { animation: none; }
   }
 
   /* SECTION TITLE WITH ICON */
@@ -538,7 +482,10 @@
     .logo .brand-name { font-size: 13.5px; }
     .product-grid { grid-template-columns: repeat(2, 1fr); }
     .services-grid { grid-template-columns: repeat(2, 1fr); }
-    .page-intro h1 { font-size: 28px; }
+    .page-intro h1 { font-size: 34px; }
+    .intro-grid { grid-template-columns: 1fr; gap: 10px; }
+    .intro-visual { min-height: 300px; margin-top: 10px; }
+    .page-intro p { max-width: none; }
     .product-table thead { display: none; }
     .product-table tbody td:first-child { font-weight: 600; padding-bottom: 4px; border-bottom: none; }
     .cta-banner .box { grid-template-columns: 1fr; text-align: center; padding: 32px 24px; }
@@ -558,6 +505,160 @@
     .header-inner { padding: 10px 14px; }
     .wrap { padding: 0 16px; }
   }
+
+  /* ===== anchor offset (sticky header) ===== */
+  section[id] { scroll-margin-top: 90px; }
+
+  /* ===== OVERVIEW (取扱い一覧) ===== */
+  .cat-overview { padding: 80px 0 96px; position: relative; overflow: hidden; }
+  .cat-overview .wrap { position: relative; z-index: 2; }
+  /* background deco（すべてセクション内に収めて端で切れないように） */
+  .cat-overview .ov-deco { position: absolute; z-index: 0; pointer-events: none; }
+  .cat-overview .ov-deco.blob-tr { width: 420px; top: 22px; right: -60px; opacity: .55; animation: ovFloat 11s ease-in-out infinite; }
+  .cat-overview .ov-deco.dots-tr { width: 130px; top: 50px; right: 2%; opacity: .6; animation: ovFloat 8s ease-in-out infinite; }
+  .cat-overview .ov-deco.ring-tl { width: 56px; top: 26px; left: 16%; opacity: .55; animation: ovFloat 9s ease-in-out infinite; animation-delay: -2s; }
+  .cat-overview .ov-deco.dots-b  { width: 150px; bottom: 82px; left: 46%; opacity: .5; animation: ovFloat 7s ease-in-out infinite; }
+  .cat-overview .ov-deco.blob-bl { width: 220px; bottom: 26px; left: -70px; opacity: .55; animation: ovFloat 12s ease-in-out infinite reverse; }
+  .cat-overview .ov-deco.wave-b  { width: 100%; height: 190px; object-fit: cover; object-position: center bottom; left: 0; bottom: 10px; opacity: .55; }
+  @keyframes ovFloat { 0%,100%{ transform: translate(0,0) rotate(0deg); } 50%{ transform: translate(8px,-10px) rotate(3deg); } }
+
+  .overview-head { text-align: left; margin-bottom: 32px; }
+  .overview-head .eyebrow { display: block; margin-bottom: 12px; font-size: 23px; letter-spacing: 0.3em; font-family: "Montserrat", sans-serif; font-weight: 600; color: var(--teal-deep); }
+  .overview-head .click-hint { margin: 0 0 6px; }
+  .overview-head .click-hint span {
+    display: inline; font-weight: 700; color: var(--ink); font-size: 15px;
+    background-image: linear-gradient(transparent 58%, rgba(110,201,184,0.55) 58%);
+    background-repeat: no-repeat; background-size: 100% 100%;
+    padding: 0 2px;
+  }
+  .overview-head p { font-size: 15px; color: var(--ink-2); margin: 0; line-height: 1.8; font-weight: 500; }
+  .overview-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .ov-card {
+    background: #fff; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(45,58,74,0.08);
+    transition: transform .25s, box-shadow .25s; display: block;
+  }
+  .ov-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(45,58,74,0.14); }
+  .ov-card .ov-thumb { width: 100%; aspect-ratio: 1/1; overflow: hidden; position: relative; }
+  /* カテゴリ別の柔らかい背景（参考のトーンに寄せる） */
+  .ov-card:nth-child(1) .ov-thumb { background: radial-gradient(125% 100% at 50% 28%, #eef4fb, #d9e6f3); }
+  .ov-card:nth-child(2) .ov-thumb { background: radial-gradient(125% 100% at 50% 28%, #fcfdfe, #e8f0f8); }
+  .ov-card:nth-child(3) .ov-thumb { background: radial-gradient(125% 100% at 50% 28%, #e4eef9, #c8ddf0); }
+  .ov-card:nth-child(4) .ov-thumb { background: radial-gradient(125% 100% at 50% 28%, #fcfdfe, #e8f0f8); }
+  .ov-card .ov-thumb::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 -22px 30px rgba(45,58,74,.06); pointer-events: none; }
+  /* 製品は全体表示（見切れ防止・縮尺を参考に合わせる） */
+  .ov-card .ov-thumb img { width: 100%; height: 100%; object-fit: contain; padding: 3%; transition: transform .45s ease; position: relative; z-index: 1; }
+  .ov-card:hover .ov-thumb img { transform: scale(1.14); }
+  .ov-card .ov-label {
+    padding: 18px 8px; text-align: center;
+    font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: .04em;
+  }
+  .ov-card .ov-label .num { color: var(--teal-deep); margin-right: 8px; font-family: "Montserrat", sans-serif; }
+  .ov-card .ov-label .ov-sub { font-size: 11px; color: var(--ink-3); font-weight: 400; letter-spacing: 0; }
+
+  /* ===== CATEGORY DETAIL (SECTION 3) ===== */
+  .cat-detail { padding: 72px 0; position: relative; overflow: hidden; }
+  .cat-detail .wrap { position: relative; z-index: 2; max-width: 1200px; }
+  /* background deco（端で切れないようセクション内に配置） */
+  .cat-detail .cd-deco { position: absolute; z-index: 0; pointer-events: none; }
+  .cat-detail .cd-deco.blob-tr { width: 300px; top: 16px; right: 1%; opacity: .4; }
+  .cat-detail .cd-deco.dots-tr { width: 118px; top: 34px; right: 3%; opacity: .5; }
+  .cat-detail .cd-deco.dots-bl { width: 92px; bottom: 34px; left: 1%; opacity: .45; }
+
+  /* SECTION label */
+  .sec-label { display: inline-block; font-family: "Montserrat", sans-serif; font-size: 18px; font-weight: 600; letter-spacing: .28em; color: var(--teal-deep); margin-bottom: 18px; }
+  .sec-label::after { content: ""; display: block; width: 54px; height: 3px; border-radius: 2px; background: var(--teal); margin-top: 8px; }
+
+  /* category header（番号バッジ＋大見出し＋IOSピル） */
+  .cat-header { display: flex; align-items: center; gap: 18px; margin-bottom: 30px; flex-wrap: wrap; }
+  .cat-header .cat-badge { width: 64px; height: 64px; flex-shrink: 0; }
+  .cat-header .cat-title { font-size: 44px; font-weight: 700; color: var(--ink); letter-spacing: .03em; margin: 0; line-height: 1.15; }
+  .cat-header .cat-title .sub { font-size: 25px; }
+  .cat-header .cat-pill { height: 40px; width: auto; }
+
+  /* detail card with rows */
+  .detail-card { background: #fff; border-radius: 26px; padding: 6px 44px; box-shadow: 0 16px 44px rgba(74,144,226,0.10); }
+  .detail-row { display: flex; align-items: center; gap: 26px; padding: 26px 0; border-bottom: 2px dotted #dfe7ef; }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-row .r-icon { width: 64px; height: 64px; flex-shrink: 0; }
+  .detail-row .r-name { width: 250px; flex-shrink: 0; font-size: 21px; font-weight: 700; color: var(--teal-deep); letter-spacing: .03em; padding-right: 26px; border-right: 1px solid var(--line); line-height: 1.4; }
+  .detail-row .r-name .rsub { font-size: 14px; }
+  .detail-row .r-items { font-size: 16.5px; color: var(--ink); line-height: 1.95; }
+  .detail-row .r-items .note { color: var(--ink-3); font-size: 13px; }
+
+  /* ===== INQUIRY STRIP (料金はお問い合わせ) ===== */
+  .inquiry { padding: 40px 0 90px; }
+  .inquiry .box {
+    position: relative;
+    background: linear-gradient(130deg, #ffffff 0%, #f5f9fe 52%, #e9f1fb 100%);
+    border-radius: 30px;
+    padding: 52px 54px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 28px; flex-wrap: wrap;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(74,124,190,0.13);
+  }
+  /* 右側ブロブ波・中央ソフト円・波線は薄い縦線が出るため削除 */
+  .inquiry .deco { position: absolute; pointer-events: none; z-index: 1; }
+  .inquiry .deco-logo   { top: 30px;  left: 40px;  width: 46px; opacity: 0.95; z-index: 2; }
+  .inquiry .deco-circle { top: -4%;   left: 30%;   width: 250px; opacity: 0.7; }
+  .inquiry .deco-dot-tr { top: 30px;  right: 80px; width: 120px; opacity: 0.9; }
+  .inquiry .deco-dot-bl { bottom: 24px; left: 150px; width: 96px; opacity: 0.85; }
+  .inquiry .deco-wave   { bottom: -24px; left: -14px; width: 360px; opacity: 0.72; }
+  .inquiry .copy { position: relative; z-index: 3; }
+  .inquiry .t {
+    font-size: 30px; font-weight: 700; color: #213a59;
+    line-height: 1.42; letter-spacing: 0.005em; margin: 0;
+  }
+  .inquiry .divider { width: 46px; height: 3px; background: #2bc46a; border-radius: 2px; margin: 20px 0 16px; }
+  .inquiry .sub { font-size: 15.5px; color: var(--ink-2); margin: 0; }
+  .inquiry .line-btn {
+    position: relative; z-index: 3;
+    background: linear-gradient(135deg, #21c96e 0%, #06bd4f 100%);
+    color: #fff; padding: 18px 26px; border-radius: 999px;
+    font-size: 17px; font-weight: 700; display: inline-flex; align-items: center; gap: 14px;
+    box-shadow: 0 14px 30px rgba(17,191,82,0.35); white-space: nowrap;
+    transition: transform .15s, box-shadow .2s;
+  }
+  .inquiry .line-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 38px rgba(17,191,82,0.45); }
+  .inquiry .line-btn .line-ic {
+    width: 40px; height: 40px; background: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .inquiry .line-btn .line-ic img { width: 24px; height: 24px; }
+  .inquiry .line-btn .chev { font-size: 22px; line-height: 1; opacity: 0.95; margin-left: 2px; }
+  /* CTAボタン：ヘッダー右上と同じ緑ボタンを、約1.5倍に拡大して少し左へ寄せる */
+  .inquiry .inquiry-btn {
+    position: relative; z-index: 3;
+    padding: 24px 60px; font-size: 22px; gap: 14px;
+    margin-right: 40px;
+  }
+  .inquiry .inquiry-btn svg { width: 27px; height: 27px; }
+
+  @media (max-width: 960px) {
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    .inquiry .box { flex-direction: column; align-items: flex-start; text-align: left; padding: 40px 36px; gap: 26px; }
+    .inquiry .t { font-size: 25px; }
+    .inquiry .deco-circle, .inquiry .deco-dot-tr, .inquiry .deco-wave { opacity: 0.4; }
+    .cat-header .cat-title { font-size: 30px; }
+    .cat-header .cat-title .sub { font-size: 17px; }
+    .cat-header .cat-badge { width: 50px; height: 50px; }
+    .cat-header .cat-pill { height: 32px; }
+    .detail-card { padding: 4px 20px; }
+    .detail-row { flex-wrap: wrap; gap: 8px 16px; padding: 18px 0; }
+    .detail-row .r-icon { width: 46px; height: 46px; }
+    .detail-row .r-name { width: auto; border-right: none; padding-right: 0; font-size: 18px; }
+    .detail-row .r-items { font-size: 14px; flex-basis: 100%; }
+  }
+  @media (max-width: 540px) {
+    .inquiry .box { padding: 34px 24px; border-radius: 24px; }
+    .inquiry .t { font-size: 19px; line-height: 1.5; }
+    .inquiry .sub { font-size: 13.5px; }
+    .inquiry .line-btn { font-size: 15.5px; padding: 15px 22px; }
+    .inquiry .line-btn .line-ic { width: 34px; height: 34px; }
+    .inquiry .inquiry-btn { font-size: 17px; padding: 16px 30px; gap: 10px; margin-right: 0; }
+    .inquiry .inquiry-btn svg { width: 20px; height: 20px; }
+  }
 </style>
 </head>
 <body>
@@ -574,6 +675,7 @@
       <a href="https://noir-0111.github.io/tre-foil-homepage/about.html">会社概要</a>
       <a href="https://noir-0111.github.io/tre-foil-homepage/products.html" class="active">製品紹介</a>
       <a href="https://noir-0111.github.io/tre-foil-homepage/flow.html">ご注文の流れ</a>
+      <a href="https://noir-0111.github.io/tre-foil-homepage/delivery-calendar.html">納期カレンダー</a>
       <a href="#">採用情報</a>
     </nav>
     <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
@@ -594,216 +696,216 @@
 
 <!-- PAGE INTRO -->
 <section class="page-intro" data-screen-label="Intro">
-  <img src="assets3/31.png" alt="" class="deco tooth-line" />
-  <img src="assets3/28.png" alt="" class="deco cloud-blue" />
-  <img src="assets3/32.png" alt="" class="deco dots-tr" />
-  <img src="assets3/30.png" alt="" class="deco cloud-blob" />
-  <div class="deco dot-blue"></div>
+  <img src="素材13/dotgrid_blue.png" alt="" class="pi-deco dots-tr" />
+  <img src="素材13/dotgrid_green.png" alt="" class="pi-deco dots-bl" />
+  <img src="素材13/circle_outline_blue.png" alt="" class="pi-deco c1" />
 
-  <div class="wrap">
-    <span class="eyebrow">PRODUCTS</span>
-    <h1>製 品 紹 介</h1>
-    <p>
-      確かな技術と高品質な素材で、<br/>
-      患者さま一人ひとりに最適な技工物をお届けします。
-    </p>
-  </div>
-</section>
-
-<!-- 保険適用製品 -->
-<section class="category" data-screen-label="Insured Products">
-  <div class="wrap">
-    <div class="cat-head reveal">
-      <div class="ic-bubble">
-        <svg viewBox="0 0 60 60" fill="none">
-          <path d="M30 12C22 12 16 18 16 26c0 6 3 11 6 16 2 4 3 8 3 12 0 1.5 0.6 2 1.5 2h7c0.9 0 1.5-0.5 1.5-2 0-4 1-8 3-12 3-5 6-10 6-16 0-8-6-14-14-14z" stroke="#4a90e2" stroke-width="2.4" fill="#fff"/>
-          <circle cx="26" cy="26" r="1.4" fill="#6ec9b8"/>
-          <path d="M22 22 Q24 24 26 22" stroke="#6ec9b8" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <h2>保険適用製品</h2>
-      <span class="desc">保険診療に対応した高品質な技工物を、確かな品質でご提供します。</span>
+  <div class="wrap intro-grid">
+    <div class="intro-text">
+      <span class="eyebrow">PRODUCTS</span>
+      <h1>製 品 紹 介</h1>
+      <p>
+        保険・自費からインプラント上部構造、義歯まで<br/>
+        幅広く対応。IOS（口腔内スキャナー）データにも対応。<br/>
+        料金は症例に応じてお見積り
+      </p>
     </div>
-    <div class="product-grid">
-      <article class="p-card reveal">
-        <div class="img"><img src="assets3/10.png" alt="金属床義歯" /></div>
-        <div class="body">
-          <h3>金属床義歯</h3>
-          <p>強度と適合性に優れ、違和感の少ない<br/>快適な装着感を実現します。</p>
-        </div>
-      </article>
-      <article class="p-card reveal">
-        <div class="img"><img src="assets3/11.png" alt="CAD/CAM冠" /></div>
-        <div class="body">
-          <h3>CAD/CAM冠</h3>
-          <p>精度な設計と加工で、機能性と審美性を<br/>兼ね備えた補綴物を提供します。</p>
-        </div>
-      </article>
-      <article class="p-card reveal">
-        <div class="img"><img src="assets3/12.png" alt="メタルクラウン" /></div>
-        <div class="body">
-          <h3>メタルクラウン</h3>
-          <p>高い強度と耐久性を持ち、<br/>長期的な安定性を実現します。</p>
-        </div>
-      </article>
+    <div class="intro-visual">
+      <img src="素材13/photo_crowns_bridge_nobg.png" alt="クラウン・ブリッジ" class="iv-photo bridge" />
+      <img src="素材13/photo_crown_single_nobg.png" alt="オールセラミッククラウン" class="iv-photo single" />
+      <img src="素材13/photo_metal_crown.png" alt="メタルクラウン" class="iv-photo metal" />
     </div>
   </div>
 </section>
 
-<!-- 自費製品 -->
-<section class="category" data-screen-label="Premium Products">
-  <div class="wrap">
-    <div class="cat-head reveal">
-      <div class="ic-bubble">
-        <svg viewBox="0 0 60 60" fill="none">
-          <path d="M30 48 C 16 38, 10 28, 14 20 C 18 12, 26 14, 30 22 C 34 14, 42 12, 46 20 C 50 28, 44 38, 30 48 Z" stroke="#6ec9b8" stroke-width="2.4" fill="#fff"/>
-        </svg>
-      </div>
-      <h2>自費製品</h2>
-      <span class="desc">審美性・機能性にこだわった高品質な自費製品を取り揃えています。</span>
-    </div>
-    <div class="product-grid">
-      <article class="p-card reveal">
-        <div class="img"><img src="assets3/13.png" alt="ジルコニアクラウン" /></div>
-        <div class="body">
-          <h3>ジルコニアクラウン</h3>
-          <p>高い強度と自然な透明感で、<br/>美しく長持ちする補綴物です。</p>
-        </div>
-      </article>
-      <article class="p-card reveal">
-        <div class="img"><img src="assets3/14.png" alt="e.max オールセラミック" /></div>
-        <div class="body">
-          <h3>e.max（オールセラミック）</h3>
-          <p>優れた審美性と生体親和性で、<br/>自然な仕上がりを実現します。</p>
-        </div>
-      </article>
-      <article class="p-card reveal">
-        <div class="img"><img src="assets3/15.png" alt="インプラント上部構造" /></div>
-        <div class="body">
-          <h3>インプラント上部構造</h3>
-          <p>精密な適合と高い審美性で、<br/>快適な口腔環境をサポートします。</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+<!-- OVERVIEW（取扱い一覧） -->
+<section class="cat-overview" data-screen-label="Overview">
+  <img src="素材14/blob_soft1.png" alt="" class="ov-deco blob-tr" />
+  <img src="素材14/dotgrid_top.png" alt="" class="ov-deco dots-tr" />
+  <img src="素材14/circle_outline.png" alt="" class="ov-deco ring-tl" />
+  <img src="素材14/dotgrid_bottom.png" alt="" class="ov-deco dots-b" />
+  <img src="素材14/blob_wave1.png" alt="" class="ov-deco blob-bl" />
 
-<!-- TABLE -->
-<section class="table-section" data-screen-label="Other Products">
   <div class="wrap">
-    <div class="cat-head reveal">
-      <div class="ic-bubble">
-        <svg viewBox="0 0 60 60" fill="none" stroke="#4a90e2" stroke-width="2.2">
-          <rect x="16" y="16" width="28" height="32" rx="2" fill="#fff"/>
-          <rect x="22" y="12" width="16" height="6" rx="1" fill="#fff"/>
-          <path d="M22 28 l3 3 l6 -6" stroke="#6ec9b8"/>
-          <path d="M34 30 L42 30" stroke="#6ec9b8"/>
-          <path d="M22 38 l3 3 l6 -6" stroke="#6ec9b8"/>
-          <path d="M34 40 L42 40" stroke="#6ec9b8"/>
-        </svg>
-      </div>
-      <h2>その他取り扱い製品一覧</h2>
+    <div class="overview-head reveal">
+      <span class="eyebrow">CATEGORY</span>
+      <p class="click-hint"><span>クリックで詳細へ移動</span></p>
     </div>
-    <table class="product-table reveal">
-      <thead>
-        <tr>
-          <th>分類</th>
-          <th>主な製品</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>クラウン・ブリッジ</td>
-          <td>保険用レジン冠／メタルボンド／PFM／ゴールドクラウン など</td>
-        </tr>
-        <tr>
-          <td>義歯</td>
-          <td>レジン床義歯／金属床義歯／ノンクラスプデンチャー など</td>
-        </tr>
-        <tr>
-          <td>インレー・アンレー</td>
-          <td>ゴールドインレー／CAD/CAMインレー／ハイブリッドインレー など</td>
-        </tr>
-        <tr>
-          <td>矯正装置</td>
-          <td>矯正用リテーナー／床矯正装置／マウスピース矯正装置 など</td>
-        </tr>
-        <tr>
-          <td>ホワイトニング関連</td>
-          <td>ホームホワイトニングトレー など</td>
-        </tr>
-        <tr>
-          <td>その他</td>
-          <td>咬合床／顎関模型／診断用ワックスアップ など</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" data-screen-label="Services">
-  <div class="wrap">
-    <div class="cat-head reveal">
-      <div class="ic-bubble">
-        <svg viewBox="0 0 60 60" fill="none">
-          <path d="M30 12C22 12 16 18 16 26c0 6 3 11 6 16 2 4 3 8 3 12 0 1.5 0.6 2 1.5 2h7c0.9 0 1.5-0.5 1.5-2 0-4 1-8 3-12 3-5 6-10 6-16 0-8-6-14-14-14z" stroke="#4a90e2" stroke-width="2.4" fill="#fff"/>
-          <path d="M22 22 Q26 24 32 22" stroke="#4a90e2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-          <path d="M22 28 Q26 30 32 28" stroke="#4a90e2" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-      <h2>対応可能なサービス</h2>
-      <span class="desc">最新設備と確かな技術で、歯科医院さまと患者さまのニーズにお応えします。</span>
-    </div>
-    <div class="services-grid">
-      <div class="svc-card reveal">
-        <div class="ic"><img src="assets3/22.png" alt="" /></div>
-        <span class="pill">CAD/CAM設計・製作</span>
-        <p>デジタル技術を活用した精度な<br/>設計・製作を行います。</p>
-      </div>
-      <div class="svc-card reveal">
-        <div class="ic"><img src="assets3/23.png" alt="" /></div>
-        <span class="pill teal">ジルコニア加工</span>
-        <p>高精度ミリングマシンによる<br/>高品質なジルコニア加工。</p>
-      </div>
-      <div class="svc-card reveal">
-        <div class="ic"><img src="assets3/24.png" alt="" /></div>
-        <span class="pill">スキャナデータ対応</span>
-        <p>各種口腔内スキャナーのデータに<br/>対応可能です。</p>
-      </div>
-      <div class="svc-card reveal">
-        <div class="ic"><img src="assets3/25.png" alt="" /></div>
-        <span class="pill teal">咬合器付模型製作</span>
-        <p>精密な咬合調整のための<br/>模型製作を行います。</p>
-      </div>
-      <div class="svc-card reveal">
-        <div class="ic"><img src="assets3/26.png" alt="" /></div>
-        <span class="pill">迅速・丁寧な納品</span>
-        <p>確かな品質を守りながら、<br/>スピーディーにお届けします。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-banner" id="contact" data-screen-label="CTA">
-  <div class="wrap">
-    <div class="box reveal">
-      <div class="icon-bubble">
-        <img src="素材2/tre-foilロゴ.png" alt="tre-foil" />
-      </div>
-      <div class="copy">
-        <h3>技工に関するご相談・ご依頼はお気軽にどうぞ</h3>
-        <p class="sub">先生の理想をカタチにするお手伝いをいたします。</p>
-      </div>
-      <a class="btn-white" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="#06C755"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-        LINEで問い合わせはこちら
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div class="overview-grid">
+      <a class="ov-card reveal" href="#ios">
+        <div class="ov-thumb"><img src="素材14/photo_scanner_scene.png" alt="IOS（口腔内スキャナー対応）" /></div>
+        <div class="ov-label"><span class="num">Ⅰ</span>IOS<span class="ov-sub">（口腔内スキャナー対応）</span></div>
+      </a>
+      <a class="ov-card reveal" href="#jihi">
+        <div class="ov-thumb"><img src="素材14/photo_bridge.png" alt="自費" /></div>
+        <div class="ov-label"><span class="num">Ⅱ</span>自費</div>
+      </a>
+      <a class="ov-card reveal" href="#hoken">
+        <div class="ov-thumb"><img src="素材14/photo_crown_milling.png" alt="保険" /></div>
+        <div class="ov-label"><span class="num">Ⅲ</span>保険</div>
+      </a>
+      <a class="ov-card reveal" href="#denture">
+        <div class="ov-thumb"><img src="素材14/photo_denture.png" alt="デンチャー" /></div>
+        <div class="ov-label"><span class="num">Ⅳ</span>デンチャー</div>
       </a>
     </div>
   </div>
 </section>
+
+<!-- Ⅰ IOS -->
+<section class="cat-detail" id="ios" data-screen-label="IOS">
+  <img src="素材14/blob_soft1.png" alt="" class="cd-deco blob-tr" />
+  <img src="素材14/dotgrid_top.png" alt="" class="cd-deco dots-tr" />
+  <img src="素材14/dotgrid_bottom.png" alt="" class="cd-deco dots-bl" />
+  <div class="wrap">
+    <span class="sec-label reveal">DIGITAL</span>
+    <div class="cat-header reveal">
+      <img src="素材15/s1_ios_badge_num.png" alt="Ⅰ" class="cat-badge" />
+      <h2 class="cat-title">IOS<span class="sub">（口腔内スキャナー対応）</span></h2>
+      <img src="素材15/s1_ios_pill.png" alt="IOS対応" class="cat-pill" />
+    </div>
+    <div class="detail-card reveal">
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">e.max<span class="rsub">（プレス法）</span></div>
+        <div class="r-items">S-e.max／インレー／アンレー／ステイン仕上げ（臼歯部・前歯部）／レイヤリング仕上げ</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">ジルコニア</div>
+        <div class="r-items">S-ジルコニア／インレー／アンレー／ステイン仕上げ（臼歯部・前歯部）／レイヤリング仕上げ</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">ハイブリッド</div>
+        <div class="r-items">前歯部／小臼歯／大臼歯／小臼歯インレー／大臼歯インレー</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">インプラント</div>
+        <div class="r-items">ジルコニア（ステイン法）／ジルコニア（レイヤリング法）／スクリュー固定 接着加工／カスタムアバットメント<span class="note">（要相談）</span>／既成アバットメント<span class="note">（要相談）</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ⅱ 自費 -->
+<section class="cat-detail" id="jihi" data-screen-label="Jihi">
+  <img src="素材14/blob_soft1.png" alt="" class="cd-deco blob-tr" />
+  <img src="素材14/dotgrid_top.png" alt="" class="cd-deco dots-tr" />
+  <img src="素材14/dotgrid_bottom.png" alt="" class="cd-deco dots-bl" />
+  <div class="wrap">
+    <span class="sec-label reveal">PREMIUM</span>
+    <div class="cat-header reveal">
+      <img src="素材15/s2_jihi_badge_num.png" alt="Ⅱ" class="cat-badge" />
+      <h2 class="cat-title">自費</h2>
+    </div>
+    <div class="detail-card reveal">
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">e.max</div>
+        <div class="r-items">S-e.max／インレー／アンレー／ステイン仕上げ（臼歯部・前歯部）／レイヤリング仕上げ</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">ジルコニア</div>
+        <div class="r-items">S-ジルコニア／インレー／アンレー／ステイン仕上げ（臼歯部・前歯部）／レイヤリング仕上げ</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">プリンター模型</div>
+        <div class="r-items">片側／両側</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ⅲ 保険 -->
+<section class="cat-detail" id="hoken" data-screen-label="Hoken">
+  <img src="素材14/blob_soft1.png" alt="" class="cd-deco blob-tr" />
+  <img src="素材14/dotgrid_top.png" alt="" class="cd-deco dots-tr" />
+  <img src="素材14/dotgrid_bottom.png" alt="" class="cd-deco dots-bl" />
+  <div class="wrap">
+    <span class="sec-label reveal">INSURANCE</span>
+    <div class="cat-header reveal">
+      <img src="素材15/s3_hoken_badge_num.png" alt="Ⅲ" class="cat-badge" />
+      <h2 class="cat-title">保険</h2>
+    </div>
+    <div class="detail-card reveal">
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">CAD/CAM<span class="rsub">（GCブロック）</span></div>
+        <div class="r-items">CAD/CAMインレー（小臼歯・大臼歯）／CAD/CAM冠（小臼歯・大臼歯・前歯）／PEEK冠</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">冠・前装冠</div>
+        <div class="r-items">FMC（全部金属冠）／3-4冠・4-5冠／チタンクラウン／チタン前装冠／硬質レジン前装冠</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">コア<span class="rsub">（支台築造）</span></div>
+        <div class="r-items">メタルコア／ファイバーコア（ポスト1本・2本）</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">その他</div>
+        <div class="r-items">インレー／テンポラリークラウン／ナイトガード</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ⅳ デンチャー -->
+<section class="cat-detail" id="denture" data-screen-label="Denture">
+  <img src="素材14/blob_soft1.png" alt="" class="cd-deco blob-tr" />
+  <img src="素材14/dotgrid_top.png" alt="" class="cd-deco dots-tr" />
+  <img src="素材14/dotgrid_bottom.png" alt="" class="cd-deco dots-bl" />
+  <div class="wrap">
+    <span class="sec-label reveal">DENTURE</span>
+    <div class="cat-header reveal">
+      <img src="素材15/s4_denture_badge_num.png" alt="Ⅳ" class="cat-badge" />
+      <h2 class="cat-title">デンチャー</h2>
+    </div>
+    <div class="detail-card reveal">
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">義歯・配列<span class="rsub">（レジン床）</span></div>
+        <div class="r-items">配列完成（1〜4歯／5〜8歯／9〜11歯／12歯以上）／全部床義歯</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">クラスプ・バー・その他</div>
+        <div class="r-items">エーカース／双歯鉤／単鉤／両翼レスト付／両翼鉤／コンビネーション／バー／レストのみ／保持装置／補強線</div>
+      </div>
+      <div class="detail-row">
+        <img src="素材15/s1_ios_icon1.png" alt="" class="r-icon" />
+        <div class="r-name">トレー・咬合堤</div>
+        <div class="r-items">個人トレー／ロウ堤／WAXロウ堤</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 料金・お問い合わせ -->
+<section class="inquiry" data-screen-label="Inquiry">
+  <div class="wrap">
+    <div class="box reveal">
+      <img class="deco deco-dot-tr" src="素材16/dotgrid1.png" alt="" aria-hidden="true">
+      <img class="deco deco-dot-bl" src="素材16/dotgrid2.png" alt="" aria-hidden="true">
+      <div class="copy">
+        <div class="t">料金・納期・お見積りは<br>お気軽にお問い合わせください</div>
+        <p class="sub">技工物のご相談・新規お取引のご相談も歓迎</p>
+      </div>
+      <a class="btn-contact-header inquiry-btn" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせ
+      </a>
+    </div>
+  </div>
+</section>
+
 
 <!-- FOOTER -->
 <footer data-screen-label="Footer">
@@ -817,19 +919,20 @@
     <div>
       <h5>サービス</h5>
       <ul>
-        <li><a href="products.html">オールセラミック</a></li>
-        <li><a href="products.html">インプラント</a></li>
-        <li><a href="products.html">義歯</a></li>
-        <li><a href="products.html">矯正装置</a></li>
+        <li><a href="products.html#ios">IOS（口腔内スキャナー対応）</a></li>
+        <li><a href="products.html#jihi">自費</a></li>
+        <li><a href="products.html#hoken">保険</a></li>
+        <li><a href="products.html#denture">デンチャー</a></li>
       </ul>
     </div>
     <div>
       <h5>会社情報</h5>
       <ul>
-        <li><a href="about.html">私たちについて</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="products.html">製品紹介</a></li>
         <li><a href="flow.html">ご注文の流れ</a></li>
+        <li><a href="delivery-calendar.html">納期カレンダー</a></li>
         <li><a href="#">採用情報</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
       </ul>
     </div>
     <div>
