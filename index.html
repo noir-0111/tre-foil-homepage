@@ -1323,13 +1323,14 @@
     .logo .brand-name { font-size: 11.5px; }
     .header-inner { padding: 10px 14px; }
     .wrap { padding: 0 16px; }
-    /* リード文：折り返して見切れないように（マーカーは行ごとの淡い塗りに） */
-    .hero-lead { font-size: 14.5px; }
+    /* リード文：折り返しつつ、マーカーは「文字幅・文字の下」だけに掛ける */
+    .hero-lead { font-size: 15px; line-height: 2.2; }
     .hero-lead .lead-line {
-      display: block; white-space: normal; width: auto; max-width: 100%;
-      background-image: linear-gradient(rgba(79,184,163,0.16), rgba(79,184,163,0.16));
+      display: inline; white-space: normal; width: auto; max-width: none;
+      -webkit-box-decoration-break: clone; box-decoration-break: clone;
+      background-image: linear-gradient(transparent 60%, rgba(79,184,163,0.34) 60%, rgba(79,184,163,0.34) 90%, transparent 90%);
       background-size: 100% 100%;
-      padding: 1px 4px; margin-bottom: 5px;
+      padding: 0 1px; margin: 0;
     }
     /* CTAボタン：横並び→縦並び・同サイズ */
     .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
