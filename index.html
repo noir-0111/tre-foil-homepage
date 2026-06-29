@@ -709,9 +709,16 @@
   .about-grid {
     display: grid;
     grid-template-columns: 1.15fr 1fr;
-    gap: 72px;
+    grid-template-areas:
+      "photo head"
+      "photo body";
+    column-gap: 72px;
+    row-gap: 0;
     align-items: center;
   }
+  .about-photo-wrap { grid-area: photo; }
+  .about-head { grid-area: head; align-self: end; }
+  .about-body { grid-area: body; align-self: start; }
   /* photo + mint blob behind */
   .about-photo-wrap { position: relative; }
   .about-photo-wrap::before {
@@ -1060,6 +1067,31 @@
     animation: gallerySlide 40s linear infinite;
   }
   .gallery:hover .gallery-track { animation-play-state: paused; }
+  .gallery-track.is-paused { animation-play-state: paused; }
+  .gallery-item img { cursor: zoom-in; }
+  /* 拡大表示（ライトボックス） */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(20,28,38,0.9);
+    display: none; align-items: center; justify-content: center;
+    padding: 24px; cursor: zoom-out;
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .lightbox.open { display: flex; opacity: 1; }
+  /* 拡大表示中はヘッダー（backdrop-filter）を隠して全面を覆う */
+  body.lb-open .site-header { visibility: hidden; }
+  .lightbox img {
+    max-width: 94%; max-height: 86%;
+    border-radius: 14px; box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    object-fit: contain;
+  }
+  .lightbox-close {
+    position: absolute; top: 18px; right: 20px;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255,255,255,0.16); color: #fff;
+    border: none; font-size: 26px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
   .gallery-item {
     flex: 0 0 auto;
     width: 240px;
@@ -1249,8 +1281,16 @@
         "ctas";
       row-gap: 32px;
     }
-    .hero-text, .hero-collage, .hero-ctas { align-self: stretch; }
-    .about-grid { grid-template-columns: 1fr; gap: 44px; }
+    .hero-text, .hero-ctas { align-self: stretch; }
+    .hero-collage { align-self: center; width: min(92%, 400px); margin: 8px auto 0; }
+    .about-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas: "head" "photo" "body";
+      column-gap: 0; row-gap: 28px;
+    }
+    .about-head { align-self: stretch; }
+    .about-body { align-self: stretch; }
+    .about-content p { margin-bottom: 28px; }
     .about-content h2 { font-size: 30px; }
     .about-tooth { width: 120px; opacity: 0.9; bottom: 4%; right: 6%; }
     h1.hero-title { font-size: 36px; }
@@ -1283,6 +1323,30 @@
     .logo .brand-name { font-size: 11.5px; }
     .header-inner { padding: 10px 14px; }
     .wrap { padding: 0 16px; }
+    /* リード文：折り返して見切れないように（マーカーは行ごとの淡い塗りに） */
+    .hero-lead { font-size: 14.5px; }
+    .hero-lead .lead-line {
+      display: block; white-space: normal; width: auto; max-width: 100%;
+      background-image: linear-gradient(rgba(79,184,163,0.16), rgba(79,184,163,0.16));
+      background-size: 100% 100%;
+      padding: 1px 4px; margin-bottom: 5px;
+    }
+    /* CTAボタン：横並び→縦並び・同サイズ */
+    .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
+    .hero-ctas .btn { width: 100%; justify-content: center; padding: 16px 24px; }
+
+    /* PRODUCTS 見出し・サブを1行に収まりやすく */
+    .products .p-title { font-size: 19px; line-height: 1.5; }
+    .products .p-sub { font-size: 12px; }
+    /* 製品カードは1カラムにして文言・ボタンの不自然な改行を解消 */
+    .products-grid { grid-template-columns: 1fr; gap: 16px; }
+    .product-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .product-card .img-wrap { width: 100%; max-width: 300px; }
+    .product-card h3 { font-size: 17px; }
+    .product-card p { min-height: 0; font-size: 13.5px; }
+    .product-card .more { white-space: nowrap; }
+    /* ロゴマークを「私たちについて」ボタンと同じ高さへ（位置は描画で微調整） */
+    .about-tooth { width: 96px; right: 5%; bottom: 9%; }
   }
 </style>
 </head>
@@ -1379,10 +1443,12 @@
         <img src="gallery/gallery1.jpg" alt="顕微鏡で精密な技工物を製作する様子" />
       </div>
     </div>
-    <div class="about-content reveal">
+    <div class="about-content about-head reveal">
       <span class="eyebrow teal"><span class="lbl">ABOUT US</span><span class="line"></span><span class="dot"></span></span>
       <h2>信頼される技工所で<br/>あり続けるために</h2>
       <div class="h2-underline"></div>
+    </div>
+    <div class="about-content about-body reveal">
       <p>
         私たちは、歯科技術の一端を担うパートナーとして、<br/>
         常に最新の技工と品質の追求を怠りません。<br/>
@@ -1589,6 +1655,12 @@
   </div>
 </section>
 
+<!-- ギャラリー拡大表示（タップで開く） -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="拡大画像">
+  <button class="lightbox-close" aria-label="閉じる">×</button>
+  <img src="" alt="" />
+</div>
+
 
 <!-- ============ FOOTER ============ -->
 <footer data-screen-label="Footer">
@@ -1653,6 +1725,34 @@
     });
   }
   if (menuBackdrop) menuBackdrop.addEventListener("click", closeMenu);
+
+  // ギャラリー：タップで拡大、閉じると横スクロール再開
+  (function () {
+    const track = document.querySelector(".gallery-track");
+    const lb = document.getElementById("lightbox");
+    if (!track || !lb) return;
+    const lbImg = lb.querySelector("img");
+    function openLb(src, alt) {
+      lbImg.src = src; lbImg.alt = alt || "";
+      lb.classList.add("open");
+      lb.setAttribute("aria-hidden", "false");
+      track.classList.add("is-paused");      // スクロール停止
+      document.body.classList.add("lb-open");
+      document.body.style.overflow = "hidden";
+    }
+    function closeLb() {
+      lb.classList.remove("open");
+      lb.setAttribute("aria-hidden", "true");
+      track.classList.remove("is-paused");    // スクロール再開（また横に動く）
+      document.body.classList.remove("lb-open");
+      document.body.style.overflow = "";
+    }
+    document.querySelectorAll(".gallery-item img").forEach(img => {
+      img.addEventListener("click", () => openLb(img.currentSrc || img.src, img.alt));
+    });
+    lb.addEventListener("click", closeLb);
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && lb.classList.contains("open")) closeLb(); });
+  })();
 </script>
 </body>
 </html>

@@ -919,6 +919,15 @@
     line-height: 2.15;
     margin: 0 0 32px;
   }
+  /* 3者を色マーカーで強調（凡例の黄・赤・青と対応） */
+  .ls-content .mk-y, .ls-content .mk-r, .ls-content .mk-b {
+    font-weight: 700; color: var(--ink);
+    background-repeat: no-repeat; background-size: 100% 100%;
+    padding: 0 2px; border-radius: 2px;
+  }
+  .ls-content .mk-y { background-image: linear-gradient(transparent 58%, rgba(245,180,0,0.45) 58%); }
+  .ls-content .mk-r { background-image: linear-gradient(transparent 58%, rgba(226,69,60,0.32) 58%); }
+  .ls-content .mk-b { background-image: linear-gradient(transparent 58%, rgba(74,144,226,0.32) 58%); }
   .ls-meanings { display: flex; gap: 10px; flex-wrap: nowrap; align-items: center; }
   .ls-meaning {
     display: inline-flex; align-items: center; gap: 9px; white-space: nowrap;
@@ -1270,6 +1279,11 @@
     .header-inner { padding: 10px 14px; }
     .wrap { padding: 0 16px; }
     .page-hero .hero-inner { padding: 0 16px; }
+    /* creed文を折り返して画面外へのはみ出しを解消（写真の見切れも同時に解決） */
+    .hero-text h1 { font-size: 27px; white-space: normal; }
+    .hero-text .creed { font-size: 15.5px; }
+    .hero-text .creed .line { display: block; white-space: normal; clip-path: none; }
+    .ls-content h2 { font-size: 29px; }
   }
 </style>
 </head>
@@ -1373,7 +1387,7 @@
         <span class="eyebrow">MESSAGE</span>
         <h2>代表メッセージ</h2>
         <div class="message-text">
-          <p class="lead"><span class="lead-typing">こんにちは！歯科技工所tre-foil代表の大園 鎮正です</span></p>
+          <p class="lead"><span class="lead-typing">こんにちは！歯科技工所tre-foil</span><br><span class="lead-typing">代表の大園 鎮正です</span></p>
           <p><span class="mk">当社は歯科技工所として二十余年、地域の歯科医院の先生方とともに、患者さんのお口元を支える仕事を続けてまいりました。</span>メタルボンドやe.maxプレス、インレーまで、一つひとつの補綴物の向こうには<span class="mk">必ず「その歯で噛み、笑う人」がいます。</span>だからこそ私たちは、目に見えない内部の適合や咬み合わせにこそ手を抜かないことを、何より大切にしてきました。</p>
           <p>技工は、先生方の治療があって初めて患者さんに届く仕事です。私たちはその一端を担う者として、<span class="mk">確かな品質と、安心してお任せいただける対応で応えたいと考えています。</span></p>
           <p>掲げているのは、<span class="mk">「誠実に、妥協なく、笑顔のために。」</span>という言葉です。誠実であること、技術に妥協しないこと、そしてその先にある誰かの笑顔のために働くこと。これは、<span class="mk">未来の自分が胸を張れる仕事をしたい</span>という、私自身への約束でもあります。</p>
@@ -1402,8 +1416,8 @@
       <div class="ls-content reveal">
         <h2>3者のつながりで、<br/>患者さんの笑顔を実現する</h2>
         <p>
-          ロゴのマークには、患者様・歯科医の先生・<br/>
-          私たちtre-foilの3者が関わり、<br/>
+          ロゴのマークには、<span class="mk-y">患者様</span>・<span class="mk-r">歯科医の先生</span>・<br/>
+          <span class="mk-b">私たちtre-foil</span>の3者が関わり、<br/>
           互いにバランスを取りながら、<br/>
           患者さんの幸せを実現したいという<br/>
           想いが込められています。
