@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="株式会社tre-foil" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
     --blue: #4a90e2;
@@ -502,6 +502,506 @@
     .header-inner { padding: 10px 14px; }
     .wrap { padding: 0 16px; }
   }
+
+  /* ============ NEW FLOW FIRST-VIEW ============ */
+  .fv {
+    position: relative;
+    overflow: hidden;
+    padding: 28px 0 4px;
+    background:
+      radial-gradient(120% 80% at 85% 0%, rgba(110,201,184,0.06) 0%, rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, #ffffff 0%, #f7fbfd 100%);
+  }
+  .fv-deco { position: absolute; pointer-events: none; z-index: 0; }
+  .fv-deco.blob   { width: 230px; top: -36px; left: -46px; opacity: .9; }
+  .fv-deco.c-grad { width: 150px; top: 150px; right: 9%; opacity: .85; }
+  .fv-deco.c-green{ width: 22px;  top: 320px; left: 6.5%; }
+  .fv-deco.c-out-b{ width: 120px; top: 96px;  right: 2.5%; opacity: .8; }
+  .fv-deco.c-out-g{ width: 60px;  top: 366px; left: 9%; opacity: .8; }
+  .fv-deco.dot-g  { width: 96px;  top: 300px; right: 6%; opacity: .9; }
+  .fv-deco.dot-b  { width: 12px;  top: 250px; left: 5%; }
+  .fv-deco.spark  { width: 60px;  top: 96px;  left: 40%; opacity: .95; }
+
+  .fv-top {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1.12fr 0.8fr;
+    gap: 24px;
+    align-items: center;
+    min-height: 360px;
+  }
+  .fv-copy { padding-top: 6px; }
+  .fv-script {
+    font-family: "Caveat", cursive;
+    font-size: 33px;
+    font-weight: 600;
+    color: var(--teal-deep);
+    letter-spacing: 0.01em;
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  .fv-copy h1 {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 62px;
+    font-weight: 900;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    margin: 0 0 22px;
+    line-height: 1.12;
+  }
+  .fv-sub {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    margin: 0 0 16px;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  .fv-sub .accent-blue { color: var(--blue); }
+  .fv-note {
+    font-size: 15px;
+    color: var(--ink-2);
+    letter-spacing: 0.03em;
+    margin: 0;
+    line-height: 1.7;
+  }
+  .fv-note .accent-teal { color: var(--teal-deep); font-weight: 700; }
+
+  /* hero photos — two overlapping circles */
+  .fv-photos { position: relative; height: 380px; }
+  .fv-photos .ph {
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #eef3f7;
+  }
+  .fv-photos .ph img { width: 100%; height: 100%; object-fit: cover; }
+  .fv-photos .ph-big {
+    width: 300px; height: 300px;
+    top: 12px; left: 50px;
+    box-shadow: 0 24px 50px rgba(45,58,74,0.16);
+  }
+  .fv-photos .ph-small {
+    width: 188px; height: 188px;
+    top: 188px; left: 256px;
+    box-shadow: 0 18px 40px rgba(45,58,74,0.18);
+  }
+  .fv-photos .ph-ring {
+    position: absolute;
+    width: 86px; height: 86px;
+    border: 2px solid rgba(74,144,226,0.30);
+    border-radius: 50%;
+    top: 18px; left: 312px;
+  }
+
+  /* ===== wavy step path ===== */
+  .fv-steps {
+    position: relative; z-index: 2;
+    margin-top: 4px;
+    height: 300px;
+  }
+  .fv-steps .path-svg {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+  }
+  .fv-node {
+    position: absolute;
+    width: 150px;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
+  }
+  .fv-node .badge {
+    width: 54px; height: 54px;
+    margin: -45px auto 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    background: #fff;
+    border: 2.5px solid #bfe6dd;
+    border-radius: 50%;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--ink);
+    box-shadow: 0 5px 12px rgba(74,144,226,0.12);
+  }
+  .fv-node .dash {
+    width: 0; height: 12px;
+    margin: 5px auto 3px;
+    border-left: 1.6px dashed rgba(120,170,210,0.5);
+  }
+  .fv-node .ic {
+    width: 46px; height: 46px;
+    margin: 0 auto 9px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fv-node .ic img { width: 100%; height: 100%; object-fit: contain; }
+  .fv-node .lbl {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    line-height: 1.35;
+  }
+
+  /* CTA buttons */
+  .fv-cta {
+    position: relative; z-index: 2;
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    padding: 44px 0 56px;
+  }
+  .fv-cta a {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 17px 40px;
+    border-radius: 999px;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: #fff;
+    transition: transform .15s, box-shadow .2s;
+  }
+  .fv-cta a svg.lead { width: 20px; height: 20px; }
+  .fv-cta a .arr { font-size: 18px; margin-left: 2px; }
+  .fv-cta .c-green { background: #18b85f; box-shadow: 0 12px 26px rgba(24,184,95,0.32); }
+  .fv-cta .c-blue  { background: #4a90e2; box-shadow: 0 12px 26px rgba(74,144,226,0.32); }
+  .fv-cta a:hover { transform: translateY(-2px); }
+
+  @media (max-width: 960px) {
+    .fv-top { grid-template-columns: 1fr; gap: 6px; min-height: 0; }
+    .fv-copy { text-align: center; }
+    .fv-copy h1 { font-size: 44px; }
+    .fv-sub { font-size: 19px; white-space: normal; }
+    .fv-script { font-size: 24px; }
+    .fv-photos { height: 320px; max-width: 420px; margin: 8px auto 0; }
+    .fv-photos .ph-big { left: 28px; }
+    .fv-photos .ph-small { left: 220px; }
+    .fv-deco.spark, .fv-deco.dot-b, .fv-deco.c-green, .fv-deco.c-out-g { display: none; }
+    /* steps become a 2-col stacked grid on mobile */
+    .fv-steps { height: auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 6px; margin-top: 22px; }
+    .fv-steps .path-svg { display: none; }
+    .fv-node { position: static; transform: none; width: auto; }
+    .fv-node .badge { margin: 0 auto; }
+    .fv-node .dash { display: none; }
+    .fv-cta { flex-direction: column; align-items: center; gap: 14px; padding-bottom: 40px; }
+    .fv-cta a { width: 100%; max-width: 320px; justify-content: center; }
+  }
+  @media (max-width: 540px) {
+    .fv-copy h1 { font-size: 34px; }
+    .fv-sub { font-size: 17px; }
+    .fv-script { font-size: 20px; }
+    .fv-steps { grid-template-columns: repeat(2, 1fr); }
+    .fv-photos { height: 260px; }
+    .fv-photos .ph-big { width: 200px; height: 200px; left: 12px; }
+    .fv-photos .ph-small { width: 132px; height: 132px; top: 128px; left: 150px; }
+    .fv-photos .ph-ring { display: none; }
+  }
+
+  /* ============ FV ANIMATIONS ============ */
+  /* sequential reveal of step nodes (fade only — keep base translateX(-50%) centering) */
+  .fv-node {
+    opacity: 0;
+    transition: opacity .55s ease;
+  }
+  .fv-steps.revealed .fv-node { opacity: 1; }
+
+  /* badge / icon / label active highlight (travelling left→right) */
+  .fv-node .badge {
+    transition: background .4s ease, color .4s ease, border-color .4s ease,
+                transform .4s ease, box-shadow .4s ease;
+  }
+  .fv-node.active .badge {
+    background: linear-gradient(135deg, #6ec9b8 0%, #4a90e2 100%);
+    border-color: transparent;
+    color: #fff;
+    transform: scale(1.16);
+    box-shadow: 0 10px 22px rgba(74,144,226,0.38);
+  }
+  .fv-node .badge::after {
+    content: "";
+    position: absolute; inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(74,144,226,0.45);
+    opacity: 0;
+    transform: scale(.6);
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .fv-node.active .badge::after { opacity: 1; transform: scale(1); }
+  .fv-node .ic  { transition: transform .4s ease; }
+  .fv-node.active .ic  { transform: translateY(-5px) scale(1.12); }
+  /* node 8: nudge its icon to the lower-left */
+  .fv-node.n8 .ic { position: relative; left: -11px; top: 7px; }
+  .fv-node .lbl { transition: color .4s ease; }
+  .fv-node.active .lbl { color: var(--blue-deep); }
+
+  /* arrow at end of the line (fades in after the line draws) */
+  .flow-arrow { opacity: 0; transition: opacity .6s ease; }
+
+  /* floating decorations */
+  @keyframes fvFloat  { 0%,100% { transform: translate(0,0); }      50% { transform: translate(-8px,-12px); } }
+  @keyframes fvDrift  { 0%,100% { transform: translate(0,0); }      50% { transform: translate(10px,-8px); } }
+  @keyframes fvPulse  { 0%,100% { transform: scale(1);   opacity: .85; } 50% { transform: scale(1.14); opacity: 1; } }
+  @keyframes fvSpark  { 0%,100% { transform: scale(.88) rotate(0);  opacity: .45; } 50% { transform: scale(1.12) rotate(10deg); opacity: 1; } }
+  @keyframes fvBob    { 0%,100% { transform: translateY(0); }       50% { transform: translateY(-11px); } }
+
+  .fv-deco.blob    { animation: fvFloat 9s  ease-in-out infinite; }
+  .fv-deco.c-grad  { animation: fvDrift 11s ease-in-out infinite; }
+  .fv-deco.c-out-b { animation: fvFloat 10s ease-in-out infinite; }
+  .fv-deco.c-out-g { animation: fvPulse 6s  ease-in-out infinite; }
+  .fv-deco.c-green { animation: fvPulse 4.5s ease-in-out infinite; }
+  .fv-deco.dot-g   { animation: fvDrift 8s  ease-in-out infinite; }
+  .fv-deco.dot-b   { animation: fvPulse 5s  ease-in-out infinite; }
+  .fv-deco.spark   { animation: fvSpark 3.6s ease-in-out infinite; }
+
+  .fv-photos .ph-big   { animation: fvBob 8s ease-in-out infinite; }
+  .fv-photos .ph-small { animation: fvBob 7s ease-in-out infinite .4s reverse; }
+  .fv-photos .ph-ring  { animation: fvPulse 5s ease-in-out infinite; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fv-deco, .fv-photos .ph-big, .fv-photos .ph-small, .fv-photos .ph-ring { animation: none !important; }
+    .fv-node { opacity: 1 !important; transform: none !important; }
+    .flow-arrow { opacity: 1 !important; }
+  }
+
+  /* ============ STEP DETAIL (01–03) ============ */
+  .sd {
+    position: relative;
+    overflow: hidden;
+    padding: 78px 0 88px;
+    background: linear-gradient(180deg, #f7fbfd 0%, #eef5fb 100%);
+  }
+  .sd-deco { position: absolute; pointer-events: none; z-index: 0; }
+  .sd-deco.blob-tl { width: 240px; top: -46px; left: -54px; }
+  .sd-deco.ring-l  { width: 60px;  top: 156px; left: 64px;  opacity: .85; }
+  .sd-deco.dot-l   { width: 13px;  top: 128px; left: 252px; }
+  .sd-deco.grid-tr { width: 98px;  top: 120px; right: 74px; opacity: .9; }
+  .sd-deco.blob-bl { width: 210px; bottom: -56px; left: -46px; opacity: .7; }
+  .sd-deco.circ-r  { width: 156px; top: 44%; right: -46px; opacity: .65; }
+
+  .sd-head { position: relative; z-index: 1; text-align: center; margin-bottom: 48px; padding: 0 24px; }
+  .sd-eyebrow {
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    letter-spacing: .34em; font-size: 13px; color: var(--teal-deep);
+    display: block; margin-bottom: 14px;
+  }
+  .sd-head h2 {
+    font-size: 40px; font-weight: 900; color: var(--ink);
+    letter-spacing: .05em; margin: 0 0 18px;
+  }
+  .sd-head h2 .range {
+    background: linear-gradient(90deg, #15b8a6 0%, #4a90e2 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .sd-head .sub { font-size: 17px; color: var(--ink-2); margin: 0; letter-spacing: .02em; }
+  .sd-head .sub .em { color: var(--teal-deep); font-weight: 700; }
+
+  .sd-list {
+    position: relative; z-index: 1;
+    max-width: 1180px; margin: 0 auto; padding: 0 32px;
+    display: flex; flex-direction: column; gap: 26px;
+  }
+  .sd-card {
+    position: relative; overflow: hidden;
+    background: #fff; border-radius: 22px;
+    box-shadow: 0 14px 38px rgba(45,58,74,0.08);
+    display: grid; grid-template-columns: 200px 132px 34px 1fr; align-items: center;
+    min-height: 188px; padding: 26px 44px 26px 0;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .sd-card:hover { transform: translateY(-3px); box-shadow: 0 20px 44px rgba(45,58,74,0.12); }
+  .sd-notch {
+    position: absolute; left: 0; top: 0; height: 100%; width: 300px;
+    object-fit: cover; object-position: left center; z-index: 0;
+  }
+  .sd-num {
+    position: relative; z-index: 1; justify-self: center;
+    width: 96px; height: 96px; border-radius: 50%; background: #fff;
+    box-shadow: 0 8px 22px rgba(45,58,74,0.12);
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Montserrat", sans-serif; font-weight: 700; font-size: 34px;
+  }
+  .sd-icon { position: relative; z-index: 1; justify-self: center; width: 86px; }
+  .sd-icon > img:first-child { width: 74px; height: auto; margin: 0 auto; display: block; }
+  .sd-spark { position: absolute; width: 28px; top: -8px; right: -2px; }
+  .sd-divider {
+    position: relative; z-index: 1; justify-self: center;
+    width: 4px; height: 100px; color: #3fc6b4;
+    background-image: radial-gradient(circle, currentColor 1.7px, transparent 2.1px);
+    background-size: 4px 15px; background-repeat: repeat-y;
+  }
+  .sd-body { position: relative; z-index: 1; padding-left: 10px; padding-right: 24px; }
+  .sd-body h3 { font-size: 28px; font-weight: 700; color: var(--ink); margin: 0 0 14px; letter-spacing: .04em; }
+  .sd-body p  { font-size: 17px; color: var(--ink-2); line-height: 1.95; margin: 0; }
+
+  .sd-c1 .sd-num { color: #18b29a; } .sd-c1 .sd-divider { color: #3fc6b4; }
+  .sd-c2 .sd-num { color: #15b1ac; } .sd-c2 .sd-divider { color: #46c6cf; }
+  .sd-c3 .sd-num { color: #4a90e2; } .sd-c3 .sd-divider { color: #6aaef0; }
+
+  .sd-deco.blob-tl, .sd-deco.blob-bl { animation: fvFloat 10s ease-in-out infinite; }
+  .sd-deco.circ-r  { animation: fvDrift 12s ease-in-out infinite; }
+  .sd-deco.ring-l  { animation: fvPulse 6s ease-in-out infinite; }
+  .sd-deco.grid-tr { animation: fvDrift 9s ease-in-out infinite; }
+  .sd-spark { animation: fvSpark 3.6s ease-in-out infinite; }
+
+  @media (max-width: 960px) {
+    .sd { padding: 62px 0 66px; }
+    .sd-head h2 { font-size: 30px; }
+    .sd-head .sub { font-size: 15px; }
+    .sd-card {
+      grid-template-columns: 104px 86px 1fr;
+      min-height: 0; padding: 22px 28px 22px 8px; column-gap: 10px;
+    }
+    .sd-notch { width: 168px; }
+    .sd-divider { display: none; }
+    .sd-num { width: 74px; height: 74px; font-size: 27px; }
+    .sd-icon { width: 70px; }
+    .sd-icon > img:first-child { width: 58px; }
+    .sd-spark { width: 22px; }
+    .sd-body h3 { font-size: 20px; margin-bottom: 9px; }
+    .sd-body p { font-size: 14px; line-height: 1.85; }
+    .sd-deco.circ-r, .sd-deco.dot-l { display: none; }
+  }
+  @media (max-width: 540px) {
+    .sd-head h2 { font-size: 24px; }
+    .sd-card { grid-template-columns: 72px 1fr; padding: 20px 20px 20px 6px; }
+    .sd-icon { display: none; }
+    .sd-notch { width: 120px; }
+    .sd-num { width: 60px; height: 60px; font-size: 22px; }
+    .sd-body { padding-left: 4px; }
+  }
+
+  /* ============ CONTACT FORM ============ */
+  .cf {
+    position: relative; overflow: hidden;
+    padding: 86px 0 96px;
+    background: linear-gradient(180deg, #f7fbfd 0%, #eef5fb 100%);
+  }
+  .cf-deco { position: absolute; pointer-events: none; z-index: 0; }
+  .cf-deco.blob-tl { width: 250px; top: -44px; left: -54px; }
+  .cf-deco.ring-l  { width: 58px;  top: 300px; left: 70px; opacity: .85; }
+  .cf-deco.dot-l   { width: 13px;  top: 250px; left: 92px; }
+  .cf-deco.grid-bl { width: 96px;  bottom: 150px; left: 250px; opacity: .85; }
+  .cf-deco.blob-bl { width: 240px; bottom: -54px; left: -50px; opacity: .8; }
+  .cf-deco.soft-bc { width: 170px; bottom: -40px; left: 560px; opacity: .55; }
+  .cf-deco.ring-r  { width: 58px;  top: 210px; right: 64px; opacity: .8; }
+  .cf-deco.soft-r  { width: 150px; top: 42%; right: -44px; opacity: .5; }
+
+  .cf-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1.06fr; gap: 56px; align-items: center;
+  }
+
+  .cf-intro { position: relative; }
+  .cf-eyebrow {
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    letter-spacing: .34em; font-size: 13px; color: var(--teal-deep);
+    display: inline-block; margin-bottom: 16px;
+  }
+  .cf-spark { position: absolute; width: 52px; top: -6px; left: 200px; }
+  .cf-intro h2 { font-size: 42px; font-weight: 900; color: var(--ink); letter-spacing: .04em; margin: 0 0 22px; line-height: 1.2; }
+  .cf-lead { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.75; margin: 0 0 28px; }
+  .cf-lead .em { color: var(--teal-deep); }
+  .cf-note { font-size: 15px; color: var(--ink-2); line-height: 1.95; margin: 0 0 30px; }
+  .cf-note .em { color: var(--teal-deep); font-weight: 700; }
+
+  .cf-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 470px; }
+  .cf-mini {
+    display: flex; align-items: center; gap: 12px;
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 16px 16px; transition: transform .2s, box-shadow .2s;
+  }
+  .cf-mini:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(45,58,74,.10); }
+  .cf-mini-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .cf-mini-icon.green { background: #e7f8ef; color: #18b85f; }
+  .cf-mini-icon.blue  { background: #e9f1fc; color: #4a90e2; }
+  .cf-mini-icon svg { width: 22px; height: 22px; }
+  .cf-mini-body { flex: 1; min-width: 0; }
+  .cf-mini-body strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .cf-mini.line strong { color: #18b85f; }
+  .cf-mini.form strong { color: #4a90e2; }
+  .cf-mini-body span { font-size: 11px; color: var(--ink-3); line-height: 1.55; }
+  .cf-mini .arr { color: #c0cad7; width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* CTA buttons (stacked) */
+  .cf-cta { display: flex; flex-direction: column; gap: 14px; max-width: 470px; }
+  .cf-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 17px 28px; border-radius: 999px;
+    font-size: 16px; font-weight: 700; letter-spacing: .03em; color: #fff;
+    transition: transform .15s, box-shadow .2s;
+  }
+  .cf-btn svg.lead { width: 20px; height: 20px; }
+  .cf-btn .arr { font-size: 18px; margin-left: 2px; }
+  .cf-btn.green { background: #18b85f; box-shadow: 0 12px 26px rgba(24,184,95,.32); }
+  .cf-btn.blue  { background: #4a90e2; box-shadow: 0 12px 26px rgba(74,144,226,.32); }
+  .cf-btn:hover { transform: translateY(-2px); }
+
+  /* form card */
+  .cf-card {
+    position: relative; z-index: 1;
+    background: #fbfcfe; border: 1px solid #eef2f7; border-radius: 24px;
+    padding: 40px 42px; box-shadow: 0 22px 54px rgba(45,58,74,.09);
+  }
+  .cf-form { display: flex; flex-direction: column; gap: 17px; }
+  .cf-row { display: grid; grid-template-columns: 138px 1fr; align-items: center; gap: 14px; }
+  .cf-row.top { align-items: start; }
+  .cf-row.top > label { padding-top: 12px; }
+  .cf-row > label { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .cf-field {
+    width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
+    background: #fff; border: 1.5px solid #e3e9f0; border-radius: 10px;
+    padding: 12px 14px; transition: border-color .2s, box-shadow .2s;
+  }
+  .cf-field::placeholder { color: #aeb8c4; }
+  .cf-field:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(74,144,226,.12); }
+  textarea.cf-field { min-height: 108px; resize: vertical; line-height: 1.7; }
+  select.cf-field {
+    appearance: none; -webkit-appearance: none; cursor: pointer; color: #aeb8c4;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a96a4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
+  }
+  select.cf-field.filled { color: var(--ink); }
+
+  .cf-divider { border-top: 1px dashed #d4dde8; margin: 10px 0 2px; }
+  .cf-check { display: flex; align-items: center; justify-content: center; gap: 9px; font-size: 13.5px; color: var(--ink-2); }
+  .cf-check input { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+  .cf-check a { color: var(--teal-deep); text-decoration: underline; }
+  .cf-submit {
+    align-self: center; margin-top: 8px; min-width: 300px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: #4a90e2; color: #fff; font-size: 16px; font-weight: 700;
+    border: none; border-radius: 999px; padding: 16px 40px; cursor: pointer;
+    box-shadow: 0 12px 28px rgba(74,144,226,.34); transition: transform .15s, box-shadow .2s;
+  }
+  .cf-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(74,144,226,.44); }
+  .cf-submit svg { width: 18px; height: 18px; }
+  .cf-done { text-align: center; color: var(--teal-deep); font-weight: 700; font-size: 14px; margin: 10px 0 0; }
+
+  .cf-deco.blob-tl, .cf-deco.blob-bl { animation: fvFloat 10s ease-in-out infinite; }
+  .cf-deco.soft-bc, .cf-deco.soft-r  { animation: fvDrift 12s ease-in-out infinite; }
+  .cf-deco.ring-l, .cf-deco.ring-r   { animation: fvPulse 6s ease-in-out infinite; }
+  .cf-spark { animation: fvSpark 3.6s ease-in-out infinite; }
+
+  @media (max-width: 960px) {
+    .cf { padding: 64px 0 70px; }
+    .cf-grid { grid-template-columns: 1fr; gap: 34px; }
+    .cf-intro h2 { font-size: 32px; }
+    .cf-spark { left: auto; right: 20%; }
+    .cf-cards { max-width: none; }
+    .cf-card { padding: 30px 26px; }
+    .cf-deco.soft-r, .cf-deco.grid-bl, .cf-deco.soft-bc { display: none; }
+  }
+  @media (max-width: 540px) {
+    .cf-intro h2 { font-size: 26px; }
+    .cf-lead { font-size: 16px; }
+    .cf-cards { grid-template-columns: 1fr; }
+    .cf-row { grid-template-columns: 1fr; align-items: start; gap: 7px; }
+    .cf-row.top > label { padding-top: 0; }
+    .cf-submit { min-width: 0; width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -531,143 +1031,325 @@
 </header>
 <div class="menu-backdrop"></div>
 
-<div class="wrap breadcrumb">
-  <a href="index.html">ホーム</a><span class="sep">›</span><span class="current">ご注文の流れ</span>
-</div>
+<!-- FIRST VIEW -->
+<section class="fv" data-screen-label="Flow First View">
+  <img src="素材17/s1_blob_wave.png"        alt="" class="fv-deco blob" />
+  <img src="素材17/s1_circle_gradient.png"   alt="" class="fv-deco c-grad" />
+  <img src="素材17/s1_circle_green.png"      alt="" class="fv-deco c-green" />
+  <img src="素材17/s1_circle_outline_blue.png"  alt="" class="fv-deco c-out-b" />
+  <img src="素材17/s1_circle_outline_green.png" alt="" class="fv-deco c-out-g" />
+  <img src="素材17/s1_dotgrid.png"           alt="" class="fv-deco dot-g" />
+  <img src="素材17/s1_dot_blue.png"          alt="" class="fv-deco dot-b" />
+  <img src="素材17/s2_sparkles.png"          alt="" class="fv-deco spark" />
 
-<!-- HERO -->
-<section class="page-hero" data-screen-label="Flow Hero">
-  <div class="deco circ-1"></div>
-  <div class="deco circ-2"></div>
-  <img src="assets6/14.png" alt="" class="deco tooth-line" />
-  <img src="assets6/24.png" alt="" class="deco dot-grid" />
-  <img src="assets6/21.png" alt="" class="deco blob-cluster" />
   <div class="wrap">
-    <span class="eyebrow">FLOW</span>
-    <h1>ご 注 文 の 流 れ</h1>
-    <p class="lead">
-      ご注文から納品までの流れをご案内します。<br/>
-      確かな品質を、スピーディーにお届けするための体制を整えています。
-    </p>
-  </div>
-</section>
-
-<!-- STEPS -->
-<section class="flow-section" data-screen-label="Flow Steps">
-  <div class="wrap">
-    <div class="flow-grid row1">
-      <div class="step reveal">
-        <span class="num">01</span>
-        <div class="icon-circle"><img src="assets6/step-01.png" alt="" /></div>
-        <h4>お問い合わせ</h4>
-        <p>LINEまたはフォームより<br/>お問い合わせください。<br/>ご不明点もお気軽にご相談<br/>いただけます。</p>
+    <!-- top: copy + photos -->
+    <div class="fv-top">
+      <div class="fv-copy">
+        <p class="fv-script">Crafting smiles,&nbsp; Building trust.</p>
+        <h1>ご注文の流れ</h1>
+        <p class="fv-sub">高品質な技工物を、<span class="accent-blue">スムーズ</span>にお届けするために。</p>
+        <p class="fv-note">初めてのご依頼でも、わかりやすく<span class="accent-teal">丁寧</span>にご案内します。</p>
       </div>
-      <div class="step reveal">
-        <span class="num">02</span>
-        <div class="icon-circle"><img src="assets6/step-02.png" alt="" /></div>
-        <h4>お見積り</h4>
-        <p>ご依頼内容を確認し、<br/>お見積りを提出します。<br/>内容にご納得いただけましたら<br/>ご発注をお願いします。</p>
-      </div>
-      <div class="step reveal">
-        <span class="num">03</span>
-        <div class="icon-circle"><img src="assets6/step-03.png" alt="" /></div>
-        <h4>模型・データの送付</h4>
-        <p>模型または口腔内スキャンデータを<br/>ご送付ください。<br/>（デジタルデータの場合は<br/>オンライン送信も可能です）</p>
-      </div>
-      <div class="step reveal">
-        <span class="num">04</span>
-        <div class="icon-circle"><img src="assets6/step-04.png" alt="" /></div>
-        <h4>設計・製作</h4>
-        <p>熟練の技工士が<br/>丁寧に設計・製作を行います。<br/>最新設備を活用し、精度の高い<br/>技工物を製作します。</p>
-      </div>
-      <div class="step reveal">
-        <span class="num">05</span>
-        <div class="icon-circle"><img src="assets6/13.png" alt="" /></div>
-        <h4>品質チェック</h4>
-        <p>厳しい品質基準のもと、<br/>精密な検査・確認を行います。<br/>細部まで徹底したチェックで<br/>品質を保証します。</p>
+      <div class="fv-photos">
+        <div class="ph ph-big"><img src="gallery/hero1.jpg" alt="歯科技工物の模型" /></div>
+        <div class="ph ph-small"><img src="gallery/gallery1.jpg" alt="マイクロスコープによる精密作業" /></div>
+        <span class="ph-ring"></span>
       </div>
     </div>
 
-    <div class="flow-grid row2">
-      <div class="step reveal">
-        <span class="num">06</span>
-        <div class="icon-circle"><img src="assets6/14.png" alt="" /></div>
-        <h4>完成</h4>
+    <!-- wavy step path -->
+    <div class="fv-steps">
+      <svg class="path-svg" viewBox="0 0 1700 300" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="flowline" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0"   stop-color="#7ed0c0" />
+            <stop offset="0.5" stop-color="#9ed3df" />
+            <stop offset="1"   stop-color="#7fb4ec" />
+          </linearGradient>
+        </defs>
+        <path d="M 40,72
+                 C 58.3,73.7 103.7,73 150,82
+                 C 196.3,91 262,113.7 318,126
+                 C 374,138.3 430,152 486,156
+                 C 542,160 598,150 654,150
+                 C 710,150 766,163 822,156
+                 C 878,149 934,120.3 990,108
+                 C 1046,95.7 1102,78.7 1158,82
+                 C 1214,85.3 1270,135 1326,128
+                 C 1382,121 1440.3,57.7 1494,40
+                 C 1547.7,22.3 1622.3,25 1648,22"
+              class="flow-line" fill="none" stroke="url(#flowline)" stroke-width="4.2" stroke-linecap="round" />
+        <path d="M 1632,6 L 1668,18 L 1650,48"
+              class="flow-arrow" fill="none" stroke="#7fb4ec" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+
+      <div class="fv-node" style="left:8.8%;  top:38.0%;">
+        <span class="badge">1</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_chat.png" alt="" /></div>
+        <div class="lbl">お問い合わせ</div>
+      </div>
+      <div class="fv-node" style="left:18.7%; top:50.3%;">
+        <span class="badge">2</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_document_clock.png" alt="" /></div>
+        <div class="lbl">お見積り</div>
+      </div>
+      <div class="fv-node" style="left:28.6%; top:50.7%;">
+        <span class="badge">3</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_box.png" alt="" /></div>
+        <div class="lbl">模型・データの<br/>送付</div>
+      </div>
+      <div class="fv-node" style="left:38.5%; top:52.7%;">
+        <span class="badge">4</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_monitor.png" alt="" /></div>
+        <div class="lbl">設計・製作</div>
+      </div>
+      <div class="fv-node" style="left:48.4%; top:53.5%;">
+        <span class="badge">5</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_clipboard.png" alt="" /></div>
+        <div class="lbl">品質チェック</div>
+      </div>
+      <div class="fv-node" style="left:58.2%; top:37.5%;">
+        <span class="badge">6</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_tooth_sparkle.png" alt="" /></div>
+        <div class="lbl">完成</div>
+      </div>
+      <div class="fv-node" style="left:68.1%; top:29.0%;">
+        <span class="badge">7</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_truck.png" alt="" /></div>
+        <div class="lbl">発送・納品</div>
+      </div>
+      <div class="fv-node n8" style="left:78.0%; top:48.0%;">
+        <span class="badge">8</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_search.png" alt="" /></div>
+        <div class="lbl">ご確認</div>
+      </div>
+      <div class="fv-node" style="left:85.5%; top:20.0%;">
+        <span class="badge">9</span>
+        <span class="dash"></span>
+        <div class="ic"><img src="素材17/s3_icon_heart_hands.png" alt="" /></div>
+        <div class="lbl">アフターフォロー</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="fv-cta">
+      <a class="c-green" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg class="lead" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        お問い合わせはこちら <span class="arr">→</span>
+      </a>
+      <a class="c-blue" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+        <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h6M10 16h6"/></svg>
+        フォームを見る <span class="arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- STEP DETAIL 01-03 -->
+<section class="sd" data-screen-label="Step Detail 01-03">
+  <img src="素材18/s1_blob_wave.png"       alt="" class="sd-deco blob-tl" />
+  <img src="素材18/s1_circle_outline.png"  alt="" class="sd-deco ring-l" />
+  <img src="素材18/s1_dot_small.png"       alt="" class="sd-deco dot-l" />
+  <img src="素材18/s1_dotgrid.png"         alt="" class="sd-deco grid-tr" />
+  <img src="素材18/s2_blob_wave.png"       alt="" class="sd-deco blob-bl" />
+  <img src="素材18/s1_circle_gradient2.png" alt="" class="sd-deco circ-r" />
+
+  <div class="sd-head reveal">
+    <span class="sd-eyebrow">STEP DETAIL</span>
+    <h2>ご注文の流れ 詳細</h2>
+    <p class="sub">お問い合わせからアフターフォローまで、<span class="em">すべての流れ</span>をご案内します。</p>
+  </div>
+
+  <div class="sd-list">
+    <div class="sd-card sd-c1 reveal">
+      <img class="sd-notch" src="素材18/s1_shape_notch1.png" alt="" />
+      <div class="sd-num">01</div>
+      <div class="sd-icon"><img src="素材18/s3_icon_chat.png" alt="" /><img class="sd-spark" src="素材18/s2_sparkle1.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>お問い合わせ</h3>
+        <p>LINEまたはフォームよりお問い合わせください。<br/>ご不明点もお気軽にご相談いただけます。</p>
+      </div>
+    </div>
+
+    <div class="sd-card sd-c2 reveal" style="transition-delay:.1s;">
+      <img class="sd-notch" src="素材18/s2_shape_notch.png" alt="" />
+      <div class="sd-num">02</div>
+      <div class="sd-icon"><img src="素材18/s3_icon_document.png" alt="" /><img class="sd-spark" src="素材18/s2_sparkle2.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>お見積り</h3>
+        <p>ご依頼内容を確認し、お見積りを提出します。<br/>内容にご納得いただけましたらご発注をお願いします。</p>
+      </div>
+    </div>
+
+    <div class="sd-card sd-c3 reveal" style="transition-delay:.2s;">
+      <img class="sd-notch" src="素材18/s1_shape_notch2.png" alt="" />
+      <div class="sd-num">03</div>
+      <div class="sd-icon"><img src="素材18/s3_icon_box.png" alt="" /><img class="sd-spark" src="素材18/s2_sparkle3.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>模型・データの送付</h3>
+        <p>模型または口腔内スキャンデータをご送付ください。<br/>（デジタルデータの場合はオンライン送信も可能です）</p>
+      </div>
+    </div>
+    <div class="sd-card sd-c1 reveal">
+      <img class="sd-notch" src="素材18/s1_shape_notch1.png" alt="" />
+      <div class="sd-num">04</div>
+      <div class="sd-icon"><img src="素材19/s3_icon_monitor1.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>設計・製作</h3>
+        <p>熟練の技工士が丁寧に設計・製作を行います。<br/>最新設備を活用し、精度の高い技工物を製作します。</p>
+      </div>
+    </div>
+
+    <div class="sd-card sd-c2 reveal" style="transition-delay:.1s;">
+      <img class="sd-notch" src="素材18/s2_shape_notch.png" alt="" />
+      <div class="sd-num">05</div>
+      <div class="sd-icon"><img src="素材19/s3_icon_clipboard1.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>品質チェック</h3>
+        <p>厳しい品質基準のもと、精密な検査・確認を行います。<br/>細部まで徹底したチェックで品質を保証します。</p>
+      </div>
+    </div>
+
+    <div class="sd-card sd-c3 reveal" style="transition-delay:.2s;">
+      <img class="sd-notch" src="素材18/s1_shape_notch2.png" alt="" />
+      <div class="sd-num">06</div>
+      <div class="sd-icon"><img src="素材19/s3_icon_tooth1.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>完成</h3>
         <p>品質検査をクリアした<br/>技工物が完成します。</p>
       </div>
-      <div class="step reveal">
-        <span class="num">07</span>
-        <div class="icon-circle"><img src="assets6/step-07.png" alt="" /></div>
-        <h4>発送・納品</h4>
-        <p>丁寧に梱包し、迅速に<br/>発送いたします。<br/>ご指定の方式で納品します。</p>
-      </div>
-      <div class="step reveal">
-        <span class="num">08</span>
-        <div class="icon-circle"><img src="assets6/step-08.png" alt="" /></div>
-        <h4>ご確認</h4>
-        <p>納品物をご確認ください。<br/>ご不明点や調整が必要な場合は<br/>ご連絡をお願いします。</p>
-      </div>
-      <div class="step reveal">
-        <span class="num">09</span>
-        <div class="icon-circle"><img src="assets6/step-09.png" alt="" /></div>
-        <h4>アフターフォロー</h4>
-        <p>納品後も安心のサポート体制で、<br/>継続的にフォローさせて<br/>いただきます。</p>
-      </div>
-      <div class="step" style="visibility:hidden;"></div>
     </div>
-  </div>
-</section>
-
-
-<!-- STRENGTHS -->
-<section class="strengths" data-screen-label="Strengths">
-  <div class="wrap">
-    <div class="strengths-head">
-      <svg class="ic-tooth" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <path d="M12 4c-3 0-5 2-5 5 0 3 1.4 4.7 2.5 7 1 2 1.4 3.5 1.4 5 0 0.5 0.3 1 0.8 1h0.6c0.5 0 0.8-0.5 0.8-1 0-1.5 0.4-3 1.4-5 1.1-2.3 2.5-4 2.5-7 0-3-2-5-5-5z"/>
-        <path d="M16 6 l1 2 l2 0.5 l-1.5 1.5 l0.5 2 l-2 -1 l-2 1 l0.5 -2 l-1.5 -1.5 l2 -0.5 z" stroke="none" fill="currentColor" opacity="0.5"/>
-      </svg>
-      <h2>株式会社tre-foilの強み</h2>
+    <div class="sd-card sd-c1 reveal">
+      <img class="sd-notch" src="素材18/s1_shape_notch1.png" alt="" />
+      <div class="sd-num">07</div>
+      <div class="sd-icon"><img src="素材20/s3_icon_truck.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>発送・納品</h3>
+        <p>丁寧に梱包し、迅速に<br/>発送いたします。</p>
+      </div>
     </div>
-    <div class="strengths-grid">
-      <div class="strength-card reveal">
-        <div class="ic"><img src="assets6/s-clock.png" alt="" /></div>
-        <span class="lbl">スピーディーな対応</span>
-        <p>最新設備と効率的な体制により、<br/>短納期のご要望にも対応します。</p>
+
+    <div class="sd-card sd-c2 reveal" style="transition-delay:.1s;">
+      <img class="sd-notch" src="素材18/s2_shape_notch.png" alt="" />
+      <div class="sd-num">08</div>
+      <div class="sd-icon"><img src="素材20/s3_icon_search.png" alt="" /><img class="sd-spark" src="素材18/s2_sparkle2.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>ご確認</h3>
+        <p>納品物をご確認ください。<br/>ご不明点や調整が必要な場合はご連絡をお願いします。</p>
       </div>
-      <div class="strength-card reveal">
-        <div class="ic"><img src="assets6/s-diamond.png" alt="" /></div>
-        <span class="lbl">高品質な技工物</span>
-        <p>経験豊富な技工士が、細部までこだわり<br/>高品質な技工物を製作します。</p>
-      </div>
-      <div class="strength-card reveal">
-        <div class="ic"><img src="assets6/s-people.png" alt="" /></div>
-        <span class="lbl teal">丁寧なコミュニケーション</span>
-        <p>ご要望をしっかりとヒアリングし、<br/>最適なご提案をいたします。</p>
+    </div>
+
+    <div class="sd-card sd-c3 reveal" style="transition-delay:.2s;">
+      <img class="sd-notch" src="素材18/s1_shape_notch2.png" alt="" />
+      <div class="sd-num">09</div>
+      <div class="sd-icon"><img src="素材20/s3_icon_heart_hands.png" alt="" /></div>
+      <div class="sd-divider"></div>
+      <div class="sd-body">
+        <h3>アフターフォロー</h3>
+        <p>納品後も安心のサポート体制で、<br/>継続的にフォローさせていただきます。</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- LINE INFO BAR -->
-<section class="info-bar" data-screen-label="Line Info">
-  <div class="wrap">
-    <div class="box reveal">
-      <div class="ic">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/>
-        </svg>
+<!-- CONTACT FORM -->
+<section class="cf" id="contact" data-screen-label="Contact Form">
+  <img src="素材20/s1_blob.png"           alt="" class="cf-deco blob-tl" />
+  <img src="素材20/s1_circle_outline.png" alt="" class="cf-deco ring-l" />
+  <img src="素材20/s1_dot_blue.png"        alt="" class="cf-deco dot-l" />
+  <img src="素材20/s1_dotgrid.png"         alt="" class="cf-deco grid-bl" />
+  <img src="素材20/s4_blob.png"            alt="" class="cf-deco blob-bl" />
+  <img src="素材20/s1_circle_soft.png"     alt="" class="cf-deco soft-bc" />
+  <img src="素材20/s2_circle_outline.png"  alt="" class="cf-deco ring-r" />
+  <img src="素材20/s1_circle_gradient.png" alt="" class="cf-deco soft-r" />
+
+  <div class="wrap cf-grid">
+    <!-- intro -->
+    <div class="cf-intro">
+      <img src="素材20/s2_sparkles.png" alt="" class="cf-spark" />
+      <span class="cf-eyebrow">CONTACT</span>
+      <h2>お問い合わせフォーム</h2>
+      <p class="cf-lead">料金・納期・お見積り・技工物のご相談は<br/><span class="em">お気軽に</span>お問い合わせください。</p>
+      <p class="cf-note">専任スタッフが丁寧に対応いたします。<br/>内容を確認のうえ、<br/><span class="em">迅速に</span>ご連絡させていただきます。</p>
+
+      <div class="cf-cta">
+        <a class="cf-btn green" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+          <svg class="lead" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+          お問い合わせはこちら <span class="arr">→</span>
+        </a>
+        <a class="cf-btn blue" href="#cf-form">
+          <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h6M10 16h6"/></svg>
+          フォームを見る <span class="arr">→</span>
+        </a>
       </div>
-      <div class="copy">
-        <span class="lbl">お急ぎのご注文・ご相談はこちら</span>
-        <span class="main-text">公式LINEでお気軽にご連絡ください</span>
-        <span class="hours">受付：平日 9:00 – 18:00</span>
-      </div>
-      <a class="line-btn" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-        公式LINEを追加
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
+    </div>
+
+    <!-- form card -->
+    <div class="cf-card">
+      <form class="cf-form" id="cf-form" action="/api/contact" method="POST">
+        <div class="cf-row">
+          <label for="cf-company">医院名・会社名</label>
+          <input class="cf-field" id="cf-company" name="医院名・会社名" type="text" placeholder="例）歯科技工所 tre-foil" required />
+        </div>
+        <div class="cf-row">
+          <label for="cf-name">ご担当者名</label>
+          <input class="cf-field" id="cf-name" name="ご担当者名" type="text" placeholder="例）山田 太郎" required />
+        </div>
+        <div class="cf-row">
+          <label for="cf-email">メールアドレス</label>
+          <input class="cf-field" id="cf-email" name="メールアドレス" type="email" placeholder="例）yamada@example.com" required />
+        </div>
+        <div class="cf-row">
+          <label for="cf-tel">電話番号</label>
+          <input class="cf-field" id="cf-tel" name="電話番号" type="tel" placeholder="例）03-1234-5678" required />
+        </div>
+        <div class="cf-row">
+          <label for="cf-type">お問い合わせ種別</label>
+          <select class="cf-field" id="cf-type" name="お問い合わせ種別" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="お見積り・料金について">お見積り・料金について</option>
+            <option value="納期について">納期について</option>
+            <option value="技工物について">技工物について</option>
+            <option value="IOS・デジタルについて">IOS・デジタルについて</option>
+            <option value="その他">その他</option>
+          </select>
+        </div>
+        <div class="cf-row top">
+          <label for="cf-message">お問い合わせ内容</label>
+          <textarea class="cf-field" id="cf-message" name="お問い合わせ内容" placeholder="ご相談内容をご記入ください" required></textarea>
+        </div>
+
+        <div class="cf-divider"></div>
+
+        <label class="cf-check">
+          <input type="checkbox" id="cf-agree" name="個人情報の取り扱いに同意" required />
+          <span><a href="#">個人情報の取り扱い</a>に同意します</span>
+        </label>
+
+        <button class="cf-submit" type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          送信する
+        </button>
+        <p class="cf-done" hidden>送信ありがとうございました。担当者より折り返しご連絡いたします。</p>
+      </form>
     </div>
   </div>
 </section>
@@ -716,6 +1398,48 @@
   }, { threshold: 0.12 });
   document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
+  // FV steps: sequential reveal + travelling highlight + line draw
+  (function () {
+    const fvSteps = document.querySelector(".fv-steps");
+    if (!fvSteps) return;
+    const nodes = Array.from(fvSteps.querySelectorAll(".fv-node"));
+    const line  = fvSteps.querySelector(".flow-line");
+    const arrow = fvSteps.querySelector(".flow-arrow");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    nodes.forEach((n, i) => { n.style.transitionDelay = (i * 0.09) + "s"; });
+
+    let started = false;
+    const start = () => {
+      if (started) return; started = true;
+      fvSteps.classList.add("revealed");
+
+      if (line && !reduce) {
+        const len = line.getTotalLength();
+        line.style.strokeDasharray = len;
+        line.style.strokeDashoffset = len;
+        line.getBoundingClientRect(); // reflow
+        line.style.transition = "stroke-dashoffset 1.6s ease";
+        requestAnimationFrame(() => { line.style.strokeDashoffset = "0"; });
+      }
+      if (arrow) { setTimeout(() => { arrow.style.opacity = "1"; }, reduce ? 0 : 1500); }
+      if (reduce) return;
+
+      let i = 0;
+      const tick = () => {
+        nodes.forEach(n => n.classList.remove("active"));
+        nodes[i].classList.add("active");
+        i = (i + 1) % nodes.length;
+      };
+      setTimeout(() => { tick(); setInterval(tick, 650); }, 1700);
+    };
+
+    const obs = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { start(); obs.disconnect(); } });
+    }, { threshold: 0.2 });
+    obs.observe(fvSteps);
+  })();
+
   // mobile hamburger menu
   const menuToggle = document.querySelector(".menu-toggle");
   const menuBackdrop = document.querySelector(".menu-backdrop");
@@ -731,6 +1455,46 @@
     });
   }
   if (menuBackdrop) menuBackdrop.addEventListener("click", closeMenu);
+
+  // contact form
+  (function () {
+    const form = document.getElementById("cf-form");
+    if (!form) return;
+    const sel = document.getElementById("cf-type");
+    if (sel) {
+      const sync = () => sel.classList.toggle("filled", !!sel.value);
+      sel.addEventListener("change", sync); sync();
+    }
+    const done = form.querySelector(".cf-done");
+    const btn = form.querySelector(".cf-submit");
+    const restoreBtn = () => { if (btn) { btn.disabled = false; btn.style.opacity = ""; btn.style.cursor = ""; } };
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return; // 全項目入力チェック（未入力なら送信不可）
+      const action = form.getAttribute("action") || "/api/contact";
+      if (btn) { btn.disabled = true; btn.style.opacity = ".6"; btn.style.cursor = "default"; }
+      try {
+        const res = await fetch(action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+        let data = {};
+        try { data = await res.json(); } catch (_) {}
+        if (res.ok && data.ok !== false) {
+          if (done) done.hidden = false;
+          form.reset();
+          if (sel) sel.classList.remove("filled");
+        } else {
+          alert(data.error || "送信に失敗しました。時間をおいて再度お試しください。");
+          restoreBtn();
+        }
+      } catch (err) {
+        alert("送信に失敗しました。通信環境をご確認ください。");
+        restoreBtn();
+      }
+    });
+  })();
 </script>
 </body>
 </html>
