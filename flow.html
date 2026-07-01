@@ -30,6 +30,7 @@
     --bg: #f7fbfd;
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   html, body { margin: 0; padding: 0; overflow-x: clip; }
   body {
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
@@ -549,24 +550,19 @@
     margin: 0 0 22px;
     line-height: 1.12;
   }
-  .fv-sub {
-    font-size: 21px;
+  .fv-lead2 {
+    font-size: 20px;
     font-weight: 700;
     color: var(--ink);
     letter-spacing: 0.02em;
-    margin: 0 0 16px;
-    line-height: 1.5;
-    white-space: nowrap;
+    margin: 0 0 12px;
+    line-height: 1.6;
   }
-  .fv-sub .accent-blue { color: var(--blue); }
-  .fv-note {
-    font-size: 15px;
-    color: var(--ink-2);
-    letter-spacing: 0.03em;
-    margin: 0;
-    line-height: 1.7;
-  }
-  .fv-note .accent-teal { color: var(--teal-deep); font-weight: 700; }
+  .fv-lead2:last-of-type { margin-bottom: 0; }
+  .fv-lead2 .accent-blue { color: var(--blue); }
+  .fv-lead2 .accent-teal { color: var(--teal-deep); }
+  /* 日本語の区切り（読点）で改行させ、語中で折り返さない */
+  .fv-lead2 .nb { display: inline-block; }
 
   /* hero photos — two overlapping circles */
   .fv-photos { position: relative; height: 380px; }
@@ -674,7 +670,7 @@
     .fv-top { grid-template-columns: 1fr; gap: 6px; min-height: 0; }
     .fv-copy { text-align: center; }
     .fv-copy h1 { font-size: 44px; }
-    .fv-sub { font-size: 19px; white-space: normal; }
+    .fv-lead2 { font-size: 18px; }
     .fv-script { font-size: 24px; }
     .fv-photos { height: 320px; max-width: 420px; margin: 8px auto 0; }
     .fv-photos .ph-big { left: 28px; }
@@ -691,7 +687,7 @@
   }
   @media (max-width: 540px) {
     .fv-copy h1 { font-size: 34px; }
-    .fv-sub { font-size: 17px; }
+    .fv-lead2 { font-size: 16px; }
     .fv-script { font-size: 20px; }
     .fv-steps { grid-template-columns: repeat(2, 1fr); }
     .fv-photos { height: 250px; width: 300px; max-width: 100%; margin: 10px auto 0; }
@@ -878,6 +874,7 @@
     position: relative; overflow: hidden;
     padding: 86px 0 96px;
     background: linear-gradient(180deg, #f7fbfd 0%, #eef5fb 100%);
+    scroll-margin-top: 84px;
   }
   .cf-deco { position: absolute; pointer-events: none; z-index: 0; }
   .cf-deco.blob-tl { width: 250px; top: -44px; left: -54px; }
@@ -949,7 +946,15 @@
   .cf-row { display: grid; grid-template-columns: 138px 1fr; align-items: center; gap: 14px; }
   .cf-row.top { align-items: start; }
   .cf-row.top > label { padding-top: 12px; }
-  .cf-row > label { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .cf-row > label { font-size: 14px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .cf-row.top > label { align-items: flex-start; }
+  .req {
+    display: inline-block;
+    background: #e8483f; color: #fff;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 3px 6px; border-radius: 4px;
+    letter-spacing: .02em; white-space: nowrap;
+  }
   .cf-field {
     width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
     background: #fff; border: 1.5px solid #e3e9f0; border-radius: 10px;
@@ -1048,8 +1053,8 @@
       <div class="fv-copy">
         <p class="fv-script">Crafting smiles,&nbsp; Building trust.</p>
         <h1>ご注文の流れ</h1>
-        <p class="fv-sub">高品質な技工物を、<span class="accent-blue">スムーズ</span>にお届けするために。</p>
-        <p class="fv-note">初めてのご依頼でも、わかりやすく<span class="accent-teal">丁寧</span>にご案内します。</p>
+        <p class="fv-lead2"><span class="nb">高品質な技工物を、</span><span class="nb"><span class="accent-blue">スムーズ</span>にお届けするために。</span></p>
+        <p class="fv-lead2"><span class="nb">初めてのご依頼でも、</span><span class="nb">わかりやすく<span class="accent-teal">丁寧</span>にご案内します。</span></p>
       </div>
       <div class="fv-photos">
         <div class="ph ph-big"><img src="gallery/hero1.jpg" alt="歯科技工物の模型" /></div>
@@ -1144,9 +1149,9 @@
     <div class="fv-cta">
       <a class="c-green" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
         <svg class="lead" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-        お問い合わせはこちら <span class="arr">→</span>
+        LINEで問い合わせる <span class="arr">→</span>
       </a>
-      <a class="c-blue" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+      <a class="c-blue" href="#contact">
         <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h6M10 16h6"/></svg>
         フォームを見る <span class="arr">→</span>
       </a>
@@ -1293,11 +1298,7 @@
       <div class="cf-cta">
         <a class="cf-btn green" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
           <svg class="lead" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-          お問い合わせはこちら <span class="arr">→</span>
-        </a>
-        <a class="cf-btn blue" href="#cf-form">
-          <svg class="lead" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M10 12h6M10 16h6"/></svg>
-          フォームを見る <span class="arr">→</span>
+          LINEで問い合わせる <span class="arr">→</span>
         </a>
       </div>
     </div>
@@ -1306,23 +1307,23 @@
     <div class="cf-card">
       <form class="cf-form" id="cf-form" action="/api/contact" method="POST">
         <div class="cf-row">
-          <label for="cf-company">医院名・会社名</label>
+          <label for="cf-company">医院名・会社名<span class="req">必須</span></label>
           <input class="cf-field" id="cf-company" name="医院名・会社名" type="text" placeholder="例）歯科技工所 tre-foil" required />
         </div>
         <div class="cf-row">
-          <label for="cf-name">ご担当者名</label>
+          <label for="cf-name">ご担当者名<span class="req">必須</span></label>
           <input class="cf-field" id="cf-name" name="ご担当者名" type="text" placeholder="例）山田 太郎" required />
         </div>
         <div class="cf-row">
-          <label for="cf-email">メールアドレス</label>
+          <label for="cf-email">メールアドレス<span class="req">必須</span></label>
           <input class="cf-field" id="cf-email" name="メールアドレス" type="email" placeholder="例）yamada@example.com" required />
         </div>
         <div class="cf-row">
-          <label for="cf-tel">電話番号</label>
+          <label for="cf-tel">電話番号<span class="req">必須</span></label>
           <input class="cf-field" id="cf-tel" name="電話番号" type="tel" placeholder="例）03-1234-5678" required />
         </div>
         <div class="cf-row">
-          <label for="cf-type">お問い合わせ種別</label>
+          <label for="cf-type">お問い合わせ種別<span class="req">必須</span></label>
           <select class="cf-field" id="cf-type" name="お問い合わせ種別" required>
             <option value="" disabled selected>選択してください</option>
             <option value="お見積り・料金について">お見積り・料金について</option>
@@ -1333,16 +1334,11 @@
           </select>
         </div>
         <div class="cf-row top">
-          <label for="cf-message">お問い合わせ内容</label>
+          <label for="cf-message">お問い合わせ内容<span class="req">必須</span></label>
           <textarea class="cf-field" id="cf-message" name="お問い合わせ内容" placeholder="ご相談内容をご記入ください" required></textarea>
         </div>
 
         <div class="cf-divider"></div>
-
-        <label class="cf-check">
-          <input type="checkbox" id="cf-agree" name="個人情報の取り扱いに同意" required />
-          <span><a href="#">個人情報の取り扱い</a>に同意します</span>
-        </label>
 
         <button class="cf-submit" type="submit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>

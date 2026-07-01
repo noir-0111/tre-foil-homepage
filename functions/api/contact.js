@@ -34,10 +34,9 @@ export async function onRequestPost(context) {
     const tel     = get("電話番号");
     const type    = get("お問い合わせ種別");
     const message = get("お問い合わせ内容");
-    const agree   = form.get("個人情報の取り扱いに同意");
 
     // サーバー側バリデーション（未入力なら送信不可）
-    if (!company || !name || !email || !tel || !type || !message || !agree) {
+    if (!company || !name || !email || !tel || !type || !message) {
       return json({ ok: false, error: "未入力の項目があります。" }, 400);
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
