@@ -30,7 +30,7 @@
     --bg: #f7fbfd;
   }
   * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  html, body { margin: 0; padding: 0; overflow-x: clip; }
   body {
     font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
     color: var(--ink);
@@ -694,9 +694,9 @@
     .fv-sub { font-size: 17px; }
     .fv-script { font-size: 20px; }
     .fv-steps { grid-template-columns: repeat(2, 1fr); }
-    .fv-photos { height: 260px; }
-    .fv-photos .ph-big { width: 200px; height: 200px; left: 12px; }
-    .fv-photos .ph-small { width: 132px; height: 132px; top: 128px; left: 150px; }
+    .fv-photos { height: 250px; width: 300px; max-width: 100%; margin: 10px auto 0; }
+    .fv-photos .ph-big { width: 188px; height: 188px; left: 0; top: 10px; }
+    .fv-photos .ph-small { width: 122px; height: 122px; top: 116px; left: 178px; }
     .fv-photos .ph-ring { display: none; }
   }
 
