@@ -943,6 +943,17 @@
   .ls-meaning:nth-child(3) .dot { background: #e2453c; }
   .ls-meaning:nth-child(5) .dot { background: var(--blue); }
   .ls-meanings .x { color: var(--ink-3); margin: 0 4px; font-weight: 400; font-size: 13px; }
+  .ls-triangle {
+    background: #232323;
+    border-radius: 14px;
+    padding: 22px 20px 18px;
+    max-width: 330px;
+    margin-top: 12px;
+    box-shadow: 0 10px 26px rgba(35,35,35,0.16);
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  }
+  .ls-triangle svg { width: 100%; height: auto; display: block; }
+  .ls-triangle text { font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif; }
 
   /* HISTORY */
   .history {
@@ -1268,6 +1279,7 @@
   }
   @media (max-width: 540px) {
     .ls-meanings { flex-wrap: wrap; }
+    .ls-triangle { margin-left: auto; margin-right: auto; }
     .btn-contact-header {
       padding: 5px 9px;
       font-size: 9.5px;
@@ -1434,17 +1446,22 @@
         <h2>3者のつながりで、<br/>患者さんの笑顔を実現する</h2>
         <p>
           ロゴのマークには、<span class="mk-y">患者様</span>・<span class="mk-r">歯科医の先生</span>・<br/>
-          <span class="mk-b">私たち株式会社tre-foil</span>の3者が関わり、<br/>
+          <span class="mk-b">私たち</span>の3者が関わり、<br/>
           互いにバランスを取りながら、<br/>
           患者さんの幸せを実現したいという<br/>
           想いが込められています。
         </p>
-        <div class="ls-meanings">
-          <span class="ls-meaning"><span class="dot"></span>黄：患者様</span>
-          <span class="x">×</span>
-          <span class="ls-meaning"><span class="dot"></span>赤：先生</span>
-          <span class="x">×</span>
-          <span class="ls-meaning"><span class="dot"></span>青：私たち</span>
+        <div class="ls-triangle" aria-label="患者様・先生・私たちの3者のつながり">
+          <svg viewBox="0 0 300 232" xmlns="http://www.w3.org/2000/svg" role="img">
+            <polygon points="150,62 60,182 240,182" fill="none" stroke="#6f6f6f" stroke-width="1.4"/>
+            <text x="150" y="133" text-anchor="middle" fill="#c9c9c9" font-size="13">3者のつながり</text>
+            <circle cx="150" cy="62" r="9" fill="#f5a623"/>
+            <circle cx="60" cy="182" r="9" fill="#e53935"/>
+            <circle cx="240" cy="182" r="9" fill="#4a90e2"/>
+            <text x="150" y="40" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">患者様</text>
+            <text x="52" y="212" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">先生</text>
+            <text x="248" y="212" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700">私たち</text>
+          </svg>
         </div>
       </div>
     </div>
