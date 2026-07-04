@@ -1361,9 +1361,57 @@
   .footer-social a:hover { color: #fff; transform: translateY(-2px); }
   .footer-social svg { width: 24px; height: 24px; display: block; }
   @media (max-width: 960px) { .header-social { display: none; } }
+  /* ===== オープニングアニメーション（スプラッシュ） ===== */
+  .splash{
+    position:fixed;inset:0;z-index:9999;background:#fff;
+    display:flex;align-items:center;justify-content:center;
+    animation:splashFade .7s ease 1.9s forwards;
+  }
+  .splash__inner{
+    display:flex;flex-direction:column;align-items:center;gap:18px;
+    animation:splashRise 1s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .splash__logo{width:112px;height:auto;display:block}
+  .splash__name{display:flex;flex-direction:column;align-items:center;line-height:1.25}
+  .splash__co{font-size:14px;font-weight:700;letter-spacing:3px;color:#2d3a4a}
+  .splash__brand{font-size:28px;font-weight:900;letter-spacing:1px;color:#2d3a4a}
+  .splash.is-done{display:none}
+  @keyframes splashRise{from{opacity:0;transform:translateY(16px) scale(.95)}to{opacity:1;transform:none}}
+  @keyframes splashFade{to{opacity:0;visibility:hidden}}
+  @media (max-width:480px){
+    .splash__logo{width:92px}
+    .splash__brand{font-size:23px}
+    .splash__co{font-size:12px;letter-spacing:2px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .splash{animation:splashFade .4s ease .8s forwards}
+    .splash__inner{animation:none}
+  }
 </style>
 </head>
 <body>
+
+<!-- ===== オープニングアニメーション ===== -->
+<div class="splash" id="splash">
+  <div class="splash__inner">
+    <img class="splash__logo" src="素材2/tre-foilロゴ.png" alt="">
+    <span class="splash__name">
+      <span class="splash__co">株式会社</span>
+      <span class="splash__brand">tre-foil</span>
+    </span>
+  </div>
+</div>
+<script>
+(function(){
+  var sp=document.getElementById('splash');
+  if(!sp) return;
+  var root=document.documentElement;
+  root.style.overflow='hidden';
+  function done(){ sp.classList.add('is-done'); root.style.overflow=''; }
+  var t=setTimeout(done,2800);
+  sp.addEventListener('animationend',function(e){ if(e.animationName==='splashFade'){ clearTimeout(t); done(); } });
+})();
+</script>
 
 <!-- ============ HEADER ============ -->
 <header class="site-header" data-screen-label="Header">
