@@ -983,8 +983,8 @@
   }
   .flow-row {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 6px;
     position: relative;
   }
   .step {
@@ -1002,8 +1002,8 @@
     display: block;
   }
   .step .icon-circle {
-    width: 80px; height: 80px;
-    margin: 0 auto 16px;
+    width: 64px; height: 64px;
+    margin: 0 auto 14px;
     background: #fff;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
@@ -1012,15 +1012,16 @@
     position: relative;
     z-index: 2;
   }
-  .step .icon-circle img { width: 38px; height: auto; }
+  .step .icon-circle img { width: 32px; height: auto; }
   .step h4 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    margin: 0 0 8px;
+    margin: 0 0 7px;
     color: var(--ink);
+    letter-spacing: 0.01em;
   }
   .step p {
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--ink-2);
     line-height: 1.7;
     margin: 0;
@@ -1028,8 +1029,8 @@
   .step::after {
     content: "";
     position: absolute;
-    top: 56px; right: -12%;
-    width: 24%; height: 1px;
+    top: 49px; right: -10%;
+    width: 20%; height: 1px;
     background: repeating-linear-gradient(90deg, var(--blue) 0 4px, transparent 4px 8px);
     z-index: 1;
   }
@@ -1544,44 +1545,62 @@
     <div class="flow-row">
       <div class="step reveal">
         <span class="num">01</span>
-        <div class="icon-circle"><img src="素材4/04.png" alt="" /></div>
+        <div class="icon-circle"><img src="素材17/s3_icon_chat.png" alt="" /></div>
         <h4>お問い合わせ</h4>
-        <p>まずはお気軽に<br/>ご連絡ください。</p>
+        <p>LINE・フォームから<br/>お気軽にご相談。</p>
       </div>
       <div class="step reveal">
         <span class="num">02</span>
-        <div class="icon-circle"><img src="素材4/05.png" alt="" /></div>
-        <h4>お見積り・ご相談</h4>
-        <p>内容をしっかり確認し、<br/>ご提案いたします。</p>
+        <div class="icon-circle"><img src="素材17/s3_icon_document_clock.png" alt="" /></div>
+        <h4>お見積り</h4>
+        <p>内容を確認し<br/>お見積りを提出。</p>
       </div>
       <div class="step reveal">
         <span class="num">03</span>
-        <div class="icon-circle"><img src="素材4/06.png" alt="" /></div>
-        <h4>製作</h4>
-        <p>熟練の技工士が<br/>一つひとつ丁寧に。</p>
+        <div class="icon-circle"><img src="素材17/s3_icon_box.png" alt="" /></div>
+        <h4>模型・データの送付</h4>
+        <p>模型やスキャン<br/>データをご送付。</p>
       </div>
       <div class="step reveal">
         <span class="num">04</span>
-        <div class="icon-circle"><img src="素材4/07.png" alt="" /></div>
-        <h4>品質チェック</h4>
-        <p>厳格な検査体制で<br/>仕上がりを担保します。</p>
+        <div class="icon-circle"><img src="素材17/s3_icon_monitor.png" alt="" /></div>
+        <h4>設計・製作</h4>
+        <p>熟練の技工士が<br/>丁寧に設計・製作。</p>
       </div>
       <div class="step reveal">
         <span class="num">05</span>
-        <div class="icon-circle"><img src="素材4/08.png" alt="" /></div>
-        <h4>納品・アフターサポート</h4>
-        <p>迅速な配送と<br/>その後の対応も万全。</p>
+        <div class="icon-circle"><img src="素材17/s3_icon_clipboard.png" alt="" /></div>
+        <h4>品質チェック</h4>
+        <p>厳しい基準で<br/>精密に検査。</p>
       </div>
       <div class="step reveal">
         <span class="num">06</span>
-        <div class="icon-circle"><img src="素材4/09.png" alt="" /></div>
-        <h4>完了</h4>
-        <p>納品後も末永く<br/>サポートします。</p>
+        <div class="icon-circle"><img src="素材17/s3_icon_tooth_sparkle.png" alt="" /></div>
+        <h4>完成</h4>
+        <p>検査をクリアし<br/>技工物が完成。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">07</span>
+        <div class="icon-circle"><img src="素材17/s3_icon_truck.png" alt="" /></div>
+        <h4>発送・納品</h4>
+        <p>丁寧に梱包し<br/>迅速に発送。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">08</span>
+        <div class="icon-circle"><img src="素材17/s3_icon_search.png" alt="" /></div>
+        <h4>ご確認</h4>
+        <p>納品物を<br/>ご確認ください。</p>
+      </div>
+      <div class="step reveal">
+        <span class="num">09</span>
+        <div class="icon-circle"><img src="素材17/s3_icon_heart_hands.png" alt="" /></div>
+        <h4>アフターフォロー</h4>
+        <p>納品後も安心の<br/>サポート体制。</p>
       </div>
     </div>
 
     <div class="flow-cta">
-      <a class="btn btn-secondary" href="#flow">
+      <a class="btn btn-secondary" href="flow.html">
         詳しい流れを見る
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
