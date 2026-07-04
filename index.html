@@ -1365,23 +1365,24 @@
   .splash{
     position:fixed;inset:0;z-index:9999;background:#fff;
     display:flex;align-items:center;justify-content:center;
-    animation:splashFade .7s ease 1.9s forwards;
+    animation:splashFade .7s ease 2.3s forwards;
   }
   .splash__inner{
-    display:flex;flex-direction:column;align-items:center;gap:18px;
+    display:flex;flex-direction:column;align-items:center;gap:34px;
     animation:splashRise 1s cubic-bezier(.2,.7,.3,1) both;
   }
-  .splash__logo{width:112px;height:auto;display:block}
+  .splash__logo{width:336px;height:auto;display:block}
   .splash__name{display:flex;flex-direction:column;align-items:center;line-height:1.25}
-  .splash__co{font-size:14px;font-weight:700;letter-spacing:3px;color:#2d3a4a}
-  .splash__brand{font-size:28px;font-weight:900;letter-spacing:1px;color:#2d3a4a}
+  .splash__co{font-size:42px;font-weight:700;letter-spacing:9px;color:#2d3a4a}
+  .splash__brand{font-size:84px;font-weight:900;letter-spacing:3px;color:#2d3a4a}
   .splash.is-done{display:none}
   @keyframes splashRise{from{opacity:0;transform:translateY(16px) scale(.95)}to{opacity:1;transform:none}}
   @keyframes splashFade{to{opacity:0;visibility:hidden}}
   @media (max-width:480px){
-    .splash__logo{width:92px}
-    .splash__brand{font-size:23px}
-    .splash__co{font-size:12px;letter-spacing:2px}
+    .splash__inner{gap:22px}
+    .splash__logo{width:184px}
+    .splash__brand{font-size:46px}
+    .splash__co{font-size:24px;letter-spacing:4px}
   }
   @media (prefers-reduced-motion:reduce){
     .splash{animation:splashFade .4s ease .8s forwards}
@@ -1408,7 +1409,7 @@
   var root=document.documentElement;
   root.style.overflow='hidden';
   function done(){ sp.classList.add('is-done'); root.style.overflow=''; }
-  var t=setTimeout(done,2800);
+  var t=setTimeout(done,3200);
   sp.addEventListener('animationend',function(e){ if(e.animationName==='splashFade'){ clearTimeout(t); done(); } });
 })();
 </script>
