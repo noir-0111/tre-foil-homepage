@@ -18,6 +18,13 @@ function json(body, status = 200) {
   });
 }
 
+// HTMLメールに差し込む前に値をエスケープ（表示崩れ・インジェクション防止）
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
+  );
+}
+
 export async function onRequestOptions() {
   return new Response(null, { headers: CORS });
 }
@@ -50,8 +57,9 @@ export async function onRequestPost(context) {
       return json({ ok: false, error: "サーバー設定が未完了です（環境変数を確認してください）。" }, 500);
     }
 
+    // プレーンテキスト版（HTML非対応クライアント向けのフォールバック）
     const text =
-`ホームページのお問い合わせフォームから送信がありました。
+`株式会社tre-foil ウェブサイトのお問い合わせフォームより送信がありました。
 
 ■ 医院名・会社名: ${company}
 ■ ご担当者名: ${name}
@@ -61,7 +69,42 @@ export async function onRequestPost(context) {
 
 ■ お問い合わせ内容:
 ${message}
-`;
+
+――――――――――――――――――
+このメールに返信すると、送信者（${name} 様）のメールアドレス宛に返信されます。`;
+
+    // HTML版（表形式で見やすく）
+    const row = (label, value) =>
+`<tr>
+  <th style="text-align:left;background:#f4f7fb;color:#5a6878;font-weight:700;padding:14px 16px;width:34%;border:1px solid #e6ebf1;vertical-align:top;font-size:13px;">${label}</th>
+  <td style="padding:14px 16px;color:#2d3a4a;border:1px solid #e6ebf1;vertical-align:top;font-size:14px;line-height:1.7;">${value}</td>
+</tr>`;
+
+    const html =
+`<div style="background:#eef2f6;padding:24px 12px;font-family:'Hiragino Kaku Gothic ProN','Noto Sans JP',Meiryo,sans-serif;">
+  <div style="max-width:600px;margin:0 auto;background:#ffffff;border-radius:14px;overflow:hidden;border:1px solid #e6ebf1;">
+    <div style="height:5px;background:linear-gradient(90deg,#18b85f,#4a90e2);"></div>
+    <div style="padding:28px 30px 6px;">
+      <h1 style="margin:0 0 8px;font-size:20px;color:#2d3a4a;font-weight:700;">お問い合わせがありました</h1>
+      <p style="margin:0 0 18px;font-size:13px;color:#8a96a4;line-height:1.7;">株式会社tre-foil ウェブサイトのお問い合わせフォームより送信されました。</p>
+    </div>
+    <div style="padding:0 30px 6px;">
+      <table style="width:100%;border-collapse:collapse;">
+        <tbody>
+          ${row("医院名・会社名", esc(company))}
+          ${row("ご担当者名", esc(name))}
+          ${row("メールアドレス", `<a href="mailto:${esc(email)}" style="color:#4a90e2;text-decoration:none;">${esc(email)}</a>`)}
+          ${row("電話番号", esc(tel))}
+          ${row("お問い合わせ種別", esc(type))}
+          ${row("お問い合わせ内容", esc(message).replace(/\n/g, "<br>"))}
+        </tbody>
+      </table>
+    </div>
+    <div style="padding:16px 30px 26px;">
+      <p style="margin:0;font-size:12px;color:#a7b0bb;line-height:1.7;">このメールに返信すると、送信者（${esc(name)} 様）のメールアドレス宛に返信されます。</p>
+    </div>
+  </div>
+</div>`;
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -73,8 +116,9 @@ ${message}
         from: `tre-foil お問い合わせ <${from}>`,
         to: [to],
         reply_to: email,
-        subject: `【ホームページ】お問い合わせ（${name} 様）`,
+        subject: `【tre-foil】お問い合わせ（${name} 様）`,
         text,
+        html,
       }),
     });
 
