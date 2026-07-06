@@ -464,65 +464,97 @@
   /* ============ ENTRY FORM ============ */
   .cf {
     position: relative; overflow: hidden;
-    padding: 86px 0 96px;
-    background: #fff;
+    padding: 84px 0 104px;
+    background: #fdfefe;
     scroll-margin-top: 84px;
   }
   .cf-deco { position: absolute; pointer-events: none; z-index: 0; }
-  .cf-deco.wave-b { width: 900px; bottom: -200px; right: -160px; opacity: .8; mix-blend-mode: multiply; animation: rvDrift 15s ease-in-out infinite; }
-  .cf-deco.blob-tl { width: 300px; top: -50px; left: -70px; opacity: .8; mix-blend-mode: multiply; }
+  .cf-deco.blob-tl { width: 400px; top: -50px; left: -70px; opacity: .95; }
+  .cf-deco.wave-gl { width: 480px; bottom: -160px; left: -130px; opacity: .9; animation: rvFloat 14s ease-in-out infinite; }
+  .cf-deco.wave-br { width: 500px; bottom: -170px; right: -130px; opacity: .95; animation: rvDrift 16s ease-in-out infinite; }
+  .cf-deco.curve-tr { width: 280px; top: 60px; right: 2%; opacity: .9; }
+  .cf-deco.curve-b { width: 430px; bottom: 90px; left: 40%; opacity: .8; }
+  .cf-deco.clover-tr { width: 44px; top: 108px; right: 4.5%; opacity: .65; animation: rvBob 6s ease-in-out infinite; }
+  .cf-deco.clover-br { width: 30px; bottom: 100px; right: 9%; opacity: .55; animation: rvBob 6s ease-in-out infinite; animation-delay: -2.5s; }
 
   .cf-grid {
     position: relative; z-index: 1;
-    display: grid; grid-template-columns: 1fr 1.06fr; gap: 56px; align-items: start;
+    display: grid; grid-template-columns: 1.32fr .92fr; gap: 54px; align-items: start;
   }
-  .cf-intro { position: relative; padding-top: 20px; }
-  .cf-eyebrow {
-    font-family: "Montserrat", sans-serif; font-weight: 600;
-    letter-spacing: .34em; font-size: 13px; color: var(--teal-deep);
-    display: inline-block; margin-bottom: 16px;
-  }
-  .cf-intro h2 { font-size: 40px; font-weight: 900; color: var(--ink); letter-spacing: .04em; margin: 0 0 22px; line-height: 1.25; }
-  .cf-lead { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.75; margin: 0 0 24px; }
-  .cf-lead .em { color: var(--teal-deep); }
-  .cf-note { font-size: 15px; color: var(--ink-2); line-height: 1.95; margin: 0 0 30px; }
-  .cf-note .em { color: var(--teal-deep); font-weight: 700; }
-  .cf-cta { display: flex; flex-direction: column; gap: 14px; max-width: 470px; }
-  .cf-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-    padding: 17px 28px; border-radius: 999px;
-    font-size: 16px; font-weight: 700; letter-spacing: .03em; color: #fff;
-    transition: transform .15s, box-shadow .2s;
-  }
-  .cf-btn svg.lead { width: 20px; height: 20px; }
-  .cf-btn .arr { font-size: 18px; margin-left: 2px; }
-  .cf-btn.green { background: #18b85f; box-shadow: 0 12px 26px rgba(24,184,95,.32); }
-  .cf-btn:hover { transform: translateY(-2px); }
 
-  .cf-card {
-    position: relative; z-index: 1;
-    background: #fbfcfe; border: 1px solid #eef2f7; border-radius: 24px;
-    padding: 40px 42px; box-shadow: 0 22px 54px rgba(45,58,74,.09);
+  /* form column header */
+  .ef-head { text-align: center; margin-bottom: 30px; }
+  .ef-eyebrow {
+    display: inline-flex; align-items: center; gap: 13px;
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    letter-spacing: .26em; font-size: 13.5px; color: var(--teal-deep);
+    margin-bottom: 10px;
   }
-  .cf-form { display: flex; flex-direction: column; gap: 17px; }
-  .cf-row { display: grid; grid-template-columns: 148px 1fr; align-items: center; gap: 14px; }
-  .cf-row.top { align-items: start; }
-  .cf-row.top > label { padding-top: 12px; align-items: flex-start; }
-  .cf-row > label { font-size: 14px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .req {
-    display: inline-block;
-    background: #e8483f; color: #fff;
-    font-size: 10px; font-weight: 700; line-height: 1;
-    padding: 3px 6px; border-radius: 4px;
-    letter-spacing: .02em; white-space: nowrap;
+  .ef-eyebrow .cl { width: 20px; height: auto; }
+  .ef-eyebrow .dots { width: 80px; height: auto; opacity: .9; }
+  .ef-head h2 {
+    font-size: 34px; font-weight: 900; letter-spacing: .14em;
+    color: var(--ink); margin: 0 0 12px;
   }
-  .opt {
-    display: inline-block;
-    background: #aeb8c4; color: #fff;
-    font-size: 10px; font-weight: 700; line-height: 1;
-    padding: 3px 6px; border-radius: 4px;
-    letter-spacing: .02em; white-space: nowrap;
+  .ef-head p { font-size: 14px; color: var(--ink-2); margin: 0; letter-spacing: .05em; }
+
+  /* form */
+  .ef-form { display: flex; flex-direction: column; gap: 16px; }
+  .ef-row { display: grid; grid-template-columns: 182px 1fr; align-items: center; gap: 14px; }
+  .ef-row.top { align-items: start; }
+  .ef-row.top > label { padding-top: 10px; }
+  .ef-row > label { font-size: 14px; font-weight: 700; color: var(--ink); letter-spacing: .03em; }
+  .ef-row > label .req { color: #e8483f; font-size: 12px; font-weight: 500; }
+  .ef-row > label .opt { color: var(--ink-3); font-size: 12px; font-weight: 500; }
+  .ef-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ef-radio-line { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; font-size: 14px; color: var(--ink); }
+  .ef-radio { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+  .ef-radio input { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; margin: 0; }
+  .ef-exp-years { display: inline-flex; align-items: center; gap: 8px; }
+  .ef-exp-years .cf-field { width: 78px; padding: 9px 12px; }
+
+  .ef-submit-wrap { text-align: center; margin-top: 16px; }
+  .ef-privacy {
+    display: flex; align-items: center; justify-content: center; gap: 7px;
+    margin-top: 14px; font-size: 12px; color: var(--ink-3); letter-spacing: .03em;
   }
+  .ef-privacy img { width: 15px; height: auto; }
+
+  /* side cards */
+  .ef-side { display: flex; flex-direction: column; gap: 26px; margin-top: 36px; }
+  .ef-card {
+    background: #fff; border: 1px solid #eef2f7; border-radius: 18px;
+    padding: 28px 30px; box-shadow: 0 16px 40px rgba(45,58,74,.07);
+  }
+  .ef-card-head { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; }
+  .ef-card-head .cl { width: 18px; height: auto; }
+  .ef-card-head .dots { width: 52px; height: auto; opacity: .8; flex-shrink: 1; min-width: 24px; }
+  .ef-card-head strong { font-size: 15px; color: var(--teal-deep); font-weight: 700; letter-spacing: .05em; white-space: nowrap; }
+  .ef-flow { text-align: center; }
+  .ef-flow .mail-circle {
+    width: 108px; height: 108px; border-radius: 50%;
+    background: #eaf2fd;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 18px;
+  }
+  .ef-flow .mail-circle img { width: 60px; height: auto; }
+  .ef-flow .bl { color: var(--blue); font-weight: 700; font-size: 15px; margin: 0 0 10px; letter-spacing: .04em; }
+  .ef-flow .tx { font-size: 13px; color: var(--ink-2); line-height: 2; margin: 0; }
+  .ef-line-body { display: flex; gap: 16px; align-items: flex-start; }
+  .ef-line-body .li { width: 60px; height: auto; border-radius: 13px; flex-shrink: 0; }
+  .ef-line-body .bl { color: #18b85f; font-weight: 700; font-size: 15px; margin: 0 0 8px; letter-spacing: .02em; }
+  .ef-line-body .tx { font-size: 13px; color: var(--ink-2); line-height: 1.9; margin: 0; }
+  .ef-url {
+    margin-top: 16px; width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    border: 1.5px solid #bfe3d4; border-radius: 999px;
+    padding: 10px 18px; font-size: 13.5px; color: #18a05f;
+    background: #fbfffd; cursor: pointer;
+    font-family: inherit; letter-spacing: .02em;
+    transition: background .2s, transform .15s;
+  }
+  .ef-url:hover { background: #f0faf5; transform: translateY(-1px); }
+  .ef-url img { width: 17px; height: auto; }
   .cf-field {
     width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
     background: #fff; border: 1.5px solid #e3e9f0; border-radius: 10px;
@@ -665,10 +697,10 @@
     .rq-deco.dots-b, .rq-deco.clover-l { display: none; }
 
     .cf { padding: 64px 0 76px; }
-    .cf-grid { grid-template-columns: 1fr; gap: 34px; }
-    .cf-intro { padding-top: 0; }
-    .cf-intro h2 { font-size: 30px; }
-    .cf-card { padding: 30px 26px; }
+    .cf-grid { grid-template-columns: 1fr; gap: 40px; }
+    .ef-head h2 { font-size: 28px; }
+    .ef-side { margin-top: 0; }
+    .cf-deco.curve-b, .cf-deco.clover-br { display: none; }
     h2.section-title { font-size: 24px; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
   }
@@ -704,10 +736,14 @@
     .rq-pill { padding: 8px 18px 8px 10px; }
     .rq-pill .tx strong { font-size: 13px; }
     .rq-pill .tx span { font-size: 10.5px; }
-    .cf-intro h2 { font-size: 26px; }
-    .cf-lead { font-size: 16px; }
-    .cf-row { grid-template-columns: 1fr; align-items: start; gap: 7px; }
-    .cf-row.top > label { padding-top: 0; }
+    .ef-head h2 { font-size: 24px; letter-spacing: .1em; }
+    .ef-head p { font-size: 13px; }
+    .ef-eyebrow .dots { width: 40px; }
+    .ef-row { grid-template-columns: 1fr; align-items: start; gap: 7px; }
+    .ef-row.top > label { padding-top: 0; }
+    .ef-card { padding: 22px 20px; }
+    .ef-card-head .dots { width: 30px; }
+    .ef-card-head strong { font-size: 13.5px; }
     .cf-submit { min-width: 0; width: 100%; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -906,99 +942,146 @@
 
 <!-- ===== ENTRY FORM ===== -->
 <section class="cf" id="entry" data-screen-label="Entry Form">
-  <img src="素材22/deco_blob_soft.png" alt="" class="cf-deco blob-tl" />
-  <img src="素材22/deco_wave_greenblue.png" alt="" class="cf-deco wave-b" />
+  <img src="素材24/ef_blob_tl.png" alt="" class="cf-deco blob-tl" />
+  <img src="素材24/ef_wave_green.png" alt="" class="cf-deco wave-gl" />
+  <img src="素材24/ef_wave_blue.png" alt="" class="cf-deco wave-br" />
+  <img src="素材24/ef_dots_curve_green.png" alt="" class="cf-deco curve-tr" />
+  <img src="素材24/ef_dots_curve_gb.png" alt="" class="cf-deco curve-b" />
+  <img src="素材9/brand_clover_mark.png" alt="" class="cf-deco clover-tr" />
+  <img src="素材9/brand_clover_mark.png" alt="" class="cf-deco clover-br" />
 
   <div class="wrap cf-grid">
-    <!-- intro -->
-    <div class="cf-intro reveal">
-      <span class="cf-eyebrow">ENTRY</span>
-      <h2>申込みフォーム</h2>
-      <p class="cf-lead">ご応募・見学のお申込みは<br/><span class="em">お気軽に</span>ご連絡ください。</p>
-      <p class="cf-note">「まずは見学だけ」も大歓迎です。<br/>内容を確認のうえ、担当者より<br/><span class="em">折り返し</span>ご連絡させていただきます。</p>
-      <div class="cf-cta">
-        <a class="cf-btn green" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
-          <svg class="lead" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
-          LINEで問い合わせる <span class="arr">→</span>
-        </a>
+    <!-- form column -->
+    <div class="reveal">
+      <div class="ef-head">
+        <span class="ef-eyebrow">
+          <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
+          <img src="素材9/brand_clover_mark.png" alt="" class="cl" />
+          Application Form
+          <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
+        </span>
+        <h2>申込みフォーム</h2>
+        <p>必要事項をご入力のうえ、送信してください。担当者より折り返しご連絡いたします。</p>
       </div>
-    </div>
 
-    <!-- form card -->
-    <div class="cf-card reveal">
-      <form class="cf-form" id="rc-form" action="/api/recruit" method="POST">
-        <div class="cf-row">
-          <label for="rc-name">お名前<span class="req">必須</span></label>
-          <input class="cf-field" id="rc-name" name="お名前" type="text" placeholder="例）山田 太郎" required />
+      <form class="ef-form" id="rc-form" action="/api/recruit" method="POST">
+        <div class="ef-row">
+          <label for="rc-sei">お名前<span class="req">（必須）</span></label>
+          <div class="ef-pair">
+            <input class="cf-field" id="rc-sei" name="姓" type="text" placeholder="例）山田" required />
+            <input class="cf-field" id="rc-mei" name="名" type="text" placeholder="例）太郎" required />
+          </div>
         </div>
-        <div class="cf-row">
-          <label for="rc-kana">ふりがな<span class="req">必須</span></label>
-          <input class="cf-field" id="rc-kana" name="ふりがな" type="text" placeholder="例）やまだ たろう" required />
+        <div class="ef-row">
+          <label for="rc-kana-sei">ふりがな<span class="req">（必須）</span></label>
+          <div class="ef-pair">
+            <input class="cf-field" id="rc-kana-sei" name="ふりがな姓" type="text" placeholder="例）やまだ" required />
+            <input class="cf-field" id="rc-kana-mei" name="ふりがな名" type="text" placeholder="例）たろう" required />
+          </div>
         </div>
-        <div class="cf-row">
-          <label for="rc-email">メールアドレス<span class="req">必須</span></label>
-          <input class="cf-field" id="rc-email" name="メールアドレス" type="email" placeholder="例）yamada@example.com" required />
+        <div class="ef-row">
+          <label for="rc-email">メールアドレス<span class="req">（必須）</span></label>
+          <input class="cf-field" id="rc-email" name="メールアドレス" type="email" placeholder="例）info@tre-foil.jp" required />
         </div>
-        <div class="cf-row">
-          <label for="rc-tel">電話番号<span class="req">必須</span></label>
+        <div class="ef-row">
+          <label for="rc-tel">電話番号<span class="req">（必須）</span></label>
           <input class="cf-field" id="rc-tel" name="電話番号" type="tel" placeholder="例）090-1234-5678" required />
         </div>
-        <div class="cf-row">
-          <label for="rc-job">希望職種<span class="req">必須</span></label>
+        <div class="ef-row">
+          <label for="rc-job">希望職種<span class="req">（必須）</span></label>
           <select class="cf-field" id="rc-job" name="希望職種" required>
-            <option value="" disabled selected>選択してください</option>
+            <option value="" disabled selected>歯科技工士／アシスタント／事務・サポート</option>
             <option value="歯科技工士">歯科技工士</option>
             <option value="アシスタント">アシスタント</option>
             <option value="事務・サポート">事務・サポート</option>
           </select>
         </div>
-        <div class="cf-row">
-          <label for="rc-type">希望雇用形態<span class="req">必須</span></label>
+        <div class="ef-row">
+          <label for="rc-type">希望雇用形態<span class="req">（必須）</span></label>
           <select class="cf-field" id="rc-type" name="希望雇用形態" required>
-            <option value="" disabled selected>選択してください</option>
+            <option value="" disabled selected>正社員／パート・アルバイト</option>
             <option value="正社員">正社員</option>
             <option value="パート・アルバイト">パート・アルバイト</option>
           </select>
         </div>
-        <div class="cf-row">
-          <label for="rc-place">希望勤務地<span class="req">必須</span></label>
+        <div class="ef-row">
+          <label for="rc-place">希望勤務地<span class="req">（必須）</span></label>
           <select class="cf-field" id="rc-place" name="希望勤務地" required>
-            <option value="" disabled selected>選択してください</option>
+            <option value="" disabled selected>福岡／大阪</option>
             <option value="福岡">福岡</option>
             <option value="大阪">大阪</option>
           </select>
         </div>
-        <div class="cf-row">
-          <label for="rc-license">歯科技工士免許<span class="opt">任意</span></label>
-          <select class="cf-field" id="rc-license" name="歯科技工士免許">
-            <option value="" selected>選択してください</option>
-            <option value="あり">あり</option>
-            <option value="なし">なし</option>
-          </select>
+        <div class="ef-row">
+          <label>歯科技工士免許<span class="opt">（任意）</span></label>
+          <div class="ef-radio-line">
+            <label class="ef-radio"><input type="radio" name="歯科技工士免許" value="あり" />あり</label>
+            <label class="ef-radio"><input type="radio" name="歯科技工士免許" value="なし" />なし</label>
+          </div>
         </div>
-        <div class="cf-row">
-          <label for="rc-exp">実務経験<span class="opt">任意</span></label>
-          <select class="cf-field" id="rc-exp" name="実務経験">
-            <option value="" selected>選択してください</option>
-            <option value="あり（〜3年）">あり（〜3年）</option>
-            <option value="あり（3〜10年）">あり（3〜10年）</option>
-            <option value="あり（10年以上）">あり（10年以上）</option>
-            <option value="なし">なし</option>
-          </select>
+        <div class="ef-row">
+          <label>実務経験<span class="opt">（任意）</span></label>
+          <div class="ef-radio-line">
+            <label class="ef-radio"><input type="radio" name="実務経験有無" value="あり" id="rc-exp-ari" />あり</label>
+            <span class="ef-exp-years">
+              <input class="cf-field" id="rc-exp-years" type="number" min="0" max="60" placeholder="例）5" aria-label="実務経験年数" />
+              年
+            </span>
+            <label class="ef-radio"><input type="radio" name="実務経験有無" value="なし" />なし</label>
+          </div>
         </div>
-        <div class="cf-row top">
-          <label for="rc-message">ご質問・メッセージ<span class="opt">任意</span></label>
-          <textarea class="cf-field" id="rc-message" name="ご質問・メッセージ" placeholder="ご質問やご希望があればご記入ください（見学希望など）"></textarea>
+        <div class="ef-row top">
+          <label for="rc-message">ご質問・メッセージ<span class="opt">（任意）</span></label>
+          <textarea class="cf-field" id="rc-message" name="ご質問・メッセージ" placeholder="例）見学希望日やご質問などご自由にご記入ください。"></textarea>
         </div>
 
-        <div class="cf-divider"></div>
-
-        <button class="cf-submit" type="submit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-          送信する
-        </button>
-        <p class="cf-done" hidden>ご応募ありがとうございました。担当者より折り返しご連絡いたします。</p>
+        <div class="ef-submit-wrap">
+          <button class="cf-submit" type="submit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            この内容で送信する
+          </button>
+          <p class="ef-privacy">
+            <img src="素材24/ef_icon_lock.png" alt="" />
+            ご入力いただいた個人情報は、採用に関するご連絡のみに使用いたします。
+          </p>
+          <p class="cf-done" hidden>ご応募ありがとうございました。担当者より折り返しご連絡いたします。</p>
+        </div>
       </form>
+    </div>
+
+    <!-- side cards -->
+    <div class="ef-side reveal">
+      <div class="ef-card ef-flow">
+        <div class="ef-card-head">
+          <img src="素材9/brand_clover_mark.png" alt="" class="cl" />
+          <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
+          <strong>送信後の流れ</strong>
+          <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
+        </div>
+        <div class="mail-circle"><img src="素材24/ef_icon_mail.png" alt="" /></div>
+        <p class="bl">送信後は完了メッセージを表示</p>
+        <p class="tx">送信が完了すると、画面に完了メッセージが表示されます。担当者より追ってご連絡いたしますので、しばらくお待ちください。</p>
+      </div>
+
+      <div class="ef-card">
+        <div class="ef-card-head">
+          <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
+          <img src="素材9/brand_clover_mark.png" alt="" class="cl" />
+          <strong>LINEでもお気軽にご相談ください</strong>
+          <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
+        </div>
+        <div class="ef-line-body">
+          <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener"><img src="素材24/ef_icon_line.png" alt="LINE" class="li" /></a>
+          <div>
+            <p class="bl">LINEからのお問い合わせにも対応</p>
+            <p class="tx">ご質問やご相談は、LINEからでも受け付けております。お気軽にご連絡ください。</p>
+          </div>
+        </div>
+        <button type="button" class="ef-url" id="ef-line-url" data-url="https://lin.ee/rfpCi9I">
+          https://lin.ee/rfpCi9I
+          <img src="素材24/ef_icon_copy.png" alt="コピー" />
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -1077,6 +1160,12 @@
       const sync = () => sel.classList.toggle("filled", !!sel.value);
       sel.addEventListener("change", sync); sync();
     });
+    // 経験年数を入力したら「あり」を自動選択
+    const expYears = document.getElementById("rc-exp-years");
+    const expAri = document.getElementById("rc-exp-ari");
+    if (expYears && expAri) {
+      expYears.addEventListener("input", () => { if (expYears.value) expAri.checked = true; });
+    }
     const done = form.querySelector(".cf-done");
     const btn = form.querySelector(".cf-submit");
     const restoreBtn = () => { if (btn) { btn.disabled = false; btn.style.opacity = ""; btn.style.cursor = ""; } };
@@ -1085,10 +1174,18 @@
       if (!form.reportValidity()) return; // 必須項目チェック
       const action = form.getAttribute("action") || "/api/recruit";
       if (btn) { btn.disabled = true; btn.style.opacity = ".6"; btn.style.cursor = "default"; }
+      // 姓名・ふりがな・実務経験をサーバー向けの項目に組み立てる
+      const fd = new FormData(form);
+      const v = (k) => (fd.get(k) || "").toString().trim();
+      fd.set("お名前", `${v("姓")} ${v("名")}`.trim());
+      fd.set("ふりがな", `${v("ふりがな姓")} ${v("ふりがな名")}`.trim());
+      const expType = v("実務経験有無");
+      const years = expYears ? expYears.value.trim() : "";
+      fd.set("実務経験", expType === "あり" ? (years ? `あり（${years}年）` : "あり") : expType);
       try {
         const res = await fetch(action, {
           method: "POST",
-          body: new FormData(form),
+          body: fd,
           headers: { "Accept": "application/json" }
         });
         let data = {};
@@ -1106,6 +1203,21 @@
         restoreBtn();
       }
     });
+    // LINE URLコピー
+    const urlBtn = document.getElementById("ef-line-url");
+    if (urlBtn) {
+      urlBtn.addEventListener("click", async () => {
+        const url = urlBtn.getAttribute("data-url");
+        try {
+          await navigator.clipboard.writeText(url);
+          const orig = urlBtn.firstChild.textContent;
+          urlBtn.firstChild.textContent = "コピーしました ";
+          setTimeout(() => { urlBtn.firstChild.textContent = orig; }, 1600);
+        } catch (_) {
+          window.open(url, "_blank", "noopener");
+        }
+      });
+    }
   })();
 </script>
 </body>
