@@ -732,8 +732,10 @@
     .rv-lead br { display: none; }
     .rv-btn { padding: 13px 20px; font-size: 14px; }
     .rv-cta { gap: 12px; }
-    .rv-chips { gap: 9px; }
-    .rv-chip { font-size: 12px; padding: 7px 14px 7px 8px; }
+    .rv-chips { flex-wrap: nowrap; gap: 6px; }
+    .rv-chip { font-size: 10.5px; padding: 6px 9px 6px 6px; gap: 5px; white-space: nowrap; }
+    .rv-chip .ic { width: 20px; height: 20px; }
+    .rv-chip .ic img { width: 20px; height: 20px; }
     .rv-circ.c1 { width: 104px; height: 104px; left: 0; }
     .rv-circ.c2 { width: 128px; height: 128px; right: 0; }
     .rq-head h2 { font-size: 27px; }
@@ -743,7 +745,8 @@
     .rq-row dt { border-right: none; padding-right: 0; font-size: 13px; }
     .rq-row dd { grid-column: 2; font-size: 13px; }
     .rq-card { padding: 6px 16px; }
-    .rq-pill { padding: 8px 18px 8px 10px; }
+    .rq-pills { flex-direction: column; align-items: center; gap: 10px; }
+    .rq-pill { padding: 8px 18px 8px 10px; min-width: 220px; justify-content: flex-start; }
     .rq-pill .tx strong { font-size: 13px; }
     .rq-pill .tx span { font-size: 10.5px; }
     .ef-head h2 { font-size: 24px; letter-spacing: .1em; }
