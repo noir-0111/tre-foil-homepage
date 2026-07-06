@@ -540,21 +540,17 @@
   .ef-flow .mail-circle img { width: 60px; height: auto; }
   .ef-flow .bl { color: var(--blue); font-weight: 700; font-size: 15px; margin: 0 0 10px; letter-spacing: .04em; }
   .ef-flow .tx { font-size: 13px; color: var(--ink-2); line-height: 2; margin: 0; }
-  .ef-line-body { display: flex; gap: 16px; align-items: flex-start; }
-  .ef-line-body .li { width: 60px; height: auto; border-radius: 13px; flex-shrink: 0; }
-  .ef-line-body .bl { color: #18b85f; font-weight: 700; font-size: 15px; margin: 0 0 8px; letter-spacing: .02em; }
-  .ef-line-body .tx { font-size: 13px; color: var(--ink-2); line-height: 1.9; margin: 0; }
-  .ef-url {
-    margin-top: 16px; width: 100%;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    border: 1.5px solid #bfe3d4; border-radius: 999px;
-    padding: 10px 18px; font-size: 13.5px; color: #18a05f;
-    background: #fbfffd; cursor: pointer;
-    font-family: inherit; letter-spacing: .02em;
-    transition: background .2s, transform .15s;
+  .ef-line-cta { text-align: center; padding: 6px 0 4px; }
+  .ef-line-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: #06C755; color: #fff;
+    padding: 14px 34px; border-radius: 999px;
+    font-size: 14.5px; font-weight: 500; letter-spacing: .03em;
+    box-shadow: 0 6px 18px rgba(6,199,85,0.35);
+    transition: transform .15s, box-shadow .2s;
   }
-  .ef-url:hover { background: #f0faf5; transform: translateY(-1px); }
-  .ef-url img { width: 17px; height: auto; }
+  .ef-line-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(6,199,85,0.45); }
+  .ef-line-btn svg { width: 18px; height: 18px; }
   .cf-field {
     width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
     background: #fff; border: 1.5px solid #e3e9f0; border-radius: 10px;
@@ -1070,17 +1066,12 @@
           <strong>LINEでもお気軽にご相談ください</strong>
           <img src="素材24/ef_dots_straight.png" alt="" class="dots" />
         </div>
-        <div class="ef-line-body">
-          <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener"><img src="素材24/ef_icon_line.png" alt="LINE" class="li" /></a>
-          <div>
-            <p class="bl">LINEからのお問い合わせにも対応</p>
-            <p class="tx">ご質問やご相談は、LINEからでも受け付けております。お気軽にご連絡ください。</p>
-          </div>
+        <div class="ef-line-cta">
+          <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="ef-line-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+            LINEで問い合わせ
+          </a>
         </div>
-        <button type="button" class="ef-url" id="ef-line-url" data-url="https://lin.ee/rfpCi9I">
-          https://lin.ee/rfpCi9I
-          <img src="素材24/ef_icon_copy.png" alt="コピー" />
-        </button>
       </div>
     </div>
   </div>
@@ -1203,21 +1194,6 @@
         restoreBtn();
       }
     });
-    // LINE URLコピー
-    const urlBtn = document.getElementById("ef-line-url");
-    if (urlBtn) {
-      urlBtn.addEventListener("click", async () => {
-        const url = urlBtn.getAttribute("data-url");
-        try {
-          await navigator.clipboard.writeText(url);
-          const orig = urlBtn.firstChild.textContent;
-          urlBtn.firstChild.textContent = "コピーしました ";
-          setTimeout(() => { urlBtn.firstChild.textContent = orig; }, 1600);
-        } catch (_) {
-          window.open(url, "_blank", "noopener");
-        }
-      });
-    }
   })();
 </script>
 </body>
