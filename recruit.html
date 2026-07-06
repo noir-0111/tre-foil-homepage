@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>採用情報 | 株式会社tre-foil</title>
+<meta name="description" content="株式会社tre-foilの採用情報。歯科技工士・アシスタント・事務スタッフを福岡・大阪で募集しています。正社員・パート／アルバイト。" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="採用情報 | 株式会社tre-foil" />
+<meta property="og:description" content="あなたの技術で、笑顔をつくる仲間を。歯科技工士・アシスタント・事務スタッフを福岡・大阪で募集しています。" />
+<meta property="og:url" content="https://tre-foil-homepage.pages.dev/recruit" />
+<meta property="og:site_name" content="株式会社tre-foil" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat:wght@400;500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --blue: #4a90e2;
+    --blue-deep: #2f7adf;
+    --blue-soft: #e8f0fc;
+    --blue-bg: #f3f7fd;
+    --teal: #6ec9b8;
+    --teal-deep: #4fb8a3;
+    --teal-soft: #e6f5f1;
+    --green: #18b85f;
+    --ink: #2d3a4a;
+    --ink-2: #5a6878;
+    --ink-3: #8a96a4;
+    --line: #e7edf3;
+    --paper: #ffffff;
+    --bg: #f7fbfd;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; overflow-x: clip; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    font-size: 15px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* HEADER */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(231,237,243,0.6);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 32px;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { width: 56px; height: auto; }
+  .logo .brand-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    line-height: 1.2;
+  }
+  nav.primary { display: flex; align-items: center; gap: 36px; }
+  nav.primary a {
+    font-size: 14px; font-weight: 500; color: var(--ink);
+    position: relative; padding: 8px 0;
+    transition: color .2s;
+  }
+  nav.primary a.active { color: var(--blue-deep); }
+  nav.primary a.active::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+    height: 2px; background: var(--blue-deep); border-radius: 2px;
+  }
+  nav.primary a:hover { color: var(--blue-deep); }
+  .btn-contact-header {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #06C755; color: #fff;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 4px 14px rgba(6,199,85,0.35);
+    transition: transform .15s, box-shadow .2s;
+  }
+  .btn-contact-header:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(6,199,85,0.45); }
+  .btn-contact-header svg { width: 16px; height: 16px; }
+
+  /* hamburger menu (mobile only) */
+  .menu-toggle {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    width: 40px; height: 40px;
+    padding: 0;
+    flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 5px;
+    z-index: 110;
+    position: relative;
+    margin-left: 8px;
+  }
+  .menu-toggle span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .3s, opacity .25s;
+  }
+  body.menu-open .menu-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  body.menu-open .menu-toggle span:nth-child(2) { opacity: 0; }
+  body.menu-open .menu-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .menu-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: transparent;
+    z-index: 30;
+  }
+  body.menu-open .menu-backdrop { display: block; }
+
+  /* BREADCRUMB */
+  .breadcrumb {
+    padding: 20px 32px 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-3);
+    position: relative;
+    z-index: 2;
+  }
+  .breadcrumb a { color: var(--ink-3); transition: color .2s; }
+  .breadcrumb a:hover { color: var(--blue-deep); }
+  .breadcrumb .sep { margin: 0 10px; color: var(--ink-3); }
+  .breadcrumb .current { color: var(--ink-2); }
+
+  /* COMMON */
+  .eyebrow {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: var(--teal-deep);
+    font-size: 11.5px;
+    display: block;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+  h2.section-title {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 50px;
+    line-height: 1.5;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+  }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ============ FIRST VIEW ============ */
+  .rv-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 34px 0 120px;
+    background: #fff;
+  }
+  .rv-deco { position: absolute; pointer-events: none; z-index: 0; }
+  .rv-deco.blob-tl { width: 460px; top: -60px; left: -80px; opacity: .9; mix-blend-mode: multiply; animation: rvFloat 11s ease-in-out infinite; }
+  .rv-deco.wave-b { width: 980px; bottom: -180px; left: -140px; opacity: .85; mix-blend-mode: multiply; animation: rvDrift 14s ease-in-out infinite; }
+  .rv-deco.clover-br { width: 60px; bottom: 34px; right: 30px; opacity: .85; animation: rvBob 5s ease-in-out infinite; }
+  .rv-deco.clover-br2 { width: 34px; bottom: 96px; right: 86px; opacity: .6; animation: rvBob 5s ease-in-out infinite; animation-delay: -2s; }
+
+  .rv-grid {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1.02fr 0.98fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 26px;
+  }
+
+  /* left */
+  .rv-text { position: relative; }
+  .rv-eyebrow {
+    display: flex; align-items: center; gap: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600; letter-spacing: .22em;
+    font-size: 13.5px; color: var(--ink-2);
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .rv-eyebrow img { width: 20px; height: auto; }
+  .rv-arc { position: absolute; width: 120px; top: -34px; left: -58px; opacity: .8; pointer-events: none; }
+  .rv-text h1 {
+    font-size: 47px;
+    line-height: 1.42;
+    font-weight: 900;
+    letter-spacing: .04em;
+    color: var(--ink);
+    margin: 0 0 20px;
+    white-space: nowrap;
+  }
+  .rv-text h1 .em { color: var(--blue); }
+  .rv-divider {
+    display: flex; align-items: center; gap: 12px;
+    max-width: 430px;
+    margin: 0 0 20px;
+  }
+  .rv-divider::before, .rv-divider::after {
+    content: ""; flex: 1; height: 1.5px;
+    background: linear-gradient(90deg, var(--teal), #bfe6dc);
+    border-radius: 2px;
+  }
+  .rv-divider img { width: 22px; height: auto; }
+  .rv-sub {
+    font-size: 21px; font-weight: 700;
+    color: var(--teal-deep);
+    letter-spacing: .14em;
+    margin: 0 0 16px;
+  }
+  .rv-lead {
+    font-size: 15.5px;
+    color: var(--ink-2);
+    line-height: 2.05;
+    margin: 0 0 30px;
+  }
+  .rv-cta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 26px; }
+  .rv-btn {
+    display: inline-flex; align-items: center; gap: 11px;
+    padding: 15px 28px;
+    border-radius: 999px;
+    font-size: 15.5px; font-weight: 700;
+    letter-spacing: .04em;
+    transition: transform .15s, box-shadow .2s;
+  }
+  .rv-btn .ic {
+    width: 27px; height: 27px; border-radius: 50%;
+    background: #fff; overflow: hidden; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rv-btn .ic img { width: 21px; height: 21px; object-fit: cover; transform: scale(1.55); }
+  .rv-btn .arr { font-size: 17px; margin-left: 2px; }
+  .rv-btn.outline {
+    background: #fff; color: var(--teal-deep);
+    border: 2px solid var(--teal-deep);
+    box-shadow: 0 8px 20px rgba(79,184,163,.16);
+  }
+  .rv-btn.solid {
+    background: var(--blue); color: #fff;
+    border: 2px solid var(--blue);
+    box-shadow: 0 12px 26px rgba(74,144,226,.34);
+  }
+  .rv-btn:hover { transform: translateY(-2px); }
+  .rv-chips { display: flex; flex-wrap: wrap; gap: 12px; }
+  .rv-chip {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #fff;
+    border: 1.5px solid #dcebe6;
+    border-radius: 999px;
+    padding: 8px 18px 8px 10px;
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    box-shadow: 0 6px 16px rgba(45,58,74,.06);
+  }
+  .rv-chip .ic {
+    width: 26px; height: 26px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .rv-chip .ic img { width: 26px; height: 26px; object-fit: cover; transform: scale(1.5); }
+
+  /* right */
+  .rv-photo-col { position: relative; }
+  .rv-photo {
+    position: relative; z-index: 1;
+    border-radius: 190px 30px 30px 190px / 230px 30px 30px 230px;
+    overflow: hidden;
+    aspect-ratio: 4/4.6;
+    max-height: 620px;
+    box-shadow: 0 26px 60px rgba(45,58,74,.16);
+    animation: rvPhotoFloat 7s ease-in-out infinite;
+  }
+  .rv-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .rv-circ {
+    position: absolute; z-index: 2;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #fff;
+    box-shadow: 0 16px 38px rgba(45,58,74,.18);
+  }
+  .rv-circ img { width: 100%; height: 100%; object-fit: cover; }
+  .rv-circ.c1 { width: 168px; height: 168px; left: 3%; bottom: -44px; animation: rvBob 6s ease-in-out infinite; }
+  .rv-circ.c2 { width: 208px; height: 208px; right: -4%; bottom: -64px; animation: rvBob 6s ease-in-out infinite; animation-delay: -3s; }
+
+  @keyframes rvFloat {
+    0%, 100% { transform: translate(0,0); }
+    50%      { transform: translate(16px,-16px); }
+  }
+  @keyframes rvDrift {
+    0%, 100% { transform: translate(0,0); }
+    50%      { transform: translate(-22px,10px); }
+  }
+  @keyframes rvBob {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-9px); }
+  }
+  @keyframes rvPhotoFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  /* ============ REQUIREMENTS ============ */
+  .rq {
+    position: relative; overflow: hidden;
+    padding: 86px 0 96px;
+    background: linear-gradient(180deg, #f7fbfd 0%, #eef5fb 100%);
+    scroll-margin-top: 84px;
+  }
+  .rq-deco { position: absolute; pointer-events: none; z-index: 0; }
+  .rq-deco.blob-r { width: 340px; top: -40px; right: -90px; opacity: .75; mix-blend-mode: multiply; animation: rvFloat 12s ease-in-out infinite; }
+  .rq-deco.arc-l { width: 150px; bottom: 70px; left: -30px; opacity: .6; }
+  .rq-card {
+    position: relative; z-index: 1;
+    max-width: 860px; margin: 0 auto;
+    background: #fff;
+    border: 1px solid #eef2f7;
+    border-radius: 24px;
+    padding: 18px 48px;
+    box-shadow: 0 22px 54px rgba(45,58,74,.09);
+  }
+  .rq-row {
+    display: grid;
+    grid-template-columns: 172px 1fr;
+    gap: 20px;
+    padding: 21px 6px;
+    border-bottom: 1px dashed #d4dde8;
+  }
+  .rq-row:last-child { border-bottom: none; }
+  .rq-row dt {
+    font-size: 14.5px; font-weight: 700; color: var(--teal-deep);
+    display: flex; align-items: flex-start; gap: 9px;
+    padding-top: 2px;
+  }
+  .rq-row dt::before {
+    content: "";
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--teal);
+    margin-top: 9px;
+    flex-shrink: 0;
+  }
+  .rq-row dd { margin: 0; font-size: 14.5px; color: var(--ink); line-height: 1.95; }
+  .rq-row dd .sm { font-size: 12.5px; color: var(--ink-3); }
+  .rq-row dd strong { color: var(--ink); }
+
+  /* ============ ENTRY FORM ============ */
+  .cf {
+    position: relative; overflow: hidden;
+    padding: 86px 0 96px;
+    background: #fff;
+    scroll-margin-top: 84px;
+  }
+  .cf-deco { position: absolute; pointer-events: none; z-index: 0; }
+  .cf-deco.wave-b { width: 900px; bottom: -200px; right: -160px; opacity: .8; mix-blend-mode: multiply; animation: rvDrift 15s ease-in-out infinite; }
+  .cf-deco.blob-tl { width: 300px; top: -50px; left: -70px; opacity: .8; mix-blend-mode: multiply; }
+
+  .cf-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1.06fr; gap: 56px; align-items: start;
+  }
+  .cf-intro { position: relative; padding-top: 20px; }
+  .cf-eyebrow {
+    font-family: "Montserrat", sans-serif; font-weight: 600;
+    letter-spacing: .34em; font-size: 13px; color: var(--teal-deep);
+    display: inline-block; margin-bottom: 16px;
+  }
+  .cf-intro h2 { font-size: 40px; font-weight: 900; color: var(--ink); letter-spacing: .04em; margin: 0 0 22px; line-height: 1.25; }
+  .cf-lead { font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.75; margin: 0 0 24px; }
+  .cf-lead .em { color: var(--teal-deep); }
+  .cf-note { font-size: 15px; color: var(--ink-2); line-height: 1.95; margin: 0 0 30px; }
+  .cf-note .em { color: var(--teal-deep); font-weight: 700; }
+  .cf-cta { display: flex; flex-direction: column; gap: 14px; max-width: 470px; }
+  .cf-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 17px 28px; border-radius: 999px;
+    font-size: 16px; font-weight: 700; letter-spacing: .03em; color: #fff;
+    transition: transform .15s, box-shadow .2s;
+  }
+  .cf-btn svg.lead { width: 20px; height: 20px; }
+  .cf-btn .arr { font-size: 18px; margin-left: 2px; }
+  .cf-btn.green { background: #18b85f; box-shadow: 0 12px 26px rgba(24,184,95,.32); }
+  .cf-btn:hover { transform: translateY(-2px); }
+
+  .cf-card {
+    position: relative; z-index: 1;
+    background: #fbfcfe; border: 1px solid #eef2f7; border-radius: 24px;
+    padding: 40px 42px; box-shadow: 0 22px 54px rgba(45,58,74,.09);
+  }
+  .cf-form { display: flex; flex-direction: column; gap: 17px; }
+  .cf-row { display: grid; grid-template-columns: 148px 1fr; align-items: center; gap: 14px; }
+  .cf-row.top { align-items: start; }
+  .cf-row.top > label { padding-top: 12px; align-items: flex-start; }
+  .cf-row > label { font-size: 14px; font-weight: 700; color: var(--ink); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .req {
+    display: inline-block;
+    background: #e8483f; color: #fff;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 3px 6px; border-radius: 4px;
+    letter-spacing: .02em; white-space: nowrap;
+  }
+  .opt {
+    display: inline-block;
+    background: #aeb8c4; color: #fff;
+    font-size: 10px; font-weight: 700; line-height: 1;
+    padding: 3px 6px; border-radius: 4px;
+    letter-spacing: .02em; white-space: nowrap;
+  }
+  .cf-field {
+    width: 100%; font-family: inherit; font-size: 14px; color: var(--ink);
+    background: #fff; border: 1.5px solid #e3e9f0; border-radius: 10px;
+    padding: 12px 14px; transition: border-color .2s, box-shadow .2s;
+  }
+  .cf-field::placeholder { color: #aeb8c4; }
+  .cf-field:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(74,144,226,.12); }
+  textarea.cf-field { min-height: 108px; resize: vertical; line-height: 1.7; }
+  select.cf-field {
+    appearance: none; -webkit-appearance: none; cursor: pointer; color: #aeb8c4;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a96a4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
+  }
+  select.cf-field.filled { color: var(--ink); }
+  .cf-divider { border-top: 1px dashed #d4dde8; margin: 10px 0 2px; }
+  .cf-submit {
+    align-self: center; margin-top: 8px; min-width: 300px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    background: #4a90e2; color: #fff; font-size: 16px; font-weight: 700;
+    border: none; border-radius: 999px; padding: 16px 40px; cursor: pointer;
+    box-shadow: 0 12px 28px rgba(74,144,226,.34); transition: transform .15s, box-shadow .2s;
+    font-family: inherit;
+  }
+  .cf-submit:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(74,144,226,.44); }
+  .cf-submit svg { width: 18px; height: 18px; }
+  .cf-done { text-align: center; color: var(--teal-deep); font-weight: 700; font-size: 14px; margin: 10px 0 0; }
+
+  /* FOOTER */
+  footer {
+    background: #2d3a4a;
+    color: #c0cad7;
+    padding: 60px 0 28px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  footer .brand-block p {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.9;
+    color: #8a96a4;
+  }
+  footer h5 {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    letter-spacing: 0.05em;
+  }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer ul li { margin-bottom: 10px; }
+  footer ul a { font-size: 12.5px; color: #c0cad7; transition: color .2s; }
+  footer ul a:hover { color: #fff; }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 22px;
+    text-align: center;
+    font-size: 11px;
+    color: #8a96a4;
+    font-family: "Montserrat", sans-serif;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== SNS icons (header / footer) ===== */
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .header-social { display: flex; align-items: center; gap: 13px; }
+  .header-social a { color: #2d3a4a; display: inline-flex; transition: color .2s, transform .15s; }
+  .header-social a:hover { color: #4a90e2; transform: translateY(-1px); }
+  .header-social svg { width: 21px; height: 21px; display: block; }
+  .footer-social { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+  .footer-social a { color: #c0cad7; display: inline-flex; transition: color .2s, transform .15s; }
+  .footer-social a:hover { color: #fff; transform: translateY(-2px); }
+  .footer-social svg { width: 24px; height: 24px; display: block; }
+  @media (max-width: 960px) { .header-social { display: none; } }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .menu-toggle { display: flex; }
+    nav.primary {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      position: fixed;
+      top: 0; right: 0;
+      width: 78%; max-width: 320px;
+      height: 100vh;
+      background: #fff;
+      padding: 80px 28px 28px;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.12);
+      transform: translateX(100%);
+      transition: transform .35s ease;
+      z-index: 100;
+      gap: 0;
+    }
+    body.menu-open nav.primary { transform: translateX(0); }
+    nav.primary a {
+      padding: 16px 6px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15.5px;
+      font-weight: 500;
+    }
+    nav.primary a:last-child { border-bottom: none; }
+    nav.primary a.active::after { display: none; }
+    nav.primary a.active { color: var(--blue-deep); border-left: 3px solid var(--blue-deep); padding-left: 12px; }
+    .btn-contact-header {
+      padding: 6px 11px;
+      font-size: 10.5px;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .btn-contact-header svg { width: 12px; height: 12px; }
+    .logo img { width: 46px; }
+    .logo .brand-name { font-size: 13.5px; }
+
+    .rv-hero { padding: 20px 0 110px; }
+    .rv-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; margin-top: 12px; }
+    .rv-text h1 { font-size: 34px; }
+    .rv-arc { width: 88px; top: -26px; left: -30px; }
+    .rv-sub { font-size: 18px; }
+    .rv-photo { aspect-ratio: 4/4.2; border-radius: 130px 24px 24px 130px / 160px 24px 24px 160px; }
+    .rv-circ.c1 { width: 128px; height: 128px; bottom: -34px; }
+    .rv-circ.c2 { width: 156px; height: 156px; bottom: -48px; }
+    .rv-deco.blob-tl { width: 320px; }
+    .rv-deco.wave-b { width: 720px; bottom: -140px; }
+
+    .rq { padding: 64px 0 70px; }
+    .rq-card { padding: 8px 26px; }
+    .rq-row { grid-template-columns: 138px 1fr; gap: 12px; padding: 17px 2px; }
+
+    .cf { padding: 64px 0 76px; }
+    .cf-grid { grid-template-columns: 1fr; gap: 34px; }
+    .cf-intro { padding-top: 0; }
+    .cf-intro h2 { font-size: 30px; }
+    .cf-card { padding: 30px 26px; }
+    h2.section-title { font-size: 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  }
+  @media (max-width: 540px) {
+    .btn-contact-header {
+      padding: 5px 9px;
+      font-size: 9.5px;
+      gap: 4px;
+    }
+    .btn-contact-header svg { width: 11px; height: 11px; }
+    .logo img { width: 40px; }
+    .logo .brand-name { font-size: 11.5px; }
+    .header-inner { padding: 10px 14px; }
+    .wrap { padding: 0 16px; }
+    .breadcrumb { padding: 20px 16px 0; }
+    .rv-text h1 { font-size: 27px; letter-spacing: .04em; }
+    .rv-sub { font-size: 16.5px; letter-spacing: .1em; }
+    .rv-lead { font-size: 14.5px; }
+    .rv-lead br { display: none; }
+    .rv-btn { padding: 13px 20px; font-size: 14px; }
+    .rv-cta { gap: 12px; }
+    .rv-chips { gap: 9px; }
+    .rv-chip { font-size: 12px; padding: 7px 14px 7px 8px; }
+    .rv-circ.c1 { width: 104px; height: 104px; left: 0; }
+    .rv-circ.c2 { width: 128px; height: 128px; right: 0; }
+    .rq-row { grid-template-columns: 1fr; gap: 4px; padding: 15px 2px; }
+    .rq-row dt { padding-top: 0; }
+    .rq-row dd { padding-left: 17px; }
+    .rq-card { padding: 6px 20px; }
+    .cf-intro h2 { font-size: 26px; }
+    .cf-lead { font-size: 16px; }
+    .cf-row { grid-template-columns: 1fr; align-items: start; gap: 7px; }
+    .cf-row.top > label { padding-top: 0; }
+    .cf-submit { min-width: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rv-deco, .rv-photo, .rv-circ, .rq-deco, .cf-deco { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header" data-screen-label="Header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="素材2/tre-foilロゴ.png" alt="株式会社tre-foil" />
+      <span class="brand-name">株式会社tre-foil</span>
+    </a>
+    <nav class="primary">
+      <a href="index.html">ホーム</a>
+      <a href="about.html">会社概要</a>
+      <a href="products.html">製品紹介</a>
+      <a href="flow.html">ご注文の流れ</a>
+      <a href="delivery-calendar.html">納期カレンダー</a>
+      <a href="recruit.html" class="active">採用情報</a>
+    </nav>
+    <div class="header-right">
+      <div class="header-social">
+        <a href="https://www.instagram.com/tabilabo_shikagikoushi/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.94 19.86.63 19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg></a>
+        <a href="https://www.youtube.com/@%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEtre-foil" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12z"/></svg></a>
+      </div>
+      <a href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener" class="btn-contact-header">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+        LINEで問い合わせ
+      </a>
+    </div>
+    <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<div class="menu-backdrop"></div>
+
+<!-- ===== FIRST VIEW ===== -->
+<section class="rv-hero" data-screen-label="Recruit Hero">
+  <img src="素材22/deco_blob_soft.png" alt="" class="rv-deco blob-tl" />
+  <img src="素材22/deco_wave_greenblue.png" alt="" class="rv-deco wave-b" />
+  <img src="素材9/brand_clover_mark.png" alt="" class="rv-deco clover-br" />
+  <img src="素材9/brand_clover_mark.png" alt="" class="rv-deco clover-br2" />
+
+  <div class="wrap breadcrumb">
+    <a href="index.html">ホーム</a><span class="sep">›</span><span class="current">採用情報</span>
+  </div>
+
+  <div class="wrap rv-grid">
+    <!-- left -->
+    <div class="rv-text reveal">
+      <div class="rv-eyebrow">
+        <img src="素材9/brand_clover_mark.png" alt="" />
+        Crafting smiles, Building trust.
+        <img src="素材22/deco_dot_arc.png" alt="" class="rv-arc" />
+      </div>
+      <h1>あなたの技術で、<br/><span class="em">笑顔</span>をつくる仲間を。</h1>
+      <div class="rv-divider">
+        <img src="素材9/brand_clover_mark.png" alt="" />
+      </div>
+      <p class="rv-sub">正社員・パート／アルバイト募集</p>
+      <p class="rv-lead">
+        tre-foilは、誠実さ・精密さ・チームワークを大切に、<br/>
+        患者さまの笑顔を支える技工物をつくっています。<br/>
+        一緒に、信頼される品質を追求しませんか。
+      </p>
+      <div class="rv-cta">
+        <a class="rv-btn outline" href="#requirements">
+          <span class="ic"><img src="素材22/icon_doc.png" alt="" /></span>
+          募集要項を見る <span class="arr">›</span>
+        </a>
+        <a class="rv-btn solid" href="#entry">
+          <span class="ic"><img src="素材22/icon_pencil.png" alt="" /></span>
+          申込みフォームへ <span class="arr">›</span>
+        </a>
+      </div>
+      <div class="rv-chips">
+        <span class="rv-chip"><span class="ic"><img src="素材22/icon_tooth.png" alt="" /></span>歯科技工士募集</span>
+        <span class="rv-chip"><span class="ic"><img src="素材22/icon_people.png" alt="" /></span>見学歓迎</span>
+        <span class="rv-chip"><span class="ic"><img src="素材22/icon_pin.png" alt="" /></span>福岡・大阪で募集</span>
+      </div>
+    </div>
+
+    <!-- right -->
+    <div class="rv-photo-col reveal">
+      <div class="rv-photo">
+        <img src="素材22/recruit_staff.jpg" alt="技工物を製作するtre-foilのスタッフ" />
+      </div>
+      <div class="rv-circ c1"><img src="素材22/recruit_ceramic.jpg" alt="オールセラミックの技工物" /></div>
+      <div class="rv-circ c2"><img src="素材22/recruit_denture.jpg" alt="金属床デンチャー" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REQUIREMENTS ===== -->
+<section class="rq" id="requirements" data-screen-label="Requirements">
+  <img src="素材22/deco_blob_soft.png" alt="" class="rq-deco blob-r" />
+  <img src="素材22/deco_dot_arc.png" alt="" class="rq-deco arc-l" />
+  <div class="wrap" style="position:relative;z-index:1;">
+    <span class="eyebrow">REQUIREMENTS</span>
+    <h2 class="section-title">募集要項</h2>
+    <div class="rq-card reveal">
+      <dl style="margin:0;">
+        <div class="rq-row">
+          <dt>募集職種</dt>
+          <dd>歯科技工士 ／ アシスタント ／ 事務・サポート</dd>
+        </div>
+        <div class="rq-row">
+          <dt>雇用形態</dt>
+          <dd>正社員 ／ パート・アルバイト</dd>
+        </div>
+        <div class="rq-row">
+          <dt>給与</dt>
+          <dd>
+            <strong>正社員</strong>：年収 500万〜700万円<br/>
+            <strong>パート・アルバイト</strong>：時給 1,200円〜<br/>
+            <span class="sm">※ いずれも経験・能力に応じて応相談</span>
+          </dd>
+        </div>
+        <div class="rq-row">
+          <dt>勤務時間</dt>
+          <dd>応相談</dd>
+        </div>
+        <div class="rq-row">
+          <dt>勤務地</dt>
+          <dd>福岡 ／ 大阪（2拠点でそれぞれ募集しています）</dd>
+        </div>
+        <div class="rq-row">
+          <dt>応募資格</dt>
+          <dd>
+            歯科技工士は<strong>免許必須</strong><br/>
+            正社員は実務経験のある方<br/>
+            パート・アルバイトは未経験・ブランクのある方も歓迎
+          </dd>
+        </div>
+        <div class="rq-row">
+          <dt>交通費</dt>
+          <dd>給与に含む</dd>
+        </div>
+        <div class="rq-row">
+          <dt>車通勤</dt>
+          <dd>福岡：可 ／ 大阪：不可</dd>
+        </div>
+        <div class="rq-row">
+          <dt>その他</dt>
+          <dd>研修・サポートあり ／ 見学のみのご来訪も歓迎します</dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ENTRY FORM ===== -->
+<section class="cf" id="entry" data-screen-label="Entry Form">
+  <img src="素材22/deco_blob_soft.png" alt="" class="cf-deco blob-tl" />
+  <img src="素材22/deco_wave_greenblue.png" alt="" class="cf-deco wave-b" />
+
+  <div class="wrap cf-grid">
+    <!-- intro -->
+    <div class="cf-intro reveal">
+      <span class="cf-eyebrow">ENTRY</span>
+      <h2>申込みフォーム</h2>
+      <p class="cf-lead">ご応募・見学のお申込みは<br/><span class="em">お気軽に</span>ご連絡ください。</p>
+      <p class="cf-note">「まずは見学だけ」も大歓迎です。<br/>内容を確認のうえ、担当者より<br/><span class="em">折り返し</span>ご連絡させていただきます。</p>
+      <div class="cf-cta">
+        <a class="cf-btn green" href="https://lin.ee/rfpCi9I" target="_blank" rel="noopener">
+          <svg class="lead" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.5 3 2 6.6 2 11.1c0 2.5 1.4 4.7 3.6 6.2-.1.6-.5 2.3-.6 2.7-.1.5.2.5.4.4.2-.1 2.5-1.7 3.5-2.4.9.2 1.9.3 3 .3 5.5 0 10-3.6 10-8.1S17.5 3 12 3z"/></svg>
+          LINEで問い合わせる <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- form card -->
+    <div class="cf-card reveal">
+      <form class="cf-form" id="rc-form" action="/api/recruit" method="POST">
+        <div class="cf-row">
+          <label for="rc-name">お名前<span class="req">必須</span></label>
+          <input class="cf-field" id="rc-name" name="お名前" type="text" placeholder="例）山田 太郎" required />
+        </div>
+        <div class="cf-row">
+          <label for="rc-kana">ふりがな<span class="req">必須</span></label>
+          <input class="cf-field" id="rc-kana" name="ふりがな" type="text" placeholder="例）やまだ たろう" required />
+        </div>
+        <div class="cf-row">
+          <label for="rc-email">メールアドレス<span class="req">必須</span></label>
+          <input class="cf-field" id="rc-email" name="メールアドレス" type="email" placeholder="例）yamada@example.com" required />
+        </div>
+        <div class="cf-row">
+          <label for="rc-tel">電話番号<span class="req">必須</span></label>
+          <input class="cf-field" id="rc-tel" name="電話番号" type="tel" placeholder="例）090-1234-5678" required />
+        </div>
+        <div class="cf-row">
+          <label for="rc-job">希望職種<span class="req">必須</span></label>
+          <select class="cf-field" id="rc-job" name="希望職種" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="歯科技工士">歯科技工士</option>
+            <option value="アシスタント">アシスタント</option>
+            <option value="事務・サポート">事務・サポート</option>
+          </select>
+        </div>
+        <div class="cf-row">
+          <label for="rc-type">希望雇用形態<span class="req">必須</span></label>
+          <select class="cf-field" id="rc-type" name="希望雇用形態" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="正社員">正社員</option>
+            <option value="パート・アルバイト">パート・アルバイト</option>
+          </select>
+        </div>
+        <div class="cf-row">
+          <label for="rc-place">希望勤務地<span class="req">必須</span></label>
+          <select class="cf-field" id="rc-place" name="希望勤務地" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="福岡">福岡</option>
+            <option value="大阪">大阪</option>
+          </select>
+        </div>
+        <div class="cf-row">
+          <label for="rc-license">歯科技工士免許<span class="opt">任意</span></label>
+          <select class="cf-field" id="rc-license" name="歯科技工士免許">
+            <option value="" selected>選択してください</option>
+            <option value="あり">あり</option>
+            <option value="なし">なし</option>
+          </select>
+        </div>
+        <div class="cf-row">
+          <label for="rc-exp">実務経験<span class="opt">任意</span></label>
+          <select class="cf-field" id="rc-exp" name="実務経験">
+            <option value="" selected>選択してください</option>
+            <option value="あり（〜3年）">あり（〜3年）</option>
+            <option value="あり（3〜10年）">あり（3〜10年）</option>
+            <option value="あり（10年以上）">あり（10年以上）</option>
+            <option value="なし">なし</option>
+          </select>
+        </div>
+        <div class="cf-row top">
+          <label for="rc-message">ご質問・メッセージ<span class="opt">任意</span></label>
+          <textarea class="cf-field" id="rc-message" name="ご質問・メッセージ" placeholder="ご質問やご希望があればご記入ください（見学希望など）"></textarea>
+        </div>
+
+        <div class="cf-divider"></div>
+
+        <button class="cf-submit" type="submit">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          送信する
+        </button>
+        <p class="cf-done" hidden>ご応募ありがとうございました。担当者より折り返しご連絡いたします。</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer data-screen-label="Footer">
+  <div class="wrap footer-grid">
+    <div class="brand-block">
+      <a href="index.html" class="logo">
+        <img src="素材2/tre-foilロゴ.png" alt="株式会社tre-foil" style="filter: brightness(0) invert(1); width: 96px;" />
+      </a>
+      <p>歯科技工のプロフェッショナルとして、<br/>先生と患者さまの笑顔のために。</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/tabilabo_shikagikoushi/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.94 19.86.63 19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zM12 16a4 4 0 1 1 4-4 4 4 0 0 1-4 4zm6.4-10.85a1.44 1.44 0 1 0 1.44 1.44 1.44 1.44 0 0 0-1.44-1.44z"/></svg></a>
+        <a href="https://www.youtube.com/@%E6%A0%AA%E5%BC%8F%E4%BC%9A%E7%A4%BEtre-foil" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h5>サービス</h5>
+      <ul>
+        <li><a href="products.html#ios">IOS（口腔内スキャナー対応）</a></li>
+        <li><a href="products.html#jihi">自費</a></li>
+        <li><a href="products.html#hoken">保険</a></li>
+        <li><a href="products.html#denture">デンチャー</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>会社情報</h5>
+      <ul>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="products.html">製品紹介</a></li>
+        <li><a href="flow.html">ご注文の流れ</a></li>
+        <li><a href="delivery-calendar.html">納期カレンダー</a></li>
+        <li><a href="recruit.html">採用情報</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>お問い合わせ</h5>
+      <ul>
+        <li>〒816-0911<br/>福岡県大野城市大城3丁目10-35</li>
+        <li>受付：平日 9:00 – 18:00</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">© 2026 株式会社tre-foil. ALL RIGHTS RESERVED.</div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  // mobile hamburger menu
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menuBackdrop = document.querySelector(".menu-backdrop");
+  const closeMenu = () => {
+    document.body.classList.remove("menu-open");
+    if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+  };
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const open = !document.body.classList.contains("menu-open");
+      document.body.classList.toggle("menu-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+  if (menuBackdrop) menuBackdrop.addEventListener("click", closeMenu);
+
+  // entry form
+  (function () {
+    const form = document.getElementById("rc-form");
+    if (!form) return;
+    const selects = form.querySelectorAll("select.cf-field");
+    selects.forEach(sel => {
+      const sync = () => sel.classList.toggle("filled", !!sel.value);
+      sel.addEventListener("change", sync); sync();
+    });
+    const done = form.querySelector(".cf-done");
+    const btn = form.querySelector(".cf-submit");
+    const restoreBtn = () => { if (btn) { btn.disabled = false; btn.style.opacity = ""; btn.style.cursor = ""; } };
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return; // 必須項目チェック
+      const action = form.getAttribute("action") || "/api/recruit";
+      if (btn) { btn.disabled = true; btn.style.opacity = ".6"; btn.style.cursor = "default"; }
+      try {
+        const res = await fetch(action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { "Accept": "application/json" }
+        });
+        let data = {};
+        try { data = await res.json(); } catch (_) {}
+        if (res.ok && data.ok !== false) {
+          if (done) done.hidden = false;
+          form.reset();
+          selects.forEach(sel => sel.classList.remove("filled"));
+        } else {
+          alert(data.error || "送信に失敗しました。時間をおいて再度お試しください。");
+          restoreBtn();
+        }
+      } catch (err) {
+        alert("送信に失敗しました。通信環境をご確認ください。");
+        restoreBtn();
+      }
+    });
+  })();
+</script>
+</body>
+</html>
