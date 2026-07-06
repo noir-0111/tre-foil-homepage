@@ -177,10 +177,16 @@
     position: relative; z-index: 2;
     display: grid;
     grid-template-columns: 1.02fr 0.98fr;
-    gap: 48px;
+    grid-template-areas:
+      "top photo"
+      "bottom photo";
+    gap: 0 48px;
     align-items: center;
     margin-top: 26px;
   }
+  .rv-top { grid-area: top; align-self: end; }
+  .rv-bottom { grid-area: bottom; align-self: start; }
+  .rv-photo-col { grid-area: photo; }
 
   /* left */
   .rv-text { position: relative; }
@@ -671,7 +677,13 @@
     .logo .brand-name { font-size: 13.5px; }
 
     .rv-hero { padding: 20px 0 110px; }
-    .rv-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; margin-top: 12px; }
+    .rv-grid {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-areas: "top" "photo" "bottom";
+      gap: 30px 0;
+      margin-top: 12px;
+    }
+    .rv-photo-col { margin-bottom: 46px; }
     .rv-text h1 { font-size: 34px; }
     .rv-arc { width: 88px; top: -26px; left: -30px; }
     .rv-sub { font-size: 18px; }
@@ -795,8 +807,8 @@
   </div>
 
   <div class="wrap rv-grid">
-    <!-- left -->
-    <div class="rv-text reveal">
+    <!-- left top -->
+    <div class="rv-text rv-top reveal">
       <div class="rv-eyebrow">
         <img src="素材9/brand_clover_mark.png" alt="" />
         Crafting smiles, Building trust.
@@ -807,6 +819,19 @@
         <img src="素材9/brand_clover_mark.png" alt="" />
       </div>
       <p class="rv-sub">正社員・パート／アルバイト募集</p>
+    </div>
+
+    <!-- right -->
+    <div class="rv-photo-col reveal">
+      <div class="rv-photo">
+        <img src="gallery/gallery7.jpg" alt="技工物を確認するtre-foilのスタッフ" />
+      </div>
+      <div class="rv-circ c1"><img src="素材3/12.png" alt="金属クラウンの技工物" /></div>
+      <div class="rv-circ c2"><img src="gallery/card-products.jpg" alt="ジルコニアディスク" /></div>
+    </div>
+
+    <!-- left bottom -->
+    <div class="rv-text rv-bottom reveal">
       <p class="rv-lead">
         tre-foilは、誠実さ・精密さ・チームワークを大切に、<br/>
         患者さまの笑顔を支える技工物をつくっています。<br/>
@@ -827,15 +852,6 @@
         <span class="rv-chip"><span class="ic"><img src="素材22/icon_people.png" alt="" /></span>見学歓迎</span>
         <span class="rv-chip"><span class="ic"><img src="素材22/icon_pin.png" alt="" /></span>福岡・大阪で募集</span>
       </div>
-    </div>
-
-    <!-- right -->
-    <div class="rv-photo-col reveal">
-      <div class="rv-photo">
-        <img src="gallery/gallery7.jpg" alt="技工物を確認するtre-foilのスタッフ" />
-      </div>
-      <div class="rv-circ c1"><img src="素材3/12.png" alt="金属クラウンの技工物" /></div>
-      <div class="rv-circ c2"><img src="gallery/card-products.jpg" alt="ジルコニアディスク" /></div>
     </div>
   </div>
 </section>
