@@ -1304,6 +1304,29 @@
   .footer-social a:hover { color: #fff; transform: translateY(-2px); }
   .footer-social svg { width: 24px; height: 24px; display: block; }
   @media (max-width: 960px) { .header-social { display: none; } }
+  /* ===== モバイル：カルーセル表示（私たちの想い） ===== */
+  @media (max-width: 960px) {
+    .philo-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-padding: 16px;
+      gap: 16px;
+      padding-bottom: 10px;
+    }
+    .philo-grid::-webkit-scrollbar { display: none; }
+    .philo-grid .philo-card {
+      flex: 0 0 84%;
+      min-width: 0;
+      scroll-snap-align: center;
+    }
+    /* カルーセル内では出現アニメーションを無効化（横スクロールと干渉するため） */
+    .philo-grid .philo-card.reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
 </style>
 </head>
 <body>

@@ -1388,6 +1388,37 @@
     .splash{animation:splashFade .4s ease .8s forwards}
     .splash__inner{animation:none}
   }
+  /* ===== モバイル：カルーセル表示（製品紹介・選ばれる3つの理由） ===== */
+  @media (max-width: 960px) {
+    .products-grid,
+    .strengths-grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      scroll-padding: 16px;
+      gap: 16px;
+      padding-bottom: 10px;
+    }
+    .products-grid::-webkit-scrollbar,
+    .strengths-grid::-webkit-scrollbar { display: none; }
+    .products-grid .product-card {
+      flex: 0 0 76%;
+      min-width: 0;
+      scroll-snap-align: center;
+    }
+    .strengths-grid .card {
+      flex: 0 0 84%;
+      min-width: 0;
+      scroll-snap-align: center;
+    }
+    /* カルーセル内では出現アニメーションを無効化（横スクロールと干渉するため） */
+    .products-grid .product-card.reveal,
+    .strengths-grid .card.reveal {
+      opacity: 1; transform: none; transition: none;
+    }
+  }
 </style>
 </head>
 <body>
